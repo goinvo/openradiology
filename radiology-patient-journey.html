@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radiology Patient Journey — ACL Tear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:       #F7F4ED;
+    --surface:     #FFFDF8;
+    --ink:         #211E17;
+    --ink-soft:    #4B463A;
+    --muted:       #837B6A;
+    --faint:       #ABA290;
+    --line:        #E4DECF;
+    --line-soft:   #EEE9DC;
+    --line-strong: #D6CFBC;
+
+    --pat-bg:      #FFFDF8;
+    --pat-border:  #E4DECF;
+    --pat-label:   #9A5A20;
+
+    --clin-bg:     #EEF3FF;
+    --clin-border: #ADC3F0;
+    --clin-label:  #2040A0;
+
+    --wait-bg:     #E8EFF8;
+    --wait-border: #B8C8DC;
+
+    --pain-system:    #B7791F;
+    --pain-clinician: #2040A0;
+    --pain-patient:   #B03828;
+
+    --serif: 'Newsreader', Georgia, serif;
+    --sans:  'Public Sans', system-ui, sans-serif;
+    --mono:  'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 52px 24px 100px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* ── Masthead ── */
+  .masthead { border-bottom: 2px solid var(--ink); padding-bottom: 22px; margin-bottom: 26px; }
+  .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--pain-patient);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .kicker::after { content: ""; flex: 1; height: 1px; background: var(--line-strong); }
+  .masthead h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(30px, 5vw, 50px);
+    line-height: 1.04; letter-spacing: -0.015em; margin-bottom: 14px;
+  }
+  .masthead h1 em { font-style: italic; }
+  .standfirst {
+    font-family: var(--serif); font-size: 17px; font-weight: 300;
+    line-height: 1.55; color: var(--ink-soft); max-width: 680px;
+  }
+  .scenario-pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--line-strong); border-radius: 100px;
+    padding: 4px 12px; margin-top: 16px;
+  }
+  .scenario-pill::before { content: "◆"; font-size: 7px; color: var(--faint); }
+
+  /* ── Legend ── */
+  .legend-bar {
+    display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+    padding: 12px 0 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+  .leg { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted); }
+  .leg-swatch { width: 26px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Vertical spine line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 79px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: var(--line-strong);
+    z-index: 0;
+  }
+
+  /* ── Row ── */
+  .tl-row {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 0 22px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .tl-row.tl-wait { margin-bottom: 14px; margin-top: 6px; }
+
+  /* ── Day label column ── */
+  .tl-day {
+    padding-top: 13px;
+    text-align: right;
+    padding-right: 18px;
+    position: relative;
+    z-index: 1;
+  }
+  /* Dot on the spine */
+  .tl-day::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 18px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+    border: 2px solid var(--paper);
+    z-index: 2;
+  }
+  .tl-wait .tl-day::after { background: var(--wait-border); }
+
+  .day-num {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .day-date {
+    font-family: var(--mono); font-size: 9.5px;
+    color: var(--faint); margin-top: 2px; white-space: nowrap;
+  }
+
+  /* ── Content side ── */
+  .tl-content {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* ── Patient card ── */
+  .card {
+    background: var(--pat-bg);
+    border: 1px solid var(--pat-border);
+    border-radius: 8px;
+    overflow: hidden;
+    flex: 1;
+    min-width: 200px;
+  }
+  .card-inner { padding: 13px 15px 12px; }
+  .card-label {
+    font-family: var(--mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--pat-label); margin-bottom: 6px;
+  }
+  .card-title {
+    font-family: var(--serif); font-size: 17px; font-weight: 500;
+    line-height: 1.2; letter-spacing: -0.005em; margin-bottom: 6px;
+  }
+  .card-body {
+    font-size: 13px; line-height: 1.55; color: var(--ink-soft);
+  }
+
+  /* ── Clinician card ── */
+  .card.clin {
+    background: var(--clin-bg);
+    border-color: var(--clin-border);
+    border-left: 3px solid var(--clin-border);
+  }
+  .card.clin .card-label { color: var(--clin-label); }
+  .card.clin .card-label span {
+    font-style: italic; font-family: var(--serif);
+    font-size: 10px; color: var(--faint); font-weight: 400;
+    letter-spacing: 0; text-transform: none; margin-left: 3px;
+  }
+
+  /* Card takes full width when alone */
+  .tl-content.solo .card { flex: none; max-width: 480px; }
+
+  /* ── Pain point footer on a card ── */
+  .card-pain {
+    border-top: 1px solid var(--line);
+    padding: 9px 15px 10px;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .pain-item { display: flex; align-items: flex-start; gap: 8px; }
+  .pain-tag {
+    font-family: var(--mono); font-size: 8.5px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 3px; color: #fff;
+    white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .pain-tag::before { content: "⚠"; font-size: 8px; }
+  .pain-tag.system    { background: var(--pain-system); }
+  .pain-tag.clinician { background: var(--pain-clinician); }
+  .pain-tag.patient   { background: var(--pain-patient); }
+  .pain-text { font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
+
+  /* ── Wait block ── */
+  .wait-block {
+    background: var(--wait-bg);
+    border: 1px dashed var(--wait-border);
+    border-radius: 8px;
+    padding: 20px 24px 18px;
+    width: 100%;
+    text-align: center;
+  }
+  .wait-label {
+    font-family: var(--mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .wait-duration {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 6px;
+  }
+  .wait-title {
+    font-family: var(--serif); font-size: 22px; font-weight: 400;
+    letter-spacing: -0.01em; margin-bottom: 8px;
+  }
+  .wait-quote {
+    font-family: var(--serif); font-style: italic;
+    font-size: 14px; color: var(--muted); margin-bottom: 14px;
+  }
+  .wait-pain {
+    display: flex; flex-direction: column; gap: 7px;
+    text-align: left;
+    border-top: 1px solid var(--wait-border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  /* ── Footnote ── */
+  .footnote {
+    margin-top: 44px;
+    font-family: var(--mono); font-size: 11px;
+    color: var(--faint); line-height: 1.75; letter-spacing: 0.01em;
+    border-top: 1px solid var(--line); padding-top: 20px;
+  }
+  .footnote b { color: var(--muted); font-weight: 600; }
+
+  /* ── Mobile ── */
+  @media (max-width: 600px) {
+    body { padding: 36px 16px 80px; }
+    .timeline::before { left: 69px; }
+    .tl-row { grid-template-columns: 72px 1fr; gap: 0 14px; }
+    .tl-day { padding-right: 14px; }
+    .tl-day::after { right: -5px; }
+    .tl-content { flex-direction: column; }
+    .card { min-width: unset; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="masthead">
+    <div class="kicker">Patient Journey · Radiology</div>
+    <h1>From Injury<br>to <em>Diagnosis</em></h1>
+    <p class="standfirst">You feel a pop in your knee during a basketball game. What follows is an 18-day journey through the US radiology system — touching five clinicians, running into barriers invisible to you at every turn, and costing more time than it should.</p>
+    <div class="scenario-pill">Scenario: ACL Tear · MRI of the Knee</div>
+  </header>
+
+  <div class="legend-bar">
+    <div class="leg">
+      <div class="leg-swatch" style="background:var(--pat-bg);border:1px solid var(--pat-border)"></div>
+      <span>Patient experience</span>
+    </div>
+    <div class="leg">
+      <div class="leg-swatch" style="background:var(--clin-bg);border-left:3px solid var(--clin-border);border-top:1px solid var(--clin-border);border-right:1px solid var(--clin-border);border-bottom:1px solid var(--clin-border)"></div>
+      <span>Clinician · behind the scenes</span>
+    </div>
+    <div class="leg" style="margin-left:auto">
+      <span class="pain-tag system" style="font-size:9px">System</span>
+      <span class="pain-tag clinician" style="font-size:9px">Clinician</span>
+      <span class="pain-tag patient" style="font-size:9px">Patient</span>
+      <span style="font-size:12px;margin-left:4px">= pain point</span>
+    </div>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+
+  <p class="footnote"><b>About this journey.</b> Timelines are estimates based on the standard US radiology workflow. Actual durations vary by insurer, facility, and geography. Pain points are sourced from peer-reviewed journals and professional society data.</p>
+
+</div>
+
+<script>
+/* ─── Data ─── */
+const ROWS = [
+  {
+    type: 'parallel',
+    dayNum: 'DAY 1',
+    dayDate: 'Thu · Jan 15',
+    patient: {
+      title: 'Knee pops during game',
+      label: 'PATIENT',
+      body: 'Sharp pain, immediate swelling, can\'t bear full weight. Drives to urgent care hoping it\'s just a sprain.',
+    },
+    clinician: {
+      title: 'Physical exam — MRI ordered',
+      label: 'PRIMARY CARE',
+      body: 'Lachman test positive, joint effusion present. Suspects ACL rupture. Places MRI knee order in EHR.',
+      pain: [
+        { tag: 'clinician', text: 'Vague clinical indication ("rule out ACL tear") gives the radiologist minimal history — associated injuries can be missed.' }
+      ]
+    }
+  },
+  {
+    type: 'wait',
+    dayNum: 'DAY 2–8',
+    dayNote: '↓ 7',
+    label: 'SYSTEM · BEHIND THE SCENES',
+    duration: '6 Days Pass',
+    title: 'Prior Authorization in Progress',
+    quote: '"Your MRI needs approval from your insurance. It should only take a few days."',
+    pain: [
+      { tag: 'system', text: 'Prior auth delays imaging by an average of 2–7 days. ~15% of imaging requests are initially denied. Process is still largely fax-based.' },
+      { tag: 'system', text: '94% of physicians report PA causes patient care delays. 29% report a patient experienced a serious adverse event because of a prior auth delay (AMA, 2024).' }
+    ]
+  },
+  {
+    type: 'parallel',
+    dayNum: 'DAY 9',
+    dayDate: 'Fri · Jan 23',
+    patient: {
+      title: 'Authorization approved',
+      label: 'PATIENT',
+      body: 'Imaging center calls to schedule. First available MRI slot is three days out.',
+    },
+    clinician: {
+      title: 'MRI booked',
+      label: 'SCHEDULING',
+      body: 'Confirms authorization number, verifies insurance, books MRI slot. Sends prep instructions by phone.',
+    }
+  },
+  {
+    type: 'parallel',
+    dayNum: 'DAY 12',
+    dayDate: 'Mon · Jan 26',
+    patient: {
+      title: 'Arrives at imaging center',
+      label: 'PATIENT',
+      body: 'Check-in, safety questionnaire, changes into gown. Waits to be called.',
+    },
+    clinician: {
+      title: 'Intake & safety screening',
+      label: 'RADIOLOGIC TECH',
+      body: 'Reviews order, confirms knee protocol, screens for MRI contraindications.',
+      pain: [
+        { tag: 'clinician', text: 'Safety screening done at the scanner, not before arrival. Patients with contraindications are sometimes turned away on the day, wasting the slot.' }
+      ]
+    }
+  },
+  {
+    type: 'parallel',
+    dayNum: '',
+    dayDate: 'same day',
+    patient: {
+      title: 'Inside the MRI — 45 minutes',
+      label: 'PATIENT',
+      body: 'Loud banging for 45 minutes. Must stay completely still. Any movement means sequences must be re-run.',
+    },
+    clinician: {
+      title: 'Sequences acquired',
+      label: 'RADIOLOGIC TECH',
+      body: 'Runs PDW, T2 fat-sat, coronal sequences. Monitors image quality on console. Study complete.',
+      pain: [
+        { tag: 'clinician', text: 'Wrong protocol or motion artifact → sequences must be repeated, delaying the patient and consuming another scanner slot.' }
+      ]
+    }
+  },
+  {
+    type: 'wait',
+    dayNum: 'DAY 13–14',
+    dayNote: '↓ 2',
+    label: 'PATIENT · WAITING',
+    duration: '1–2 Days Pass',
+    title: 'Waiting for the Report',
+    quote: '"Complete tear of the anterior cruciate ligament." Read alone in MyChart, before the doctor called.',
+    pain: [
+      { tag: 'patient', text: 'Patients routinely receive radiology reports in their portal before their doctor reviews them — with no clinical context to interpret what they\'ve read.' }
+    ]
+  },
+  {
+    type: 'clinician-only',
+    dayNum: 'DAY 14',
+    dayDate: 'Wed · Jan 28',
+    clinician: {
+      title: 'MRI interpreted',
+      label: 'RADIOLOGIST',
+      body: 'Opens study on PACS workstation. Reviews all sequences. Identifies complete ACL tear with lateral bone bruising. Dictates structured report.',
+      pain: [
+        { tag: 'clinician', text: '3–5% real-time diagnostic error rate; ~30% of errors are only found in retrospect. Rate unchanged for 75 years despite technology advances (RadioGraphics, 2018).' }
+      ]
+    }
+  },
+  {
+    type: 'clinician-only',
+    dayNum: 'DAY 15',
+    dayDate: 'Thu · Jan 29',
+    clinician: {
+      title: 'Report arrives in physician inbox',
+      label: 'REFERRING PHYSICIAN',
+      body: 'Report delivered to EHR in-basket alongside dozens of other results. No escalation alert — an ACL tear is not flagged as a "critical" finding.',
+      pain: [
+        { tag: 'system', text: '~75% of radiology malpractice claims involve communication failures, not missed findings — the radiologist found the problem, but the handoff broke (Berlin, Applied Radiology 2010).' }
+      ]
+    }
+  },
+  {
+    type: 'parallel',
+    dayNum: 'DAY 16',
+    dayDate: 'Fri · Jan 30',
+    patient: {
+      title: 'Follow-up visit',
+      label: 'PATIENT',
+      body: 'Learns the diagnosis: complete ACL tear, bone bruising, intact menisci. Given two options: surgery or physical therapy.',
+      pain: [
+        { tag: 'patient', text: '1 in 7 patients with a major radiologic finding have no documented follow-up. If this appointment hadn\'t been booked, the report might have gone unread (FIND Program, 2023).' }
+      ]
+    },
+    clinician: {
+      title: 'Diagnosis explained, referral placed',
+      label: 'REFERRING PHYSICIAN',
+      body: 'Reviews report with patient in plain language. Discusses surgical vs. conservative options. Places orthopedic surgery referral.',
+      pain: [
+        { tag: 'clinician', text: 'No standard format for translating radiologist findings into patient-facing language. Communication quality depends on the individual physician.' }
+      ]
+    }
+  },
+  {
+    type: 'parallel',
+    dayNum: 'DAY 18+',
+    dayDate: 'Sun · Feb 1',
+    patient: {
+      title: 'Orthopedic referral',
+      label: 'PATIENT',
+      body: 'Waits another week for the ortho appointment. Faces a major decision about surgery, recovery, cost, and physical therapy. Wonders if it could have been faster.',
+    },
+    clinician: {
+      title: 'Imaging reviewed, treatment planned',
+      label: 'ORTHOPEDIC SURGEON',
+      body: 'Pulls the MRI, confirms the ACL tear. Plans surgical reconstruction or PT protocol. May order additional imaging for surgical planning.',
+      pain: [
+        { tag: 'system', text: 'No EHR-native tracking for follow-up imaging recommendations. If the patient doesn\'t show up, the loop breaks with nothing to catch it (FIND Program, 2023).' }
+      ]
+    }
+  }
+];
+
+/* ─── Render ─── */
+function renderPainItems(items) {
+  return items.map(p => `
+    <div class="pain-item">
+      <span class="pain-tag ${p.tag}">${p.tag}</span>
+      <span class="pain-text">${p.text}</span>
+    </div>`).join('');
+}
+
+function renderCard(data, isClinic) {
+  const painHtml = data.pain && data.pain.length
+    ? `<div class="card-pain">${renderPainItems(data.pain)}</div>` : '';
+  const labelHtml = isClinic
+    ? `${data.label} <span>· behind the scenes</span>`
+    : data.label;
+  return `
+    <div class="card${isClinic ? ' clin' : ''}">
+      <div class="card-inner">
+        <div class="card-label">${labelHtml}</div>
+        <div class="card-title">${data.title}</div>
+        <div class="card-body">${data.body}</div>
+      </div>
+      ${painHtml}
+    </div>`;
+}
+
+const tl = document.getElementById('timeline');
+
+ROWS.forEach(row => {
+  const outer = document.createElement('div');
+  const isWait = row.type === 'wait';
+  outer.className = `tl-row${isWait ? ' tl-wait' : ''}`;
+
+  // Timeline column
+  const dayCol = document.createElement('div');
+  dayCol.className = 'tl-day';
+  if (row.dayNum) {
+    dayCol.innerHTML = `<div class="day-num">${row.dayNum}</div>${row.dayDate ? `<div class="day-date">${row.dayDate}</div>` : ''}${row.dayNote ? `<div class="day-date">${row.dayNote}</div>` : ''}`;
+  }
+
+  // Content column
+  const content = document.createElement('div');
+
+  if (isWait) {
+    const painHtml = row.pain && row.pain.length
+      ? `<div class="wait-pain">${renderPainItems(row.pain)}</div>` : '';
+    content.innerHTML = `
+      <div class="wait-block">
+        <div class="wait-label">${row.label}</div>
+        <div class="wait-duration">${row.duration}</div>
+        <div class="wait-title">${row.title}</div>
+        <div class="wait-quote">${row.quote}</div>
+        ${painHtml}
+      </div>`;
+  } else if (row.type === 'clinician-only') {
+    content.className = 'tl-content solo';
+    content.innerHTML = renderCard(row.clinician, true);
+  } else {
+    // parallel — patient + clinician
+    content.className = 'tl-content';
+    let html = '';
+    if (row.patient)  html += renderCard(row.patient, false);
+    if (row.clinician) html += renderCard(row.clinician, true);
+    content.innerHTML = html;
+  }
+
+  outer.appendChild(dayCol);
+  outer.appendChild(content);
+  tl.appendChild(outer);
+});
+</script>
+</body>
+</html>
