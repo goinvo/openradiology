@@ -101,6 +101,30 @@
   .legend-desc { font-size: 12.5px; color: var(--muted); }
   .legend-sep { color: var(--line-strong); font-size: 12px; }
 
+  /* ── Methodology blurb ── */
+  .method-blurb {
+    padding: 22px 0 24px;
+    border-bottom: 1px solid var(--line);
+    max-width: 680px;
+  }
+  .method-blurb p {
+    font-family: var(--serif); font-size: 16px; font-weight: 300;
+    line-height: 1.6; color: var(--ink-soft); margin-bottom: 18px;
+  }
+  .scale-grid {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 8px 0;
+  }
+  .scale-num {
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+    color: var(--ink); letter-spacing: 0.02em; padding-top: 1px;
+  }
+  .scale-desc {
+    font-family: var(--sans); font-size: 13px;
+    color: var(--muted); line-height: 1.4;
+  }
+
   /* ── Control bar ── */
   .controls {
     position: sticky; top: 0; z-index: 40;
@@ -179,8 +203,33 @@
   .chev svg { display: block; width: 13px; height: 13px; }
   .row.is-open .chev { transform: rotate(180deg); color: var(--ink-soft); }
 
+  /* ── Bars header (SEVERITY INDEX + legend) ── */
+  .bars-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    padding: 11px 8px 11px 4px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0;
+  }
+  .bars-header-label {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
+    flex-shrink: 0;
+  }
+  .bars-header-legend {
+    display: flex; align-items: center; gap: 6px 20px;
+    flex-wrap: wrap; flex: 1; justify-content: flex-end;
+  }
+  .bars-header-legend .legend-item { gap: 7px; }
+  .bars-header-legend .legend-desc { font-size: 12px; }
+  .bars-header-max {
+    font-family: var(--mono); font-size: 10px; color: var(--faint);
+    letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0;
+  }
+
   /* ── Ranked Bars view ── */
-  .bars-list { border-top: 1px solid var(--line); }
+  .bars-list { border-top: none; }
   .bar-row { border-bottom: 1px solid var(--line); }
   .bar-head {
     display: grid;
@@ -208,16 +257,21 @@
 
   .bar-viz { display: flex; flex-direction: column; gap: 5px; }
   .bar-track {
-    display: flex; height: 16px; background: var(--line-soft);
-    border-radius: 3px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line);
+    display: flex; height: 34px; background: var(--line-soft);
+    border-radius: 4px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line);
   }
-  .bar-seg { height: 100%; transition: width .5s cubic-bezier(.22,1,.36,1); }
+  .bar-seg {
+    height: 100%; display: flex; align-items: center;
+    padding: 0 8px; overflow: hidden; min-width: 0;
+    transition: width .5s cubic-bezier(.22,1,.36,1);
+  }
   .bar-seg.m { background: var(--m); }
   .bar-seg.p { background: var(--p); }
   .bar-seg.d { background: var(--d); }
-  .bar-scalelabels {
-    display: flex; justify-content: space-between;
-    font-family: var(--mono); font-size: 9.5px; color: var(--faint); letter-spacing: 0.04em;
+  .bar-seg-label {
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    color: rgba(255,255,255,0.92); white-space: nowrap;
+    letter-spacing: 0.04em; line-height: 1;
   }
 
   .bar-total {
@@ -264,7 +318,15 @@
     <p class="standfirst">A ranked assessment of the structural failures facing diagnostic radiology — scored across cost, patient volume, and diagnostic harm, and sourced from peer-reviewed journals, medical societies, and federal data.</p>
   </header>
 
-  <div class="legend" id="method"></div>
+  <div class="method-blurb">
+    <p>Each dimension is scored 1–10 from peer-reviewed journals, government data, and professional society reports, then scaled to 0–33 so all three sum to a 0–100 severity index.</p>
+    <div class="scale-grid">
+      <span class="scale-num">10</span>    <span class="scale-desc">Extreme — well-documented, broad US impact</span>
+      <span class="scale-num">7–9</span>   <span class="scale-desc">Significant — strong evidence</span>
+      <span class="scale-num">4–6</span>   <span class="scale-desc">Moderate — meaningful but limited in scope</span>
+      <span class="scale-num">1–3</span>   <span class="scale-desc">Minor or emerging</span>
+    </div>
+  </div>
 
   <div class="controls">
     <div class="controls-left">
@@ -285,6 +347,12 @@
   </div>
 
   <div class="count-note" id="count-note"></div>
+
+  <div class="bars-header">
+    <span class="bars-header-label">Severity Index</span>
+    <div class="bars-header-legend" id="method"></div>
+    <span class="bars-header-max">max 100</span>
+  </div>
 
   <div class="bars-list" id="bars-list"></div>
 
@@ -308,7 +376,7 @@ window.DIMENSIONS = [
 window.PROBLEMS = [
   {
     rank: 1,
-    name: "Diagnostic Error",
+    name: "Diagnosis: Findings That Go Uncaught",
     category: "Diagnostic",
     clinical: true,
     description: "Radiologists miss or misinterpret findings in 3–5% of studies — a rate that has not improved in 75 years.",
@@ -326,25 +394,23 @@ window.PROBLEMS = [
   },
   {
     rank: 2,
-    name: "Administrative Burden & Reimbursement",
+    name: "Insurance: Your Insurer Has a Veto",
     category: "Administrative",
     clinical: false,
-    description: "Prior authorization overhead and declining reimbursement drain practice capacity and delay patient access to imaging.",
+    description: "Payers require advance approval before imaging can be performed, costing $35 billion in annual administrative overhead with an 81.7% appeal overturn rate.",
     scores: { m: 33, p: 30, d: 20, total: 83 },
     evidence: [
       "**$35 billion** is spent annually on prior authorization administrative overhead in the US — equivalent to the full-time labor of **100,000+ registered nurses**, spent entirely on paperwork rather than care.",
-      "**81.7%** of appealed Medicare Advantage prior authorization denials were overturned — meaning most initial denials were incorrect, but patients and practices only discover this if they appeal.",
-      "Radiologists performed **13% more work** per Medicare beneficiary in 2021 vs. 2005 while reimbursement rates have been repeatedly cut, including a **2.8%** conversion factor reduction in 2025."
+      "**81.7%** of appealed Medicare Advantage prior authorization denials were overturned — meaning most initial denials were incorrect, but patients and practices only discover this if they appeal."
     ],
     sources: [
       { label: "PMC 2024 — Prior Auth Burden Survey", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11425057/" },
-      { label: "AMA Prior Authorization Data", url: "https://www.ama-assn.org/practice-management/prior-authorization/fixing-prior-auth-nearly-40-prior-authorizations-week-way" },
-      { label: "Siewert et al., JACR 2024", url: "https://radiologybusiness.com" }
+      { label: "AMA Prior Authorization Data", url: "https://www.ama-assn.org/practice-management/prior-authorization/fixing-prior-auth-nearly-40-prior-authorizations-week-way" }
     ]
   },
   {
     rank: 3,
-    name: "Workforce Shortage & Burnout",
+    name: "Workforce: Too Few Radiologists, Too Many Scans",
     category: "Workforce",
     clinical: false,
     description: "Imaging demand grows 5% annually while radiologist supply grows 2%, creating fatigue-driven errors and coverage gaps.",
@@ -363,7 +429,7 @@ window.PROBLEMS = [
   },
   {
     rank: 4,
-    name: "Communication Failure",
+    name: "Communication: Results That Never Reach You",
     category: "Communication",
     clinical: true,
     description: "Correctly identified findings fail to reach treating teams, and recommended follow-up imaging is never completed.",
@@ -381,7 +447,7 @@ window.PROBLEMS = [
   },
   {
     rank: 5,
-    name: "Health Equity Disparities",
+    name: "Equity: Who Gets Scanned",
     category: "Equity",
     clinical: false,
     description: "Imaging utilization and quality differ measurably by race and socioeconomic status, producing later-stage diagnoses for disadvantaged groups.",
@@ -399,7 +465,7 @@ window.PROBLEMS = [
   },
   {
     rank: 6,
-    name: "Access to Imaging",
+    name: "Access: Imaging Deserts",
     category: "Access",
     clinical: false,
     description: "Geographic deserts, scanner scarcity, and lengthening wait times leave many patients unable to obtain imaging when they need it.",
@@ -417,7 +483,7 @@ window.PROBLEMS = [
   },
   {
     rank: 7,
-    name: "Radiation Safety",
+    name: "Radiation: Scans That Cause Cancer",
     category: "Radiation",
     clinical: true,
     description: "CT scans carry a documented cumulative cancer risk that compounds with repeat imaging and varies 13-fold between facilities.",
@@ -435,7 +501,25 @@ window.PROBLEMS = [
   },
   {
     rank: 8,
-    name: "AI & Technology Failures",
+    name: "Reimbursement: More Work, Less Pay",
+    category: "Administrative",
+    clinical: false,
+    description: "Inflation-adjusted Medicare payments have fallen 33% since 2001 while practice costs rose 59%, forcing consolidation, driving attrition, and narrowing patient access.",
+    scores: { m: 27, p: 20, d: 17, total: 64 },
+    evidence: [
+      "Medicare physician payment declined **33%** in inflation-adjusted terms from 2001 to 2025, while practice operating costs rose **~59%** over the same period (AMA, based on CMS conversion factor and BLS Medicare Economic Index data).",
+      "Independent radiology practices fell **32%** between 2014 and 2023 (to 2,118 groups), while practices with 100+ radiologists surged **349%**. Inflation-adjusted cash flow per radiologist was **43.1% lower** in 2023 than in 2005, driving smaller practices to merge or sell (Yun et al., AJR 2024).",
+      "Radiologists performed **13% more work** per Medicare beneficiary in 2021 vs. 2005 while reimbursement has been repeatedly cut, including a **2.8%** conversion factor reduction in 2025 (Siewert et al., JACR 2024)."
+    ],
+    sources: [
+      { label: "AMA — Medicare Physician Pay 2001–2025", url: "https://www.ama-assn.org/practice-management/medicare-medicaid/medicare-physician-pay-has-plummeted-2001-find-out-why" },
+      { label: "Yun et al., AJR 2024", url: "https://ajronline.org/doi/10.2214/AJR.24.31357" },
+      { label: "Siewert et al., JACR 2024", url: "https://radiologybusiness.com" }
+    ]
+  },
+  {
+    rank: 9,
+    name: "AI: Cleared but Not Tested",
     category: "AI",
     clinical: false,
     description: "Most FDA-cleared radiology AI tools have undisclosed real-world performance across demographic groups and equipment types.",
@@ -482,14 +566,15 @@ window.PROBLEMS = [
     </div></div>`;
   }
 
-  /* ── Legend ── */
+  /* ── Legend — rendered into the bars-header row ── */
   function buildMethod() {
-    document.getElementById('method').innerHTML = DIMS.map(d =>
-      `<div class="legend-item">
-        <span class="legend-glyph" style="background:${d.color}">${d.short}</span>
-        <b>${d.label}</b>
-        <span class="legend-desc">${d.desc}</span>
-      </div>`).join('<span class="legend-sep">·</span>');
+    document.getElementById('method').innerHTML =
+      DIMS.map(d => `
+        <div class="legend-item">
+          <span class="legend-glyph" style="background:${d.color}">${d.short}</span>
+          <b>${d.label}</b>
+          <span class="legend-desc">${d.desc}</span>
+        </div>`).join('<span class="legend-sep">·</span>');
   }
 
   /* ── Filters ── */
@@ -543,9 +628,13 @@ window.PROBLEMS = [
   function buildBars() {
     const list = document.getElementById('bars-list');
     list.innerHTML = sortedProblems().map(p => {
-      const segs = DIMS.map(d =>
-        `<div class="bar-seg ${d.key}" style="width:${p.scores[d.key] / MAX * 100}%" title="${d.label}: ${p.scores[d.key]}"></div>`
-      ).join('');
+      const segs = DIMS.map(d => {
+        const pct = p.scores[d.key] / MAX * 100;
+        const label = pct >= 10
+          ? `<span class="bar-seg-label">${p.scores[d.key]}</span>`
+          : '';
+        return `<div class="bar-seg ${d.key}" style="width:${pct}%" title="${d.label}: ${p.scores[d.key]}">${label}</div>`;
+      }).join('');
       return `<div class="row bar-row" data-id="${p.rank}" data-category="${grp(p).key}" style="--rowc:${grp(p).color}">
         <div class="bar-head">
           <div class="bar-rank">${p.rank}</div>
@@ -555,7 +644,6 @@ window.PROBLEMS = [
           </div>
           <div class="bar-viz">
             <div class="bar-track">${segs}</div>
-            <div class="bar-scalelabels"><span>severity composition</span><span>/ ${MAX}</span></div>
           </div>
           <div class="bar-total">${p.scores.total}<small>SCORE</small></div>
           ${SVG_CHEV}
