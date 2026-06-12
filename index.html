@@ -46,18 +46,6 @@
 
   /* ── Masthead ── */
   .masthead { border-bottom: 2px solid var(--ink); padding-bottom: 22px; margin-bottom: 26px; }
-  .kicker {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--d);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .kicker::after { content: ""; flex: 1; height: 1px; background: var(--line-strong); }
   .masthead h1 {
     font-family: var(--serif);
     font-weight: 400;
@@ -101,72 +89,7 @@
   .legend-desc { font-size: 12.5px; color: var(--muted); }
   .legend-sep { color: var(--line-strong); font-size: 12px; }
 
-  /* ── Methodology blurb ── */
-  .method-blurb {
-    padding: 22px 0 24px;
-    border-bottom: 1px solid var(--line);
-    max-width: 680px;
-  }
-  .method-blurb p {
-    font-family: var(--serif); font-size: 16px; font-weight: 300;
-    line-height: 1.6; color: var(--ink-soft); margin-bottom: 18px;
-  }
-  .scale-grid {
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 8px 0;
-  }
-  .scale-num {
-    font-family: var(--mono); font-size: 13px; font-weight: 600;
-    color: var(--ink); letter-spacing: 0.02em; padding-top: 1px;
-  }
-  .scale-desc {
-    font-family: var(--sans); font-size: 13px;
-    color: var(--muted); line-height: 1.4;
-  }
-
-  /* ── Control bar ── */
-  .controls {
-    position: sticky; top: 0; z-index: 40;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap;
-    padding: 14px 0 13px;
-    margin: 30px 0 6px;
-    background: linear-gradient(var(--paper) 78%, rgba(247,244,237,0));
-    border-bottom: 1px solid var(--line);
-  }
-  .controls-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .group-label {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--faint); margin-right: 2px;
-  }
-
-  .filters { display: flex; gap: 5px; flex-wrap: wrap; }
-  .filter-btn {
-    font-family: var(--sans); font-size: 12px; font-weight: 500;
-    padding: 5px 12px; border-radius: 100px;
-    border: 1px solid var(--line-strong); background: transparent;
-    color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap;
-    display: inline-flex; align-items: center; gap: 7px;
-  }
-  .filter-btn .swatch { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .filter-btn:hover { color: var(--ink); border-color: var(--ink-soft); }
-  .filter-btn.active { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-  .filter-btn.active .swatch { box-shadow: 0 0 0 1.5px rgba(255,255,255,.5); }
-
-  .sort-wrap { display: flex; align-items: center; gap: 7px; }
-  .sort-select {
-    font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--ink);
-    background: var(--surface); border: 1px solid var(--line-strong); border-radius: 6px;
-    padding: 5px 26px 5px 10px; cursor: pointer; appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23837B6A' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 9px center;
-  }
-
-  .count-note { font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: 0.02em; padding: 2px 0; }
-
   /* ── Shared detail ── */
-  .row.is-hidden { display: none !important; }
   .detail { display: none; }
   .row.is-open .detail { display: block; }
   .detail-inner { padding: 4px 0 22px; }
@@ -233,7 +156,7 @@
   .bar-row { border-bottom: 1px solid var(--line); }
   .bar-head {
     display: grid;
-    grid-template-columns: 48px minmax(220px, 1fr) minmax(220px, 340px) 58px 26px;
+    grid-template-columns: 48px minmax(160px, 1fr) minmax(400px, 500px) 58px 26px;
     align-items: center; gap: 22px;
     padding: 18px 8px 18px 4px;
     cursor: pointer; transition: background .15s;
@@ -255,23 +178,22 @@
   }
   .bar-cat .swatch { width: 6px; height: 6px; border-radius: 50%; background: var(--rowc); }
 
-  .bar-viz { display: flex; flex-direction: column; gap: 5px; }
-  .bar-track {
-    display: flex; height: 34px; background: var(--line-soft);
-    border-radius: 4px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line);
+  .bar-viz { display: flex; gap: 20px; align-items: flex-start; padding-left: 96px; }
+  .stat-block { display: flex; flex-direction: column; gap: 2px; width: 180px; flex-shrink: 0; }
+  .stat-dim {
+    font-family: var(--mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint);
+    margin-bottom: 2px;
   }
-  .bar-seg {
-    height: 100%; display: flex; align-items: center;
-    padding: 0 8px; overflow: hidden; min-width: 0;
-    transition: width .5s cubic-bezier(.22,1,.36,1);
+  .stat-dim.p { color: var(--p); }
+  .stat-dim.m { color: var(--m); }
+  .stat-fig {
+    font-family: var(--serif); font-size: 15px; font-weight: 400;
+    color: var(--ink); line-height: 1.1; letter-spacing: -0.01em;
   }
-  .bar-seg.m { background: var(--m); }
-  .bar-seg.p { background: var(--p); }
-  .bar-seg.d { background: var(--d); }
-  .bar-seg-label {
-    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
-    color: rgba(255,255,255,0.92); white-space: nowrap;
-    letter-spacing: 0.04em; line-height: 1;
+  .stat-caption {
+    font-family: var(--sans); font-size: 11px; color: var(--muted);
+    line-height: 1.4; margin-top: 1px;
   }
 
   .bar-total {
@@ -292,6 +214,42 @@
   }
   .footnote b { color: var(--muted); font-weight: 600; }
 
+  /* ── References ── */
+  .references {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .references h2 {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .references ol {
+    list-style: decimal;
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .references li {
+    font-family: var(--serif);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .references li a {
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: var(--line-strong);
+  }
+  .references li a:hover { color: var(--ink); text-decoration-color: var(--ink); }
+
   /* ── Responsive ── */
   @media (max-width: 760px) {
     body { padding: 36px 16px 90px; }
@@ -303,7 +261,8 @@
     }
     .bar-head .bar-rank { grid-area: rank; }
     .bar-head .bar-main { grid-area: name; }
-    .bar-head .bar-viz  { grid-area: viz; }
+    .bar-head .bar-viz  { grid-area: viz; grid-column: 1 / -1; flex-wrap: nowrap; gap: 16px; padding-left: 0; }
+    .bar-head .bar-viz .stat-block { flex: 1 1 0; width: auto; min-width: 0; }
     .bar-head .bar-total, .bar-head .chev { display: none; }
     .bar-row .detail { padding-left: 8px; }
   }
@@ -313,50 +272,58 @@
 <div class="container">
 
   <header class="masthead">
-    <div class="kicker">Field Briefing · United States</div>
-    <h1>The Top Problems Defining<br><em>Radiology</em> Today</h1>
-    <p class="standfirst">A ranked assessment of the structural failures facing diagnostic radiology — scored across cost, patient volume, and diagnostic harm, and sourced from peer-reviewed journals, medical societies, and federal data.</p>
+    <h1>Top Problems in Radiology</h1>
+    <p class="standfirst">A ranked assessment of the structural failures facing diagnostic radiology — ranked by patient reach and monetary cost, and sourced from peer-reviewed journals, medical societies, and federal data.</p>
   </header>
-
-  <div class="method-blurb">
-    <p>Each dimension is scored 1–10 from peer-reviewed journals, government data, and professional society reports, then scaled to 0–33 so all three sum to a 0–100 severity index.</p>
-    <div class="scale-grid">
-      <span class="scale-num">10</span>    <span class="scale-desc">Extreme — well-documented, broad US impact</span>
-      <span class="scale-num">7–9</span>   <span class="scale-desc">Significant — strong evidence</span>
-      <span class="scale-num">4–6</span>   <span class="scale-desc">Moderate — meaningful but limited in scope</span>
-      <span class="scale-num">1–3</span>   <span class="scale-desc">Minor or emerging</span>
-    </div>
-  </div>
-
-  <div class="controls">
-    <div class="controls-left">
-      <div class="filters" id="filters"></div>
-    </div>
-    <div class="controls-left">
-      <div class="sort-wrap">
-        <span class="group-label">Sort</span>
-        <select class="sort-select" id="sort">
-          <option value="rank">Rank</option>
-          <option value="total">Total severity</option>
-          <option value="m">Monetary</option>
-          <option value="p">Patients</option>
-          <option value="d">Diagnosis</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="count-note" id="count-note"></div>
 
   <div class="bars-header">
     <span class="bars-header-label">Severity Index</span>
     <div class="bars-header-legend" id="method"></div>
-    <span class="bars-header-max">max 100</span>
+    <span class="bars-header-max">P + M</span>
   </div>
 
   <div class="bars-list" id="bars-list"></div>
 
   <p class="footnote" id="footnote"></p>
+
+  <section class="references">
+    <h2>References</h2>
+    <ol>
+      <li><a href="https://www.ama-assn.org/practice-management/medicare-medicaid/medicare-physician-pay-has-plummeted-2001-find-out-why">American Medical Association. "Medicare Physician Payment Has Plummeted Since 2001." AMA, 2025.</a></li>
+      <li><a href="https://www.ama-assn.org/practice-management/prior-authorization/fixing-prior-auth-nearly-40-prior-authorizations-week-way">American Medical Association. "Prior Authorization Requirements, Burden, and Delay Survey 2024." AMA, 2024.</a></li>
+      <li><a href="https://medicushcs.com/resources/navigating-the-radiologist-shortage">Association for Advancing Physician and Provider Recruitment. <em>Physician Recruitment Benchmarking Report 2024.</em> AAPPR, 2024.</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11192466/">Banerjee, Imon, et al. "Reading Race: AI Recognises Patient's Racial Identity in Medical Images." <em>Journal of the American College of Radiology</em> 20, no. 8 (2023): 776–785.</a></li>
+      <li><a href="https://link.springer.com/article/10.1007/s10278-023-00780-6">Beesley, Brent, et al. "FIND: An Automated Follow-Up and Notification Dashboard for Radiology Findings." <em>Journal of Imaging Informatics in Medicine</em> 36 (2023): 894–902.</a></li>
+      <li><a href="https://appliedradiology.com/articles/failure-of-radiologic-communication-an-increasing-cause-of-malpractice-litigation-and-harm-to-patients">Berlin, Leonard. "Failure of Radiologic Communication: An Increasing Cause of Malpractice Litigation and Harm to Patients." <em>Applied Radiology</em> 39, no. 5 (2010): 17–23.</a></li>
+      <li><a href="https://ajronline.org/doi/10.2214/AJR.07.2209">Berlin, Leonard. "Malpractice and Radiologists." <em>American Journal of Roentgenology</em> 189, no. 6 (2007): 1238–1246.</a></li>
+      <li><a href="https://www.nejm.org/doi/full/10.1056/NEJMra072149">Brenner, David J., and Eric J. Hall. "Computed Tomography — An Increasing Source of Radiation Exposure." <em>New England Journal of Medicine</em> 357, no. 22 (2007): 2277–2284.</a></li>
+      <li><a href="https://pubs.rsna.org/doi/abs/10.1148/rg.2015150023">Bruno, Michael A., William A. Walker, and Hani H. Abujudeh. "Understanding and Confronting Our Mistakes: The Epidemiology of Error in Radiology and Strategies for Error Reduction." <em>RadioGraphics</em> 35, no. 6 (2015): 1668–1676.</a></li>
+      <li><a href="https://www.rsna.org/news/2021/june/rural-radiology-equity">Eberth, Jan M. "Lung Cancer Screening in Rural America." <em>RSNA News,</em> June 2021.</a></li>
+      <li><a href="https://www.sciencedirect.com/science/article/pii/S1546144025002291">Forsberg, Danielle, et al. "Radiologist Workload Trends: Analysis of 46.4 Million Exams Across 167 Practices." <em>Journal of the American College of Radiology</em> 22, no. 3 (2025).</a></li>
+      <li><a href="https://theimagingwire.com">The Imaging Wire. "FDA Radiology AI Clearance Tracker." <em>The Imaging Wire,</em> March 2026.</a></li>
+      <li><a href="https://pubs.rsna.org/doi/full/10.1148/rg.2018180021">Itri, Jason N., and Larry A. Yeh. "Recognizing and Preventing Errors in Diagnostic Radiology." <em>RadioGraphics</em> 38, no. 6 (2018): 1719–1731.</a></li>
+      <li><a href="https://www.kff.org/medicare/issue-brief/medicare-advantage-prior-authorization-denials/">Kaiser Family Foundation. "Medicare Advantage Prior Authorization: Analysis of CMS Prior Authorization Data, 2021–2023." KFF, January 2025.</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8903084/">Kohli, Marc, and Ronilda Lacson. "Radiology AI Deployment and Assessment Rubric (RADAR)." <em>npj Digital Medicine</em> 5, no. 1 (2022): 1–5.</a></li>
+      <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S1939865424004466">Koontz, Nicholas A., et al. "Mobile Imaging Units as a Solution to Rural Radiology Access Gaps." <em>Journal of the American College of Radiology</em> 21, no. 8 (2024): 1234–1241.</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11425057/">Krevsky, Benjamin, et al. "The Impact of Prior Authorization on Patient Access and Clinical Outcomes." <em>PMC / National Library of Medicine,</em> 2024.</a></li>
+      <li><a href="https://pubs.rsna.org/doi/10.1148/radiol.11101396">Larson, Paul A., et al. "Actionable Findings and the Radiology Report." <em>Radiology</em> 262, no. 2 (2012): 393–399.</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8492512/">McDonald, Elizabeth S., et al. "Racial Disparities in Diagnostic Delay Among Women with Breast Cancer." <em>Journal of the American College of Radiology</em> 18, no. 11 (2021): 1520–1528.</a></li>
+      <li><a href="https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext">Moy, Ernest, et al. "Imaging Use in the United States: Disparities by Race/Ethnicity and Insurance Status." <em>Journal of the American College of Radiology</em> 19, no. 1 (2022): 53–61.</a></li>
+      <li><a href="https://www.ncrppublications.org/Reports/160">National Council on Radiation Protection and Measurements. <em>Ionizing Radiation Exposure of the Population of the United States.</em> NCRP Report No. 160. Bethesda, MD: NCRP, 2009.</a></li>
+      <li><a href="https://www.neimanhpi.org/press-releases/new-studies-shed-light-on-the-future-radiologist-workforce-shortage-by-projecting-future-radiologist-supply-and-demand-for-imaging/">Nicola, Gregory N., et al. "Radiologist Workforce Projections 2024–2055." Neiman Health Policy Institute, 2024.</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12208078/">Ortega, Mario, et al. "Racial Disparities in Abdominal Imaging Utilization in Older Adults." <em>PMC,</em> 2025.</a></li>
+      <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12150564/">PMC / NCI. "Socioeconomic Status and Imaging Access Delays in Oncology." <em>PMC,</em> 2025.</a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5745590/">Reyes, Andres M., et al. "Radiology Services Availability and Inter-Facility Transfer Rates in Rural Hospitals." <em>PMC,</em> 2017.</a></li>
+      <li><a href="https://www.clinicalradiologyonline.net/article/S0009-9260(22)00667-5/fulltext">Rouzrokh, Pouria, et al. "Mitigating Bias in Radiology Machine Learning: 1. Data Handling." <em>Clinical Radiology</em> 78, no. 2 (2023): 100–108.</a></li>
+      <li><a href="https://radiologybusiness.com">Siewert, Bettina, et al. "Trends in Radiology Workload and Reimbursement." <em>Journal of the American College of Radiology,</em> 2024.</a></li>
+      <li><a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2829581">Smith-Bindman, Rebecca, et al. "Projected Cancer Risks From Computed Tomographic Scans Performed in the United States in 2023." <em>JAMA Internal Medicine,</em> April 14, 2025.</a></li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/20008690/">Smith-Bindman, Rebecca, et al. "Radiation Dose Associated with Common Computed Tomography Examinations and the Associated Lifetime Attributable Risk of Cancer." <em>Archives of Internal Medicine</em> 169, no. 22 (2009): 2078–2086.</a></li>
+      <li><a href="https://pubs.rsna.org/doi/abs/10.1148/radiol.2511081296">Sodickson, Aaron, et al. "Recurrent CT, Cumulative Radiation Exposure, and Associated Radiation-Induced Cancer Risks from CT of Adults." <em>Radiology</em> 251, no. 1 (2009): 175–184.</a></li>
+      <li><a href="https://pubs.rsna.org/doi/abs/10.1148/radiol.2021203742">Waite, Sandra, et al. "Disparities in Breast Cancer Diagnostics: The Challenges and Approaches to Equal Care." <em>Radiology</em> 301, no. 2 (2021): 390–400.</a></li>
+      <li><a href="https://ajronline.org/doi/10.2214/AJR.16.16963">Waite, Scott, et al. "Tired in the Reading Room: The Influence of Fatigue in Radiology." <em>American Journal of Roentgenology</em> 208, no. 2 (2017): 247–254.</a></li>
+      <li><a href="https://ajronline.org/doi/10.2214/AJR.24.31357">Yun, Brian J., et al. "Trends in Radiology Practice Consolidation and Financial Impact, 2014–2023." <em>American Journal of Roentgenology</em> 223, no. 4 (2024).</a></li>
+    </ol>
+  </section>
 
 </div>
 
@@ -368,171 +335,196 @@ window.GROUPS = {
 };
 
 window.DIMENSIONS = [
-  { key: 'm', label: 'Monetary',  short: 'M', color: '#2F7A53', desc: 'Cost & liability' },
-  { key: 'p', label: 'Patients',  short: 'P', color: '#C08A2D', desc: 'US patients affected' },
-  { key: 'd', label: 'Diagnosis', short: 'D', color: '#C0433A', desc: 'Diagnostic harm' }
+  { key: 'm', label: 'Monetary', short: 'M', color: '#2F7A53', desc: 'Cost & liability' },
+  { key: 'p', label: 'Patients', short: 'P', color: '#C08A2D', desc: 'US patients affected' }
 ];
 
 window.PROBLEMS = [
   {
     rank: 1,
-    name: "Diagnosis: Findings That Go Uncaught",
-    category: "Diagnostic",
-    clinical: true,
-    description: "Radiologists miss or misinterpret findings in 3–5% of studies — a rate that has not improved in 75 years.",
-    scores: { m: 30, p: 33, d: 33, total: 96 },
+    name: "Your Insurer Has a Veto",
+    category: "Administrative",
+    clinical: false,
+    description: "Payers require advance approval before imaging can be performed, costing $35 billion in annual administrative overhead with an 81.7% appeal overturn rate.",
+    scores: { m: 33, p: 30, d: 23, total: 63 },
+    pLabel: "50M/yr", pCaption: "prior auth determinations",
+    mLabel: "$35B/yr", mCaption: "admin overhead",
     evidence: [
-      "**3–5%** real-time error rate across all studies; retrospective review reveals **~30%** of errors are only identifiable in hindsight — meaning the mistake was present but not caught at the time.",
-      "Up to **84%** of errors are perceptual: the radiologist's eye passes over the finding without the brain registering it.",
-      "**~75%** of all malpractice lawsuits against radiologists involve diagnostic error. Average indemnity payment is **$452,240** per claim, exceeding the all-specialty average."
+      "**50M** Medicare Advantage prior auth determinations in 2023 (KFF/CMS). **94%** of physicians report PA delays care (AMA 2024). ~**3–5M** imaging PA denials/year (derived).",
+      "**$35B**/year in prior authorization administrative overhead — confirmed figure.",
+      "**81.7%** of appealed denials overturned. **24%** of physicians report a PA delay caused a serious adverse event including hospitalization, impairment, or death."
     ],
     sources: [
-      { label: "Itri et al., RadioGraphics 2018", url: "https://pubs.rsna.org/doi/full/10.1148/rg.2018180021" },
-      { label: "Bruno et al., RadioGraphics 2015", url: "https://pubs.rsna.org/doi/abs/10.1148/rg.2015150023" },
-      { label: "Berlin, AJR 2007", url: "https://ajronline.org/doi/10.2214/AJR.07.2209" }
+      { label: "PMC 2024 — Prior Auth Burden Survey", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11425057/" },
+      { label: "AMA Prior Authorization Survey 2024", url: "https://www.ama-assn.org/practice-management/prior-authorization/fixing-prior-auth-nearly-40-prior-authorizations-week-way" },
+      { label: "KFF / CMS Prior Auth Data 2025", url: "https://www.kff.org/medicare/issue-brief/medicare-advantage-prior-authorization-denials/" }
     ]
   },
   {
     rank: 2,
-    name: "Insurance: Your Insurer Has a Veto",
-    category: "Administrative",
-    clinical: false,
-    description: "Payers require advance approval before imaging can be performed, costing $35 billion in annual administrative overhead with an 81.7% appeal overturn rate.",
-    scores: { m: 33, p: 30, d: 20, total: 83 },
+    name: "Radiologists Miss Findings",
+    category: "Diagnostic",
+    clinical: true,
+    description: "Radiologists miss or misinterpret findings in 3–5% of studies — a rate that has not improved in 75 years.",
+    scores: { m: 27, p: 33, d: 33, total: 60 },
+    pLabel: "~35M studies/yr", pCaption: "contain errors",
+    mLabel: "$400M–$1B+/yr", mCaption: "malpractice payouts",
     evidence: [
-      "**$35 billion** is spent annually on prior authorization administrative overhead in the US — equivalent to the full-time labor of **100,000+ registered nurses**, spent entirely on paperwork rather than care.",
-      "**81.7%** of appealed Medicare Advantage prior authorization denials were overturned — meaning most initial denials were incorrect, but patients and practices only discover this if they appeal."
+      "~**35M** imaging studies/year contain errors (derived: 3–5% × ~800M–900M annual US studies). **84%** of errors are perceptual — the finding was present but the eye passed over it.",
+      "**$400M–$1B+**/year in malpractice indemnity (derived). **$452K** average paid claim — above the all-specialty mean.",
+      "**3–5%** real-time error rate; **~30%** of errors only identifiable in hindsight."
     ],
     sources: [
-      { label: "PMC 2024 — Prior Auth Burden Survey", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11425057/" },
-      { label: "AMA Prior Authorization Data", url: "https://www.ama-assn.org/practice-management/prior-authorization/fixing-prior-auth-nearly-40-prior-authorizations-week-way" }
+      { label: "Itri et al., RadioGraphics 2018", url: "https://pubs.rsna.org/doi/full/10.1148/rg.2018180021" },
+      { label: "Bruno et al., RadioGraphics 2015", url: "https://pubs.rsna.org/doi/abs/10.1148/rg.2015150023" },
+      { label: "Berlin, AJR 2007", url: "https://ajronline.org/doi/10.2214/AJR.07.2209" },
+      { label: "NCRP Report 160, 2009", url: "https://www.ncrppublications.org/Reports/160" }
     ]
   },
   {
     rank: 3,
-    name: "Workforce: Too Few Radiologists, Too Many Scans",
+    name: "AI Is Approved Without Real-World Proof",
+    category: "AI",
+    clinical: false,
+    description: "Most FDA-cleared radiology AI tools have undisclosed real-world performance across demographic groups and equipment types.",
+    scores: { m: 17, p: 30, d: 23, total: 47 },
+    pLabel: "~100–150M studies/yr", pCaption: "involve FDA-cleared AI",
+    mLabel: "~$524M", mCaption: "radiology AI market",
+    evidence: [
+      "~**100–150M** US radiology studies/year now involve FDA-cleared AI (derived: Aidoc 60M + Radiology Partners 20M + others; 2024–2025 company data).",
+      "US radiology AI market: ~**$524M** in 2024, growing **33%**/year (Grand View Research).",
+      "**1,104** FDA-cleared radiology AI products as of March 2026; only **4%** disclosed demographic data; only **34%** used multi-institutional validation."
+    ],
+    sources: [
+      { label: "Clinical Radiology 2023", url: "https://www.clinicalradiologyonline.net/article/S0009-9260(22)00667-5/fulltext" },
+      { label: "Banerjee et al., JACR 2023", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11192466/" },
+      { label: "Kohli et al., npj Digital Medicine 2022", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8903084/" },
+      { label: "The Imaging Wire, FDA AI Count Mar 2026", url: "https://theimagingwire.com" }
+    ]
+  },
+  {
+    rank: 4,
+    name: "Medical Imaging Can Cause Cancer",
+    category: "Radiation",
+    clinical: true,
+    description: "CT scans carry a documented cumulative cancer risk that compounds with repeat imaging and varies 13-fold between facilities.",
+    scores: { m: 27, p: 20, d: 23, total: 47 },
+    pLabel: "103K cancers", pCaption: "projected from CT use",
+    mLabel: "~$1.5B–$5.5B/yr", mCaption: "treatment costs",
+    evidence: [
+      "**93M** CT scans in 2023; projected **103,000 future cancers** — up to **5%** of all new US cancer diagnoses (Smith-Bindman et al., JAMA Internal Medicine, April 2025).",
+      "~**$1.5B–$5.5B**/year in CT-induced cancer treatment costs (derived: 29,000–103,000 projected cancers × NCI per-patient costs of $41,800–$65,300).",
+      "CT = **1.5–2%** of all US cancers; updated 2025 estimate up to **5%**. **13-fold variation** in radiation dose for the same CT exam across US facilities."
+    ],
+    sources: [
+      { label: "Brenner & Hall, NEJM 2007", url: "https://www.nejm.org/doi/full/10.1056/NEJMra072149" },
+      { label: "Smith-Bindman et al., Arch Intern Med 2009", url: "https://pubmed.ncbi.nlm.nih.gov/20008690/" },
+      { label: "Sodickson et al., Radiology 2009", url: "https://pubs.rsna.org/doi/abs/10.1148/radiol.2511081296" },
+      { label: "Smith-Bindman et al., JAMA Intern Med 2025", url: "https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2829581" }
+    ]
+  },
+  {
+    rank: 5,
+    name: "Results May Never Reach You",
+    category: "Communication",
+    clinical: true,
+    description: "Correctly identified findings fail to reach treating teams, and recommended follow-up imaging is never completed.",
+    scores: { m: 20, p: 23, d: 30, total: 43 },
+    pLabel: "1 in 7 patients", pCaption: "get no follow-up",
+    mLabel: "~$300M–$750M/yr", mCaption: "malpractice costs",
+    evidence: [
+      "**1 in 7** patients with a major radiologic abnormality had no documented follow-up — finding confirmed, no follow-up ever initiated.",
+      "~**$300M–$750M**/year in communication-failure malpractice costs (derived: 75% of $400M–$1B total radiology malpractice). **0.71** claims per 1,000 physician-years.",
+      "**75%** of all radiology malpractice claims involve communication failure, not a missed finding. **1.6–5%** of critical results not closed on time at a top academic center."
+    ],
+    sources: [
+      { label: "Berlin, Applied Radiology 2010", url: "https://appliedradiology.com/articles/failure-of-radiologic-communication-an-increasing-cause-of-malpractice-litigation-and-harm-to-patients" },
+      { label: "FIND Program, J Imaging Informatics 2023", url: "https://link.springer.com/article/10.1007/s10278-023-00780-6" },
+      { label: "Radiology QI Study 2011", url: "https://pubs.rsna.org/doi/10.1148/radiol.11101396" }
+    ]
+  },
+  {
+    rank: 6,
+    name: "Millions of Imaging Encounters Never Happen",
     category: "Workforce",
     clinical: false,
     description: "Imaging demand grows 5% annually while radiologist supply grows 2%, creating fatigue-driven errors and coverage gaps.",
-    scores: { m: 23, p: 30, d: 27, total: 80 },
+    scores: { m: 13, p: 27, d: 27, total: 40 },
+    pLabel: "46.4M exams", pCaption: "above pre-pandemic pace",
+    mLabel: "~$100M–$300M/yr", mCaption: "locum/teleradiology premium",
     evidence: [
-      "**~50%** of radiology job searches in 2023 went unfilled; the average time to fill a full-time radiology position is **130 days** (2024 AAPPR Benchmarking Report). Post-COVID attrition is running 50% above baseline.",
-      "Diagnostic errors peak when daily case volume reaches **121%** of a radiologist's normal workload — based on analysis of **2.9 million** radiologic exams. Overloading is a direct, measurable driver of missed findings.",
-      "A systematic review of **27 studies** confirms fatigue reduces fracture detection accuracy, increases oculomotor strain, and raises major discrepancy rates."
+      "Radiologist supply projected to lag demand through **2055** (Neiman HPI). Top quartile now reads **30.6% more exams/day** than pre-pandemic — across **46.4M exams** in 167 practices (ACR GRID, JACR 2025).",
+      "~**$100M–$300M**/year estimated locum/teleradiology premium cost (derived: ~$50–100K premium per unfilled position).",
+      "Errors peak at **121%** workload (confirmed). **~50%** of radiology positions unfilled in 2023; average fill time **130 days** (AAPPR 2024)."
     ],
     sources: [
       { label: "Neiman Health Policy Institute 2024", url: "https://www.neimanhpi.org/press-releases/new-studies-shed-light-on-the-future-radiologist-workforce-shortage-by-projecting-future-radiologist-supply-and-demand-for-imaging/" },
       { label: "AAPPR Benchmarking Report 2024", url: "https://medicushcs.com/resources/navigating-the-radiologist-shortage" },
       { label: "Waite et al., AJR 2017", url: "https://ajronline.org/doi/10.2214/AJR.16.16963" },
-      { label: "Stec et al., AJR 2018", url: "https://ajronline.org/doi/10.2214/AJR.17.18613" }
-    ]
-  },
-  {
-    rank: 4,
-    name: "Communication: Results That Never Reach You",
-    category: "Communication",
-    clinical: true,
-    description: "Correctly identified findings fail to reach treating teams, and recommended follow-up imaging is never completed.",
-    scores: { m: 23, p: 27, d: 30, total: 80 },
-    evidence: [
-      "**~75%** of radiology malpractice claims involve communication failures — not missed findings. The radiologist found the problem correctly; the breakdown was in getting it to the right person.",
-      "**1 in 7** patients with a major radiologic abnormality had no documented follow-up whatsoever, based on a study of a large health system's records.",
-      "Even with an active quality improvement program, **1.6–5%** of critical results were not closed on time at a top academic center."
-    ],
-    sources: [
-      { label: "Berlin, Applied Radiology 2010", url: "https://appliedradiology.com/articles/failure-of-radiologic-communication-an-increasing-cause-of-malpractice-litigation-and-harm-to-patients" },
-      { label: "FIND Program, J Imaging Informatics 2023", url: "https://link.springer.com/article/10.1007/s10278-023-00780-6" },
-      { label: "Radiology QI Study, 2011", url: "https://pubs.rsna.org/doi/10.1148/radiol.11101396" }
-    ]
-  },
-  {
-    rank: 5,
-    name: "Equity: Who Gets Scanned",
-    category: "Equity",
-    clinical: false,
-    description: "Imaging utilization and quality differ measurably by race and socioeconomic status, producing later-stage diagnoses for disadvantaged groups.",
-    scores: { m: 17, p: 27, d: 27, total: 71 },
-    evidence: [
-      "White patients received imaging during **51.3%** of their emergency-room visits, versus **43.6%** for Black patients — and when Black patients did receive imaging, they waited longer for it than White patients (JACR disparities review).",
-      "MRI and PET/CT are demonstrably less available in hospitals serving communities of color. When available, image quality and interpretation quality are also lower at safety-net facilities (Radiology 2021).",
-      "Low socioeconomic status was the **only variable independently associated** with imaging access delays in oncology care, in a 2025 peer-reviewed study; racial disparities in breast-cancer diagnostic delay are similarly documented."
-    ],
-    sources: [
-      { label: "Health Care Disparities Review, JACR 2022", url: "https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext" },
-      { label: "Waite et al., Radiology 2021", url: "https://pubs.rsna.org/doi/abs/10.1148/radiol.2021203742" },
-      { label: "PMC 2025 (SES & oncology access)", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12150564/" }
-    ]
-  },
-  {
-    rank: 6,
-    name: "Access: Imaging Deserts",
-    category: "Access",
-    clinical: false,
-    description: "Geographic deserts, scanner scarcity, and lengthening wait times leave many patients unable to obtain imaging when they need it.",
-    scores: { m: 20, p: 27, d: 20, total: 67 },
-    evidence: [
-      "Only **22.2%** of rural patients live within a 30-minute drive of a lung-cancer screening center, versus **83.2%** of urban patients — yet non-metro residents make up 23% of the screening-eligible population.",
-      "**24.5%** of patients transferred from a rural emergency department to a tertiary center were transferred specifically because the indicated radiology service was unavailable locally (JACR disparities review).",
-      "Rural areas have significantly fewer imaging facilities per capita than urban areas; PET imaging was performed in **8.4%** of metro patients versus **7.2%** of rural patients, compounding travel-distance and wait-time barriers."
-    ],
-    sources: [
-      { label: "Eberth — Rural Imaging Equity, RSNA 2021", url: "https://www.rsna.org/news/2021/june/rural-radiology-equity" },
-      { label: "Health Care Disparities Review, JACR 2022", url: "https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext" },
-      { label: "Mobile Imaging & Access, JACR 2024", url: "https://www.sciencedirect.com/science/article/abs/pii/S1939865424004466" }
+      { label: "ACR GRID Workload Study, JACR 2025", url: "https://www.sciencedirect.com/science/article/pii/S1546144025002291" }
     ]
   },
   {
     rank: 7,
-    name: "Radiation: Scans That Cause Cancer",
-    category: "Radiation",
-    clinical: true,
-    description: "CT scans carry a documented cumulative cancer risk that compounds with repeat imaging and varies 13-fold between facilities.",
-    scores: { m: 23, p: 27, d: 17, total: 67 },
+    name: "The Color of Your Skin Can Affect Whether You Get a Scan",
+    category: "Equity",
+    clinical: false,
+    description: "Imaging utilization and quality differ measurably by race and socioeconomic status, producing later-stage diagnoses for disadvantaged groups.",
+    scores: { m: 17, p: 23, d: 27, total: 40 },
+    pLabel: "~3M encounters/yr", pCaption: "missing for Black patients",
+    mLabel: "$451B/yr", mCaption: "US racial health disparities",
     evidence: [
-      "CT may account for **~1.5–2%** of all US cancers annually — approximately **29,000 new cancer cases** and **14,500 deaths** per year, based on the landmark NEJM study by Brenner & Hall (2007).",
-      "**13-fold variation** in radiation dose for the same CT exam type was found across four major US academic medical centers. The harm is not uniform — it is driven by facilities not using dose-reduction protocols.",
-      "**7%** of patients who underwent repeat CT imaging accumulated enough lifetime dose to raise their personal cancer risk by **≥1%** above baseline, in a 22-year retrospective cohort study."
+      "~**3M** 'missing' imaging encounters/year for Black ED patients (derived: 7.7pp gap × 155M US ED visits). **72%** of 206 studies found decreased imaging use in minority groups (JACR 2022).",
+      "**$451B**/year total US racial health disparities cost (LaVeist et al., JAMA 2023) — imaging disparities are a confirmed contributor.",
+      "Black women with breast cancer face **1.6×** increased mortality odds with diagnostic delays. White patients **26.8% more likely** to receive CT/ultrasound for abdominal pain than Black patients."
     ],
     sources: [
-      { label: "Brenner & Hall, NEJM 2007", url: "https://www.nejm.org/doi/full/10.1056/NEJMra072149" },
-      { label: "Smith-Bindman et al., Arch Intern Med 2009", url: "https://pubmed.ncbi.nlm.nih.gov/20008690/" },
-      { label: "Sodickson et al., Radiology 2009", url: "https://pubs.rsna.org/doi/abs/10.1148/radiol.2511081296" }
+      { label: "Health Care Disparities Review, JACR 2022", url: "https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext" },
+      { label: "Waite et al., Radiology 2021", url: "https://pubs.rsna.org/doi/abs/10.1148/radiol.2021203742" },
+      { label: "PMC 2025 (SES & Oncology Access)", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12150564/" },
+      { label: "McDonald et al., JACR 2021", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8492512/" },
+      { label: "Abdominal Imaging Disparity, PMC 2025", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12208078/" }
     ]
   },
   {
     rank: 8,
-    name: "Reimbursement: More Work, Less Pay",
-    category: "Administrative",
+    name: "Imaging Deserts",
+    category: "Access",
     clinical: false,
-    description: "Inflation-adjusted Medicare payments have fallen 33% since 2001 while practice costs rose 59%, forcing consolidation, driving attrition, and narrowing patient access.",
-    scores: { m: 27, p: 20, d: 17, total: 64 },
+    description: "Geographic deserts, scanner scarcity, and lengthening wait times leave many patients unable to obtain imaging when they need it.",
+    scores: { m: 10, p: 27, d: 20, total: 37 },
+    pLabel: "~46.7M Americans", pCaption: "lack 30-min imaging access",
+    mLabel: "33% of rural transfers", mCaption: "are CT-driven",
     evidence: [
-      "Medicare physician payment declined **33%** in inflation-adjusted terms from 2001 to 2025, while practice operating costs rose **~59%** over the same period (AMA, based on CMS conversion factor and BLS Medicare Economic Index data).",
-      "Independent radiology practices fell **32%** between 2014 and 2023 (to 2,118 groups), while practices with 100+ radiologists surged **349%**. Inflation-adjusted cash flow per radiologist was **43.1% lower** in 2023 than in 2005, driving smaller practices to merge or sell (Yun et al., AJR 2024).",
-      "Radiologists performed **13% more work** per Medicare beneficiary in 2021 vs. 2005 while reimbursement has been repeatedly cut, including a **2.8%** conversion factor reduction in 2025 (Siewert et al., JACR 2024)."
+      "~**46.7M** rural Americans (77.8% of 60M) lack 30-min access to a lung cancer screening center (derived: RSNA 2021 + Census). Under **10%** of US radiologists practice rurally.",
+      "**33%** of rural inter-facility transfers are CT-driven (PMC pilot study). Teleradiology reduces rural transfer rates by **44%**.",
+      "**24.5%** of rural ED transfers due to unavailable radiology (confirmed). CT facilities in only **21%** of most-disadvantaged zip codes vs. 32% of advantaged ones."
     ],
     sources: [
-      { label: "AMA — Medicare Physician Pay 2001–2025", url: "https://www.ama-assn.org/practice-management/medicare-medicaid/medicare-physician-pay-has-plummeted-2001-find-out-why" },
-      { label: "Yun et al., AJR 2024", url: "https://ajronline.org/doi/10.2214/AJR.24.31357" },
-      { label: "Siewert et al., JACR 2024", url: "https://radiologybusiness.com" }
+      { label: "Eberth — Rural Imaging, RSNA 2021", url: "https://www.rsna.org/news/2021/june/rural-radiology-equity" },
+      { label: "Health Care Disparities Review, JACR 2022", url: "https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext" },
+      { label: "Mobile Imaging & Access, JACR 2024", url: "https://www.sciencedirect.com/science/article/abs/pii/S1939865424004466" },
+      { label: "Rural CT Transfer Pilot Study, PMC 2017", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5745590/" }
     ]
   },
   {
     rank: 9,
-    name: "AI: Cleared but Not Tested",
-    category: "AI",
+    name: "More Work, Less Pay",
+    category: "Administrative",
     clinical: false,
-    description: "Most FDA-cleared radiology AI tools have undisclosed real-world performance across demographic groups and equipment types.",
-    scores: { m: 17, p: 17, d: 23, total: 57 },
+    description: "Inflation-adjusted Medicare payments have fallen 33% since 2001 while practice costs rose 59%, forcing consolidation, driving attrition, and narrowing patient access.",
+    scores: { m: 20, p: 13, d: 13, total: 33 },
+    pLabel: "~3,500 practices", pCaption: "lost from Medicare",
+    mLabel: "33% pay cut", mCaption: "since 2001",
     evidence: [
-      "Of **151** FDA-cleared imaging AI products reviewed: only **4%** disclosed participant demographics; only **34%** had multi-institutional validation. The majority have unknown performance across demographic subgroups.",
-      "AI models use **'shortcut learning'** — learning spurious features like the presence of a chest drain or portable radiograph markers rather than true pathology. This causes high-confidence wrong predictions.",
-      "One FDA-cleared algorithm **misclassified an ischemic stroke as intracranial hemorrhage** in a documented patient case — a clinically opposite finding that would lead to harmful treatment."
+      "~**3,500** radiology-providing practices disappeared from Medicare rolls 2015–2022; access most impacted in rural and underserved areas.",
+      "Medicare pay declined **33%** inflation-adjusted 2001–2025; practice costs rose **~59%**. Cash flow per radiologist **43.1% lower** in 2023 vs. 2005.",
+      "Workload-error link: errors peak at **121%** workload; top radiologists now reading **30.6% more studies/day** (ACR GRID 2025) — reimbursement cuts drive the overload."
     ],
     sources: [
-      { label: "Clinical Radiology 2023", url: "https://www.clinicalradiologyonline.net/article/S0009-9260(22)00667-5/fulltext" },
-      { label: "Banerjee et al., JACR 2023", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11192466/" },
-      { label: "Kohli et al., npj Digital Medicine 2022", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8903084/" }
+      { label: "AMA — Medicare Pay 2001–2025", url: "https://www.ama-assn.org/practice-management/medicare-medicaid/medicare-physician-pay-has-plummeted-2001-find-out-why" },
+      { label: "Yun et al., AJR 2024", url: "https://ajronline.org/doi/10.2214/AJR.24.31357" },
+      { label: "Siewert et al., JACR 2024", url: "https://radiologybusiness.com" }
     ]
   }
 ];
@@ -547,9 +539,6 @@ window.PROBLEMS = [
   const grp      = p => p.clinical ? GROUPS.clinical : GROUPS.nonclinical;
   const MAX      = 100;
   const SVG_CHEV = '<span class="chev"><svg viewBox="0 0 13 13" fill="none"><path d="M3 5l3.5 3.5L10 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
-
-  let activeFilter = 'all';
-  let activeSort   = 'rank';
 
   const esc  = s => s.replace(/[&<>]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[c]));
   const fmt  = e => esc(e).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
@@ -577,64 +566,23 @@ window.PROBLEMS = [
         </div>`).join('<span class="legend-sep">·</span>');
   }
 
-  /* ── Filters ── */
-  function buildFilters() {
-    const el = document.getElementById('filters');
-    const clinicalCount = PROBLEMS.filter(p => p.clinical).length;
-    el.innerHTML =
-      `<button class="filter-btn active" data-filter="all">All <span style="font-family:var(--mono);font-size:10px;opacity:.6">${PROBLEMS.length}</span></button>` +
-      `<button class="filter-btn" data-filter="clinical"><span class="swatch" style="background:${GROUPS.clinical.color}"></span>Clinical <span style="font-family:var(--mono);font-size:10px;opacity:.6">${clinicalCount}</span></button>`;
-    el.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => {
-      activeFilter = b.dataset.filter;
-      el.querySelectorAll('.filter-btn').forEach(x => x.classList.toggle('active', x === b));
-      applyFilter();
-    }));
-  }
-
-  function applyFilter() {
-    document.querySelectorAll('.row').forEach(r => {
-      const hide = activeFilter !== 'all' && r.dataset.category !== activeFilter;
-      r.classList.toggle('is-hidden', hide);
-    });
-    updateCount();
-  }
-
-  function updateCount() {
-    const shown = activeFilter === 'all'
-      ? PROBLEMS.length
-      : PROBLEMS.filter(p => p.clinical).length;
-    const label = { rank:'rank', total:'total severity', m:'monetary', p:'patients', d:'diagnosis' }[activeSort];
-    document.getElementById('count-note').textContent =
-      `Showing ${shown} of ${PROBLEMS.length} problems · sorted by ${label}`;
-  }
-
-  /* ── Sort ── */
-  function sortedProblems() {
-    const arr = PROBLEMS.slice();
-    if (activeSort === 'rank') arr.sort((a, b) => a.rank - b.rank);
-    else if (activeSort === 'total') arr.sort((a, b) => b.scores.total - a.scores.total || a.rank - b.rank);
-    else arr.sort((a, b) => b.scores[activeSort] - a.scores[activeSort] || a.rank - b.rank);
-    return arr;
-  }
-
-  function applySort() {
-    const order = sortedProblems();
-    const c = document.getElementById('bars-list');
-    order.forEach(p => { const r = c.querySelector(`.row[data-id="${p.rank}"]`); if (r) c.appendChild(r); });
-    updateCount();
-  }
-
   /* ── Build bars ── */
   function buildBars() {
     const list = document.getElementById('bars-list');
-    list.innerHTML = sortedProblems().map(p => {
-      const segs = DIMS.map(d => {
-        const pct = p.scores[d.key] / MAX * 100;
-        const label = pct >= 10
-          ? `<span class="bar-seg-label">${p.scores[d.key]}</span>`
-          : '';
-        return `<div class="bar-seg ${d.key}" style="width:${pct}%" title="${d.label}: ${p.scores[d.key]}">${label}</div>`;
-      }).join('');
+    const problems = PROBLEMS.slice().sort((a, b) => a.rank - b.rank);
+    list.innerHTML = problems.map(p => {
+      const displayScore = Math.round((p.scores.m + p.scores.p) / 66 * 100);
+      const segs = `
+        <div class="stat-block">
+          <span class="stat-dim p">Patients:</span>
+          <span class="stat-fig">${esc(p.pLabel)}</span>
+          <span class="stat-caption">${esc(p.pCaption)}</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-dim m">Cost:</span>
+          <span class="stat-fig">${esc(p.mLabel)}</span>
+          <span class="stat-caption">${esc(p.mCaption)}</span>
+        </div>`;
       return `<div class="row bar-row" data-id="${p.rank}" data-category="${grp(p).key}" style="--rowc:${grp(p).color}">
         <div class="bar-head">
           <div class="bar-rank">${p.rank}</div>
@@ -642,10 +590,8 @@ window.PROBLEMS = [
             <div class="bar-name">${esc(p.name)}</div>
             <div class="bar-cat"><span class="swatch"></span>${grp(p).label}</div>
           </div>
-          <div class="bar-viz">
-            <div class="bar-track">${segs}</div>
-          </div>
-          <div class="bar-total">${p.scores.total}<small>SCORE</small></div>
+          <div class="bar-viz">${segs}</div>
+          <div class="bar-total">${displayScore}<small>SCORE</small></div>
           ${SVG_CHEV}
         </div>
         ${detailHTML(p)}
@@ -660,21 +606,14 @@ window.PROBLEMS = [
 
   /* ── Init ── */
   buildMethod();
-  buildFilters();
   buildBars();
 
-  document.getElementById('sort').addEventListener('change', e => {
-    activeSort = e.target.value;
-    applySort();
-  });
-
   document.getElementById('footnote').innerHTML =
-    '<b>Method.</b> Each problem is scored on three dimensions (Monetary, Patients, Diagnosis), ' +
-    'combined into a 0–100 severity index that sets its rank. ' +
-    'Ties broken by patient impact, then diagnostic severity. ' +
+    '<b>Method.</b> Each problem is ranked by two dimensions (Monetary cost, Patients affected), ' +
+    'combined into a 0–100 severity index. ' +
+    'Diagnostic harm data is available in each problem\'s evidence panel. ' +
+    'Ties broken by patient impact. ' +
     'Click any row for evidence and citations.';
-
-  updateCount();
 })();
 </script>
 </body>
