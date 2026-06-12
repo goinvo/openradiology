@@ -261,7 +261,8 @@
     }
     .bar-head .bar-rank { grid-area: rank; }
     .bar-head .bar-main { grid-area: name; }
-    .bar-head .bar-viz  { grid-area: viz; grid-column: 1 / -1; flex-wrap: wrap; gap: 20px 32px; }
+    .bar-head .bar-viz  { grid-area: viz; grid-column: 1 / -1; flex-wrap: nowrap; gap: 16px; padding-left: 0; }
+    .bar-head .bar-viz .stat-block { flex: 1 1 0; width: auto; min-width: 0; }
     .bar-head .bar-total, .bar-head .chev { display: none; }
     .bar-row .detail { padding-left: 8px; }
   }
@@ -271,7 +272,7 @@
 <div class="container">
 
   <header class="masthead">
-    <h1>The Top Problems Defining<br><em>Radiology</em> Today</h1>
+    <h1>Top Problems in Radiology</h1>
     <p class="standfirst">A ranked assessment of the structural failures facing diagnostic radiology — ranked by patient reach and monetary cost, and sourced from peer-reviewed journals, medical societies, and federal data.</p>
   </header>
 
@@ -361,7 +362,7 @@ window.PROBLEMS = [
   },
   {
     rank: 2,
-    name: "Misdiagnosis",
+    name: "Radiologists Miss Findings",
     category: "Diagnostic",
     clinical: true,
     description: "Radiologists miss or misinterpret findings in 3–5% of studies — a rate that has not improved in 75 years.",
@@ -382,7 +383,7 @@ window.PROBLEMS = [
   },
   {
     rank: 3,
-    name: "AI is Certified but Not Tested",
+    name: "AI Is Approved Without Real-World Proof",
     category: "AI",
     clinical: false,
     description: "Most FDA-cleared radiology AI tools have undisclosed real-world performance across demographic groups and equipment types.",
@@ -403,7 +404,7 @@ window.PROBLEMS = [
   },
   {
     rank: 4,
-    name: "Scans That Cause Cancer",
+    name: "Medical Imaging Can Cause Cancer",
     category: "Radiation",
     clinical: true,
     description: "CT scans carry a documented cumulative cancer risk that compounds with repeat imaging and varies 13-fold between facilities.",
@@ -424,7 +425,7 @@ window.PROBLEMS = [
   },
   {
     rank: 5,
-    name: "Results That Never Reach You",
+    name: "Results May Never Reach You",
     category: "Communication",
     clinical: true,
     description: "Correctly identified findings fail to reach treating teams, and recommended follow-up imaging is never completed.",
@@ -444,7 +445,7 @@ window.PROBLEMS = [
   },
   {
     rank: 6,
-    name: "Too Few Radiologists, Too Many Scans",
+    name: "Millions of Imaging Encounters Never Happen",
     category: "Workforce",
     clinical: false,
     description: "Imaging demand grows 5% annually while radiologist supply grows 2%, creating fatigue-driven errors and coverage gaps.",
@@ -465,7 +466,7 @@ window.PROBLEMS = [
   },
   {
     rank: 7,
-    name: "Scans Based on Race",
+    name: "The Color of Your Skin Can Affect Whether You Get a Scan",
     category: "Equity",
     clinical: false,
     description: "Imaging utilization and quality differ measurably by race and socioeconomic status, producing later-stage diagnoses for disadvantaged groups.",
@@ -578,7 +579,7 @@ window.PROBLEMS = [
           <span class="stat-caption">${esc(p.pCaption)}</span>
         </div>
         <div class="stat-block">
-          <span class="stat-dim m">Monetary Cost:</span>
+          <span class="stat-dim m">Cost:</span>
           <span class="stat-fig">${esc(p.mLabel)}</span>
           <span class="stat-caption">${esc(p.mCaption)}</span>
         </div>`;
