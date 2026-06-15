@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So You Need Radiology?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("5028e624-9fe6-46c1-8a51-3d499161b618") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("13d51b0e-8d5e-47f1-b0a0-0035db891cdb") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("46411371-f548-4d4a-ae95-cc6be2176f95") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("680dd547-53ef-4253-9a27-e0bada7fabdb") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("581e3932-d4d6-4090-966a-7b9d54ac30e3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("24d7cf39-28a8-4db4-a466-e54fc686c661") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("48efaf6f-6b51-49a5-858c-7e7c380ba6d5") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ca453b07-16e1-4b4f-896d-be6e5a2d3f13") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("cca25e81-b8bf-4cda-8924-62b9ba7043f2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("30b6aca5-793e-4a15-a5b3-45381fc66531") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("405cc052-1b76-460e-b32c-0b5a3eb1be81") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("54a3d675-1f3e-4408-9d42-16c3fd49b7c4") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ce2e296a-48f3-4f19-8aba-70f3e761acfe") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("912e3111-9b71-42d2-b450-0bc5345460ac") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("faccc8d1-b0c2-4524-8825-f5ca0700d418") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("a5282dc4-610d-4a85-a128-879f16f93ce3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("6b54a792-1acf-4987-a1a5-cd4f5304d2f3") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("419671a1-4d8a-4f71-8714-5c1cb2110cc6") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("bd6ee4b8-f5b3-49c8-9e3b-f4b8685ef03c") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("8a273167-dddc-4074-8589-7424ca3e5bb9") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("643534b8-ccbb-4ae3-b4da-094e8528d509") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+  :root{
+    /* calm clinical, pastel blue */
+    --bg:        oklch(0.952 0.022 235);
+    --bg-deep:   oklch(0.928 0.030 233);
+    --surface:   oklch(0.993 0.006 235);
+    --surface-2: oklch(0.978 0.010 235);
+    --ink:       oklch(0.330 0.030 252);
+    --ink-soft:  oklch(0.500 0.026 250);
+    --ink-faint: oklch(0.640 0.022 248);
+    --line:      oklch(0.880 0.018 235);
+    --line-soft: oklch(0.915 0.014 235);
+
+    /* stakeholder accents — shared L/C, hue varies */
+    --h-patient:   252;
+    --h-pcp:       168;
+    --h-insurance: 64;
+    --h-radiology: 305;
+
+    --rail-w: 78px;
+    --ctrl-h: 70px;
+    --lanehdr-h: 52px;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family:"Newsreader", Georgia, serif;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, monospace; }
+
+  /* lane color helper: set --h on a scope */
+  .lane-patient{ --h:var(--h-patient); }
+  .lane-pcp{ --h:var(--h-pcp); }
+  .lane-insurance{ --h:var(--h-insurance); }
+  .lane-radiology{ --h:var(--h-radiology); }
+
+  .swatch-bg{ background:oklch(0.968 0.030 var(--h)); }
+  .swatch-strong{ color:oklch(0.560 0.115 var(--h)); }
+  .swatch-border{ border-color:oklch(0.820 0.055 var(--h)); }
+
+  #root{ min-height:100vh; }
+
+  ::selection{ background:oklch(0.86 0.06 252); }
+
+  /* thin scrollbar */
+  ::-webkit-scrollbar{ width:11px; height:11px; }
+  ::-webkit-scrollbar-thumb{ background:var(--line); border-radius:99px; border:3px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<!-- ============ DATA ============ -->
+<script>
+window.RAD = (function(){
+  const LANES = [
+    { id:"patient",   name:"Patient",      cls:"lane-patient" },
+    { id:"pcp",       name:"Primary Care", cls:"lane-pcp" },
+    { id:"insurance", name:"Insurance",    cls:"lane-insurance" },
+    { id:"radiology", name:"Radiology",    cls:"lane-radiology" },
+  ];
+
+  // Day 1 == 2026-01-01 (Excel serial 46023)
+  const START = new Date(2026,0,1);
+
+  // events: day, lane, title (short), desc (full), seen (front-stage vs behind the scenes)
+  const EVENTS = [
+    { day:1,  lane:"patient",   title:"Notices the pain", seen:true,
+      desc:"“Should I be worried? I’ll give it a week.” Googling symptoms, scared about the cost." },
+    { day:8,  lane:"patient",   title:"Decides to call", seen:true,
+      desc:"Still bothering me — I’m going to reach out to my doctor." },
+    { day:8,  lane:"pcp",       title:"Appointment scheduled", seen:false,
+      desc:"The practice books the patient into the first available slot." },
+    { day:9,  lane:"patient",   title:"Pain starts to ease", seen:true, arrow:true,
+      desc:"Pain decreasing — but the appointment is already weeks away." },
+
+    { day:39, lane:"patient",   title:"First PCP appointment", seen:true,
+      desc:"The first available appointment with the primary care provider finally arrives." },
+    { day:39, lane:"pcp",       title:"Examines the patient", seen:false,
+      desc:"Checks insurance eligibility, then assesses symptoms, reviews history and performs a physical exam. Determines that imaging is needed — but has to check with insurance first." },
+    { day:39, lane:"insurance", title:"Eligibility check", seen:false,
+      desc:"Same-day plan check: a benefit inquiry confirms the policy is active and determines financial responsibility (deductibles and copays)." },
+
+    { day:46, lane:"insurance", title:"Prior-auth decision", seen:false,
+      desc:"Insurance returns its decision on the prior authorization request. If documentation is incomplete or more clinical detail is needed, there are further delays." },
+
+    { day:47, lane:"pcp",       title:"Orders the imaging", seen:false,
+      desc:"With authorization in hand, the PCP places the imaging order." },
+    { day:47, lane:"radiology", title:"Order received", seen:false,
+      desc:"The order is transmitted to the imaging center; the scheduling department receives it." },
+
+    { day:48, lane:"patient",   title:"Calls to schedule", seen:true,
+      desc:"Patient calls the imaging center to make an appointment." },
+    { day:48, lane:"radiology", title:"Appointment scheduled", seen:false,
+      desc:"The imaging center books the scan into its first open slot." },
+
+    { day:61, lane:"patient",   title:"Prepares for imaging", seen:true,
+      desc:"Follows prep instructions — for example, fasting before the scan." },
+
+    { day:62, lane:"patient",   title:"Imaging day", seen:true,
+      desc:"The first available imaging appointment." },
+    { day:62, lane:"insurance", title:"Verified again", seen:false,
+      desc:"Insurance is verified one more time before the scan proceeds." },
+    { day:62, lane:"radiology", title:"Imaging performed", seen:false,
+      desc:"Patient prep (contrast dye, positioning, consent), then the imaging is performed." },
+
+    { day:63, lane:"radiology", title:"Reads the images", seen:false,
+      desc:"The radiologist analyzes the images and writes the report." },
+
+    { day:64, lane:"patient",   title:"Result notification", seen:true,
+      desc:"Receives a notification in the patient portal and schedules the next available appointment with the PCP." },
+    { day:64, lane:"pcp",       title:"Receives the report", seen:false,
+      desc:"The report arrives; a follow-up appointment is scheduled." },
+    { day:64, lane:"radiology", title:"Report finalized", seen:false,
+      desc:"Report finalized and submitted." },
+
+    { day:70, lane:"pcp",       title:"Reviews findings", seen:false,
+      desc:"The PCP reviews the report findings ahead of the visit." },
+
+    { day:71, lane:"patient",   title:"Returns to the PCP", seen:true,
+      desc:"Patient returns to the primary care provider for the results." },
+    { day:71, lane:"pcp",       title:"Explains the results", seen:false,
+      desc:"Explains the results and discusses next steps." },
+  ];
+
+  // waiting periods that fill the gaps — start/end inclusive
+  const BANDS = [
+    { start:2,  end:7,  lane:"patient",   label:"Waiting it out",
+      note:"“I’ll give it a week.” Hoping it passes on its own." },
+    { start:10, end:38, lane:"patient",   label:"Waiting for the first available appointment",
+      note:"Nearly a month before the first open primary-care slot. The pain often fades before you’re ever seen." },
+    { start:40, end:45, lane:"insurance", label:"Prior authorization under review",
+      note:"Behind the scenes, insurance reviews the request — before any scan can be booked." },
+    { start:49, end:60, lane:"patient",   label:"Waiting for the imaging appointment",
+      note:"The first available imaging slot is weeks out." },
+    { start:65, end:69, lane:"pcp",       label:"Report waits to be reviewed",
+      note:"The finalized report sits in the queue until the PCP reviews it." },
+    { start:72, end:79, lane:"patient",   label:"Living with the answer",
+      note:"Following the plan discussed with the primary care provider." },
+  ];
+
+  // running "what you'll need" list — unlocks as the days pass
+  const CHECKLIST = [
+    { day:1,  text:"Notes on your symptoms",            detail:"When it started, what makes it better or worse." },
+    { day:2,  text:"Insurance card",                    detail:"Member ID and group number on hand." },
+    { day:3,  text:"Request time off work",             detail:"You’ll need it for several appointments." },
+    { day:39, text:"Medical history & medications",     detail:"Bring a current list to the primary-care visit." },
+    { day:39, text:"Photo ID & copay",                  detail:"Payment for the visit." },
+    { day:47, text:"Prior-authorization number",        detail:"Confirm imaging is approved before you go." },
+    { day:48, text:"Arrange transportation",            detail:"Especially if contrast or sedation is involved." },
+    { day:61, text:"Follow prep instructions",          detail:"Fasting or other prep before the scan." },
+    { day:62, text:"Comfortable clothes, no metal",     detail:"Plus the consent form for the imaging visit." },
+    { day:64, text:"Check the patient portal",          detail:"Results may post before your visit." },
+    { day:71, text:"Questions for your follow-up",      detail:"Write them down before you go." },
+  ];
+
+  // phase label for the HUD
+  const PHASES = [
+    { from:1,  to:7,  name:"Should I worry?" },
+    { from:8,  to:38, name:"Waiting to be seen" },
+    { from:39, to:45, name:"At the doctor" },
+    { from:46, to:48, name:"Authorized & ordered" },
+    { from:49, to:60, name:"Waiting for imaging" },
+    { from:61, to:64, name:"Imaging" },
+    { from:65, to:71, name:"Results" },
+    { from:72, to:79, name:"Living with the answer" },
+  ];
+
+  const TOTAL_DAYS = 79;
+  return { LANES, EVENTS, BANDS, CHECKLIST, PHASES, TOTAL_DAYS, START };
+})();
+</script>
+
+<script src="f5533eb0-3b9d-4504-8b5c-30733dc1da5c" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="d9477c78-96bc-4aef-9a2c-78fbc7153b75" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="c8056888-afe5-4156-bddf-acf36ea3bdb4" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const { useState, useEffect, useRef, useMemo, useCallback } = React;
+const { LANES, EVENTS, BANDS, CHECKLIST, PHASES, TOTAL_DAYS, START } = window.RAD;
+
+/* ----------------------------------------------------------- styles --- */
+const CSS = `
+.app{ max-width:1320px; margin:0 auto; padding:0 28px 120px; }
+
+/* ---- hero ---- */
+.hero{ padding:84px 0 44px; position:relative; }
+.hero .kicker{ font-size:13px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--ink-faint); margin:0 0 22px; }
+.hero h1{ font-weight:380; font-size:clamp(46px,6.6vw,92px); line-height:.98;
+  letter-spacing:-.022em; margin:0; }
+.hero h1 em{ font-style:italic; color:oklch(0.52 0.10 252); }
+.hero .sub{ font-size:clamp(19px,2vw,25px); color:var(--ink-soft); font-weight:340;
+  margin:24px 0 0; max-width:30ch; line-height:1.34; }
+.hero .meta{ display:flex; flex-wrap:wrap; gap:14px 46px; margin-top:40px;
+  padding-top:30px; border-top:1px solid var(--line); }
+.metric .n{ font-size:34px; font-weight:420; letter-spacing:-.01em; line-height:1; }
+.metric .l{ font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-faint); margin-top:8px; }
+.hero .howto{ margin-top:30px; font-size:15.5px; color:var(--ink-soft); max-width:62ch;
+  line-height:1.6; }
+.hero .howto b{ font-weight:560; color:var(--ink); }
+
+/* ---- sticky control bar ---- */
+.controls{ position:sticky; top:0; z-index:60; background:color-mix(in oklch, var(--bg) 86%, transparent);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:11px 28px;
+  display:flex; align-items:center; gap:22px; flex-wrap:wrap; min-height:var(--ctrl-h); }
+.filters{ display:flex; gap:9px; align-items:center; flex-wrap:wrap; }
+.filters .flabel{ font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-faint); margin-right:3px; }
+.chip{ font-family:inherit; cursor:pointer; border:1px solid oklch(0.820 0.055 var(--h));
+  background:oklch(0.972 0.026 var(--h)); color:oklch(0.430 0.090 var(--h));
+  padding:7px 14px 7px 11px; border-radius:99px; font-size:15px; display:flex;
+  align-items:center; gap:8px; transition:.18s; line-height:1; }
+.chip .dot{ width:9px; height:9px; border-radius:99px; background:oklch(0.560 0.130 var(--h)); flex:none; }
+.chip.off{ background:transparent; color:var(--ink-faint); border-color:var(--line); }
+.chip.off .dot{ background:var(--line); }
+.chip:hover{ transform:translateY(-1px); }
+.chip-all{ --h:248; cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--ink-soft);
+  background:none; border:none; text-decoration:underline; text-underline-offset:3px; padding:6px; }
+
+.jump{ display:flex; align-items:center; gap:13px; margin-left:auto; }
+.jump .hud{ text-align:right; line-height:1.1; }
+.jump .hud .d{ font-size:15px; font-weight:600; letter-spacing:.02em; }
+.jump .hud .p{ font-size:12px; color:var(--ink-faint); margin-top:3px; }
+.jump input[type=range]{ -webkit-appearance:none; appearance:none; width:230px; height:4px;
+  border-radius:9px; background:var(--line); outline:none; }
+.jump input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none;
+  width:18px; height:18px; border-radius:99px; background:var(--surface);
+  border:2px solid oklch(0.52 0.10 252); cursor:grab; box-shadow:0 1px 4px rgba(40,60,90,.22); }
+.jump input[type=range]::-moz-range-thumb{ width:18px; height:18px; border-radius:99px;
+  background:var(--surface); border:2px solid oklch(0.52 0.10 252); cursor:grab; }
+
+/* ---- stage: timeline + aside ---- */
+.stage{ display:grid; grid-template-columns:minmax(0,1fr) 296px; gap:34px; align-items:start; }
+
+/* ---- lane header ---- */
+.tl{ position:relative; }
+.lanehdr{ position:sticky; top:var(--ctrl-h); z-index:40; display:grid;
+  grid-template-columns:var(--rail-w) repeat(4,minmax(0,1fr));
+  background:color-mix(in oklch, var(--bg) 90%, transparent);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line); height:var(--lanehdr-h); align-items:end; }
+.lanehdr .lh{ padding:0 12px 11px; display:flex; align-items:center; gap:8px;
+  font-size:14.5px; color:oklch(0.430 0.090 var(--h)); transition:opacity .2s; }
+.lanehdr .lh .dot{ width:9px; height:9px; border-radius:99px; background:oklch(0.560 0.130 var(--h)); }
+.lanehdr .lh.dim{ opacity:.32; }
+.lanehdr .stage-label{ grid-column:2 / 4; }
+
+/* ---- segments ---- */
+.segments{ position:relative; }
+.tracks{ position:absolute; inset:0; display:grid;
+  grid-template-columns:var(--rail-w) repeat(4,minmax(0,1fr)); pointer-events:none; z-index:0; }
+.tracks .trk{ position:relative; }
+.tracks .trk::before{ content:""; position:absolute; left:50%; top:0; bottom:0; width:1px;
+  background:var(--line-soft); transform:translateX(-.5px); }
+
+.seg{ position:relative; z-index:1; display:grid;
+  grid-template-columns:var(--rail-w) repeat(4,minmax(0,1fr)); }
+
+/* rail */
+.rail{ padding:14px 10px 0 0; text-align:right; position:relative; }
+.rail .dnum{ font-size:12.5px; font-weight:600; letter-spacing:.04em; color:var(--ink); white-space:nowrap; }
+.rail .ddate{ font-size:10.5px; color:var(--ink-faint); margin-top:3px; letter-spacing:.02em; white-space:nowrap; }
+.rail.band .dnum{ color:var(--ink-faint); font-weight:500; }
+
+/* event-day block */
+.dayblock{ padding:11px 0 17px; }
+.cell{ padding:0 9px; }
+
+/* event card */
+.card{ position:relative; border:1px solid oklch(0.840 0.045 var(--h));
+  background:oklch(0.984 0.014 var(--h)); border-radius:13px; padding:12px 13px 13px;
+  cursor:default; transition:opacity .22s, box-shadow .18s, transform .18s, border-color .18s; }
+.card::before{ content:""; position:absolute; left:0; top:13px; bottom:13px; width:3px;
+  border-radius:9px; background:oklch(0.585 0.130 var(--h)); }
+.card:hover{ box-shadow:0 10px 26px -14px oklch(0.45 0.08 var(--h) / .55); transform:translateY(-2px);
+  border-color:oklch(0.700 0.090 var(--h)); z-index:5; }
+.card .ctitle{ font-size:16.5px; font-weight:540; letter-spacing:-.005em; line-height:1.18;
+  padding-left:6px; }
+.card .ctag{ display:flex; align-items:center; gap:6px; margin-top:7px; padding-left:6px;
+  font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:oklch(0.520 0.095 var(--h)); }
+.card .ctag .bts{ color:var(--ink-faint); font-style:italic; text-transform:none; letter-spacing:0;
+  font-size:12px; }
+.card .arrow{ display:inline-block; transform:translateY(1px); }
+
+/* hover popover */
+.pop{ position:absolute; top:calc(100% + 9px); width:266px; background:var(--surface);
+  border:1px solid oklch(0.820 0.050 var(--h)); border-radius:12px; padding:13px 15px;
+  box-shadow:0 18px 40px -16px rgba(38,54,82,.45); z-index:30; font-size:14.5px; line-height:1.5;
+  color:var(--ink-soft); opacity:0; visibility:hidden; transform:translateY(-4px); transition:.16s; }
+.pop.left{ left:6px; } .pop.right{ right:6px; }
+.card:hover .pop, .card:focus-within .pop{ opacity:1; visibility:visible; transform:translateY(0); }
+.pop b{ color:var(--ink); font-weight:560; }
+.pop .pday{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:oklch(0.560 0.110 var(--h));
+  margin-bottom:6px; }
+
+/* waiting band */
+.bandcell{ grid-column:2 / 6; padding:9px 9px; display:flex; }
+.band{ flex:1; border-radius:13px; border:1px dashed oklch(0.820 0.050 var(--h));
+  background:oklch(0.972 0.020 var(--h) / .55);
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+  padding:18px 26px; position:relative; overflow:hidden; transition:opacity .22s; }
+.band::after{ content:""; position:absolute; inset:0; opacity:.5; pointer-events:none;
+  background:repeating-linear-gradient(135deg, transparent 0 13px, oklch(0.86 0.04 var(--h) / .16) 13px 14px); }
+.band .bdays{ position:relative; font-size:13px; font-weight:600; letter-spacing:.05em;
+  color:oklch(0.520 0.105 var(--h)); white-space:nowrap; }
+.band .blabel{ position:relative; font-size:21px; font-weight:420; letter-spacing:-.01em;
+  margin-top:5px; max-width:30ch; line-height:1.15; }
+.band .bnote{ position:relative; font-size:14px; color:var(--ink-soft); margin-top:10px;
+  max-width:48ch; line-height:1.5; font-style:italic; }
+.band .hourglass{ position:relative; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-faint); margin-bottom:11px; }
+
+/* dimming for filter */
+.dimmed{ opacity:.1 !important; pointer-events:none; }
+.dimmed .pop{ display:none; }
+
+/* current-day indicator line */
+.nowline{ position:fixed; left:0; right:0; height:0; pointer-events:none; z-index:55; }
+
+/* ---- aside checklist ---- */
+.aside{ position:sticky; top:calc(var(--ctrl-h) + 16px); }
+.checklist{ background:var(--surface); border:1px solid var(--line); border-radius:17px;
+  padding:19px 19px 13px; box-shadow:0 14px 40px -26px rgba(38,54,82,.5); }
+.checklist .chead{ display:flex; align-items:baseline; justify-content:space-between; gap:8px;
+  padding-bottom:13px; border-bottom:1px solid var(--line-soft); }
+.checklist .chead h3{ margin:0; font-size:18px; font-weight:540; letter-spacing:-.01em; }
+.checklist .chead .cnt{ font-size:12.5px; color:var(--ink-faint); }
+.checklist .csub{ font-size:12.5px; color:var(--ink-faint); margin:9px 0 4px; line-height:1.45; }
+.items{ list-style:none; margin:8px 0 0; padding:0; }
+.item{ display:flex; gap:11px; align-items:flex-start; padding:9px 4px 9px 2px;
+  border-bottom:1px solid var(--line-soft); transition:.25s; }
+.item:last-child{ border-bottom:none; }
+.item .box{ flex:none; width:19px; height:19px; border-radius:6px; border:1.5px solid var(--ink-faint);
+  margin-top:1px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  background:var(--surface); transition:.16s; }
+.item .box svg{ width:12px; height:12px; opacity:0; transform:scale(.6); transition:.16s; }
+.item.checked .box{ background:oklch(0.55 0.10 168); border-color:oklch(0.55 0.10 168); }
+.item.checked .box svg{ opacity:1; transform:scale(1); }
+.item .it-main{ flex:1; min-width:0; }
+.item .it-text{ font-size:15px; line-height:1.25; }
+.item .it-detail{ font-size:12.5px; color:var(--ink-faint); margin-top:3px; line-height:1.4; }
+.item.checked .it-text{ color:var(--ink-faint); text-decoration:line-through;
+  text-decoration-color:oklch(0.7 0.03 168); }
+.item.locked{ opacity:.42; }
+.item.locked .box{ border-style:dashed; cursor:default; background:transparent; }
+.item .it-day{ font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint);
+  margin-top:3px; }
+.item.justunlocked{ animation:pulse 1.1s ease; }
+@keyframes pulse{ 0%{ background:oklch(0.95 0.05 168 / .0);} 22%{ background:oklch(0.93 0.06 168 / .8);} 100%{ background:transparent; } }
+
+/* closing */
+.closing{ margin-top:18px; text-align:center; padding:46px 20px 10px; }
+.closing .big{ font-size:clamp(28px,3.4vw,42px); font-weight:380; letter-spacing:-.015em; line-height:1.12; }
+.closing .big em{ font-style:italic; color:oklch(0.52 0.10 252); }
+.closing .small{ font-size:14.5px; color:var(--ink-soft); margin-top:16px; line-height:1.55; max-width:54ch;
+  margin-left:auto; margin-right:auto; }
+
+@media (max-width:1080px){
+  .stage{ grid-template-columns:1fr; }
+  .aside{ position:relative; top:0; order:-1; }
+}
+@media (max-width:720px){
+  :root{ --rail-w:54px; }
+  .jump input[type=range]{ width:150px; }
+  .hero{ padding:54px 0 30px; }
+}
+`;
+
+/* ----------------------------------------------------------- helpers --- */
+const laneById = Object.fromEntries(LANES.map(l => [l.id, l]));
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const WK = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+function dateForDay(d){ const dt = new Date(START); dt.setDate(dt.getDate() + (d-1)); return dt; }
+function fmtDate(d){ const dt = dateForDay(d); return MONTHS[dt.getMonth()] + " " + dt.getDate(); }
+function phaseFor(day){ const p = PHASES.find(p => day>=p.from && day<=p.to); return p ? p.name : ""; }
+function weekOf(day){ return Math.floor((day-1)/7) + 1; }
+
+// build ordered segments that partition days 1..TOTAL_DAYS
+function buildSegments(){
+  const evByDay = {};
+  EVENTS.forEach(e => { (evByDay[e.day] = evByDay[e.day] || []).push(e); });
+  const bandByStart = {};
+  BANDS.forEach(b => { bandByStart[b.start] = b; });
+  const segs = [];
+  let day = 1;
+  while (day <= TOTAL_DAYS){
+    if (bandByStart[day]){ const b = bandByStart[day]; segs.push({ type:"band", ...b }); day = b.end + 1; }
+    else if (evByDay[day]){ segs.push({ type:"day", day, events: evByDay[day] }); day++; }
+    else { day++; }
+  }
+  return segs;
+}
+
+/* ----------------------------------------------------------- EventCard --- */
+function EventCard({ ev, laneIndex, active }){
+  const lane = laneById[ev.lane];
+  const side = laneIndex >= 2 ? "right" : "left";
+  return (
+    <div className={`card ${lane.cls} ${active ? "" : "dimmed"}`} tabIndex={0}>
+      <div className="ctitle">
+        {ev.title}{ev.arrow && <span className="arrow"> ↓</span>}
+      </div>
+      <div className="ctag">
+        <span>{lane.name}</span>
+        {!ev.seen && <span className="bts">· behind the scenes</span>}
+      </div>
+      <div className={`pop ${side}`}>
+        <div className="pday">Day {ev.day} · {fmtDate(ev.day)}</div>
+        {ev.desc}
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------- Segment --- */
+function DayBlock({ seg, activeLanes }){
+  const dt = dateForDay(seg.day);
+  return (
+    <div className="seg" data-day={seg.day}>
+      <div className="rail dayblock">
+        <div className="dnum mono">DAY {seg.day}</div>
+        <div className="ddate mono">{WK[dt.getDay()]} · {fmtDate(seg.day)}</div>
+      </div>
+      {LANES.map((lane, i) => {
+        const ev = seg.events.find(e => e.lane === lane.id);
+        return (
+          <div className="cell dayblock" key={lane.id}>
+            {ev && <EventCard ev={ev} laneIndex={i} active={activeLanes.has(lane.id)} />}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function WaitBand({ seg, activeLanes }){
+  const lane = laneById[seg.lane];
+  const n = seg.end - seg.start + 1;
+  const h = Math.max(96, Math.min(322, n * 11));
+  const active = activeLanes.has(seg.lane);
+  return (
+    <div className="seg" data-band-start={seg.start} data-band-end={seg.end}>
+      <div className="rail band" style={{ minHeight: h }}>
+        <div className="dnum mono">DAY {seg.start}</div>
+        <div className="ddate mono">↓ {seg.end}</div>
+      </div>
+      <div className={`bandcell ${lane.cls}`}>
+        <div className={`band ${active ? "" : "dimmed"}`} style={{ minHeight: h }}>
+          <div className="hourglass">{lane.name} · waiting</div>
+          <div className="bdays mono">{n} {n === 1 ? "DAY" : "DAYS"} PASS</div>
+          <div className="blabel">{seg.label}</div>
+          <div className="bnote">{seg.note}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------- Checklist --- */
+function Checklist({ currentDay }){
+  const [checked, setChecked] = useState(() => CHECKLIST.map(() => false));
+  const prevUnlocked = useRef(0);
+  const [justIdx, setJustIdx] = useState(-1);
+
+  const unlockedCount = CHECKLIST.filter(c => currentDay >= c.day).length;
+  useEffect(() => {
+    if (unlockedCount > prevUnlocked.current){
+      setJustIdx(unlockedCount - 1);
+      const t = setTimeout(() => setJustIdx(-1), 1200);
+      prevUnlocked.current = unlockedCount;
+      return () => clearTimeout(t);
+    }
+    prevUnlocked.current = unlockedCount;
+  }, [unlockedCount]);
+
+  const toggle = (i) => setChecked(c => { const n = [...c]; n[i] = !n[i]; return n; });
+
+  return (
+    <div className="checklist">
+      <div className="chead">
+        <h3>What you’ll need</h3>
+        <span className="cnt mono">{unlockedCount} / {CHECKLIST.length}</span>
+      </div>
+      <p className="csub">A running list — items appear as the days go by. Tick them off as you go.</p>
+      <ul className="items">
+        {CHECKLIST.map((c, i) => {
+          const unlocked = currentDay >= c.day;
+          const isChecked = checked[i] && unlocked;
+          return (
+            <li key={i}
+              className={`item ${unlocked ? "" : "locked"} ${isChecked ? "checked" : ""} ${justIdx === i ? "justunlocked" : ""}`}>
+              <div className="box" onClick={() => unlocked && toggle(i)} role="checkbox" aria-checked={isChecked}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div className="it-main">
+                <div className="it-text">{c.text}</div>
+                {unlocked
+                  ? <div className="it-detail">{c.detail}</div>
+                  : <div className="it-day mono">Unlocks · Day {c.day}</div>}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------- App --- */
+function App(){
+  const segments = useMemo(buildSegments, []);
+  const [activeLanes, setActiveLanes] = useState(() => new Set(LANES.map(l => l.id)));
+  const [currentDay, setCurrentDay] = useState(1);
+
+  const kickRef = useRef(null);
+
+  const computeDay = useCallback(() => {
+    const refY = window.innerHeight * 0.34;
+    const segs = document.querySelectorAll(".segments .seg");
+    let cur = 1;
+    for (let i = 0; i < segs.length; i++){
+      const el = segs[i];
+      const r = el.getBoundingClientRect();
+      if (r.top <= refY){
+        if (el.dataset.day) cur = +el.dataset.day;
+        else {
+          const s = +el.dataset.bandStart, e = +el.dataset.bandEnd;
+          const f = Math.min(1, Math.max(0, (refY - r.top) / Math.max(1, r.height)));
+          cur = s + Math.round(f * (e - s));
+        }
+      } else break;
+    }
+    return cur;
+  }, []);
+
+  // Track the current day while scrolling, then STOP so the page can idle.
+  // A "kick" starts a short rAF loop that reads live DOM positions each frame
+  // and halts after a few still frames. Works for wheel/touch and programmatic
+  // jumps alike, without a perpetual animation loop.
+  useEffect(() => {
+    let raf = 0, lastY = null, still = 0, running = false;
+    const loop = () => {
+      const y = window.scrollY;
+      const c = computeDay();
+      setCurrentDay(prev => prev === c ? prev : c);
+      if (y === lastY) still++; else { still = 0; lastY = y; }
+      if (still > 6){ running = false; raf = 0; return; }
+      raf = requestAnimationFrame(loop);
+    };
+    const kick = () => { if (!running){ running = true; lastY = null; still = 0; raf = requestAnimationFrame(loop); } };
+    kickRef.current = kick;
+    window.addEventListener("scroll", kick, { passive:true });
+    window.addEventListener("wheel", kick, { passive:true });
+    window.addEventListener("touchmove", kick, { passive:true });
+    const t = setTimeout(() => setCurrentDay(computeDay()), 350);
+    return () => {
+      window.removeEventListener("scroll", kick);
+      window.removeEventListener("wheel", kick);
+      window.removeEventListener("touchmove", kick);
+      clearTimeout(t); if (raf) cancelAnimationFrame(raf);
+    };
+  }, [computeDay]);
+
+  const jumpTo = useCallback((day) => {
+    let el = document.querySelector(`.segments .seg[data-day="${day}"]`);
+    let f = 0;
+    if (!el){
+      el = [...document.querySelectorAll(".segments .seg[data-band-start]")]
+        .find(b => day >= +b.dataset.bandStart && day <= +b.dataset.bandEnd);
+      if (el){ const s = +el.dataset.bandStart, e = +el.dataset.bandEnd; f = (day - s) / (e - s + 1); }
+    }
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const offset = r.top + window.scrollY + f * r.height;
+    window.scrollTo(0, Math.max(0, offset - window.innerHeight * 0.30));
+    setCurrentDay(day);
+    if (kickRef.current) kickRef.current();
+  }, []);
+
+  const toggleLane = (id) => setActiveLanes(prev => {
+    const n = new Set(prev);
+    // if all are on, clicking isolates this one; otherwise normal toggle
+    if (n.size === LANES.length){ return new Set([id]); }
+    if (n.has(id)) n.delete(id); else n.add(id);
+    if (n.size === 0) return new Set(LANES.map(l => l.id));
+    return n;
+  });
+  const allOn = activeLanes.size === LANES.length;
+
+  return (
+    <div className="app">
+      {/* HERO */}
+      <header className="hero">
+        <p className="kicker mono">A comprehensive look into the process of imaging</p>
+        <h1>So you need<br/><em>radiology?</em></h1>
+        <p className="sub">One symptom. Four parties. Seventy-nine days before you hear what it means.</p>
+        <div className="meta">
+          <div className="metric"><div className="n mono">79</div><div className="l">days, start to answer</div></div>
+          <div className="metric"><div className="n mono">~11</div><div className="l">weeks</div></div>
+          <div className="metric"><div className="n mono">38</div><div className="l">days before the first visit</div></div>
+          <div className="metric"><div className="n mono">4</div><div className="l">parties involved</div></div>
+        </div>
+        <p className="howto">
+          Scroll to follow one patient’s imaging journey from first twinge to final results — the long
+          stretches of waiting are drawn to scale. <b>Hover any event</b> to read what’s happening,
+          <b> filter by stakeholder</b> to see how much unfolds out of sight, and <b>jump to any day</b>
+          with the slider. The checklist on the right fills in as the days go by.
+          <br/><span style={{color:"var(--ink-faint)"}}>Timeline based on national averages.</span>
+        </p>
+      </header>
+
+      {/* CONTROLS */}
+      <div className="controls">
+        <div className="filters">
+          <span className="flabel">Filter</span>
+          {LANES.map(lane => (
+            <button key={lane.id}
+              className={`chip ${lane.cls} ${activeLanes.has(lane.id) ? "" : "off"}`}
+              onClick={() => toggleLane(lane.id)}>
+              <span className="dot"></span>{lane.name}
+            </button>
+          ))}
+          {!allOn && <button className="chip-all" onClick={() => setActiveLanes(new Set(LANES.map(l => l.id)))}>show all</button>}
+        </div>
+        <div className="jump">
+          <div className="hud">
+            <div className="d mono">Day {currentDay} · Week {weekOf(currentDay)}</div>
+            <div className="p">{phaseFor(currentDay)}</div>
+          </div>
+          <input type="range" min="1" max={TOTAL_DAYS} value={currentDay}
+            onChange={e => jumpTo(+e.target.value)} aria-label="Jump to day" />
+        </div>
+      </div>
+
+      {/* STAGE */}
+      <div className="stage">
+        <div className="tl">
+          <div className="lanehdr">
+            <div></div>
+            {LANES.map(lane => (
+              <div key={lane.id} className={`lh ${lane.cls} ${activeLanes.has(lane.id) ? "" : "dim"}`}>
+                <span className="dot"></span>{lane.name}
+              </div>
+            ))}
+          </div>
+          <div className="segments">
+            <div className="tracks">
+              <div></div>
+              {LANES.map(l => <div className="trk" key={l.id}></div>)}
+            </div>
+            {segments.map((seg, i) => {
+              return seg.type === "day"
+                ? <DayBlock key={i} seg={seg} activeLanes={activeLanes} />
+                : <WaitBand key={i} seg={seg} activeLanes={activeLanes} />;
+            })}
+          </div>
+
+          <div className="closing">
+            <div className="big">Seventy-nine days for an answer.<br/><em>Most of it was waiting.</em></div>
+            <p className="small">From the first notice of pain to sitting down with results, the patient
+              was seen in person on a handful of days. The rest played out in scheduling queues,
+              benefit checks, and prior-authorization reviews — almost entirely out of sight.</p>
+          </div>
+        </div>
+
+        <aside className="aside">
+          <Checklist currentDay={currentDay} />
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+const style = document.createElement("style");
+style.textContent = CSS;
+document.head.appendChild(style);
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+</script>
+
+
+</body></html>

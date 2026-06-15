@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So You Need Radiology?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style id="base-vars">
+  :root{
+    /* calm clinical, pastel blue */
+    --bg:        oklch(0.952 0.022 235);
+    --bg-deep:   oklch(0.928 0.030 233);
+    --surface:   oklch(0.993 0.006 235);
+    --surface-2: oklch(0.978 0.010 235);
+    --ink:       oklch(0.330 0.030 252);
+    --ink-soft:  oklch(0.500 0.026 250);
+    --ink-faint: oklch(0.640 0.022 248);
+    --line:      oklch(0.880 0.018 235);
+    --line-soft: oklch(0.915 0.014 235);
+
+    /* stakeholder accents — shared L/C, hue varies (tweakable) */
+    --h-patient:   252;
+    --h-pcp:       168;
+    --h-insurance: 64;
+    --h-radiology: 305;
+    --h-digital:   200;
+    --h-transport: 28;
+    --h-primary:   252;   /* hero / "you are here" accent hue */
+
+    /* typography (tweakable) */
+    --font-body: "Newsreader", Georgia, serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+    /* density scale (tweakable) — multiplies paddings/gaps */
+    --d: 1;
+
+    --lanes: 6;
+    --rail-w: 72px;
+    --ctrl-h: 70px;
+    --lanehdr-h: 52px;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .mono{ font-family:var(--font-mono); }
+
+  .lane-patient{ --h:var(--h-patient); }
+  .lane-pcp{ --h:var(--h-pcp); }
+  .lane-insurance{ --h:var(--h-insurance); }
+  .lane-radiology{ --h:var(--h-radiology); }
+  .lane-digital{ --h:var(--h-digital); }
+  .lane-transport{ --h:var(--h-transport); }
+
+  #root{ min-height:100vh; }
+  ::selection{ background:oklch(0.86 0.06 252); }
+
+  ::-webkit-scrollbar{ width:11px; height:11px; }
+  ::-webkit-scrollbar-thumb{ background:var(--line); border-radius:99px; border:3px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--ink-faint); }
+</style>
+
+<style id="app-css">
+.app{ max-width:1480px; margin:0 auto; padding:0 28px 120px; }
+
+/* ---- hero ---- */
+.hero{ padding:84px 0 44px; position:relative; }
+.hero .kicker{ font-size:13px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--ink-faint); margin:0 0 22px; }
+.hero h1{ font-weight:380; font-size:clamp(46px,6.6vw,92px); line-height:.98;
+  letter-spacing:-.022em; margin:0; }
+.hero h1 em{ font-style:italic; color:oklch(0.52 0.10 var(--h-primary)); }
+.hero .sub{ font-size:clamp(19px,2vw,25px); color:var(--ink-soft); font-weight:340;
+  margin:24px 0 0; max-width:32ch; line-height:1.34; }
+.hero .meta{ display:flex; flex-wrap:wrap; gap:14px 46px; margin-top:40px;
+  padding-top:30px; border-top:1px solid var(--line); }
+.metric .n{ font-size:34px; font-weight:420; letter-spacing:-.01em; line-height:1; }
+.metric .l{ font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-faint); margin-top:8px; }
+.hero .howto{ margin-top:30px; font-size:15.5px; color:var(--ink-soft); max-width:64ch;
+  line-height:1.6; }
+.hero .howto b{ font-weight:560; color:var(--ink); }
+
+/* ---- start-date personalize chip ---- */
+.startset{ display:inline-flex; align-items:center; gap:10px; margin-top:26px;
+  background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  padding:11px 15px; box-shadow:0 10px 30px -22px rgba(38,54,82,.6); }
+.startset label{ font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); }
+.startset input{ font-family:var(--font-mono); font-size:14px; color:var(--ink);
+  border:1px solid var(--line); background:var(--surface-2); border-radius:8px; padding:6px 9px; }
+.startset .hint{ font-size:13px; color:var(--ink-faint); font-style:italic; }
+
+/* ---- sticky control bar ---- */
+.controls{ position:sticky; top:0; z-index:60; background:color-mix(in oklch, var(--bg) 86%, transparent);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:11px 28px;
+  display:flex; align-items:center; gap:22px; flex-wrap:wrap; min-height:var(--ctrl-h); }
+.filters{ display:flex; gap:9px; align-items:center; flex-wrap:wrap; }
+.filters .flabel{ font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-faint); margin-right:3px; }
+.chip{ font-family:inherit; cursor:pointer; border:1px solid oklch(0.820 0.055 var(--h));
+  background:oklch(0.972 0.026 var(--h)); color:oklch(0.430 0.090 var(--h));
+  padding:7px 14px 7px 11px; border-radius:99px; font-size:15px; display:flex;
+  align-items:center; gap:8px; transition:.18s; line-height:1; }
+.chip .dot{ width:9px; height:9px; border-radius:99px; background:oklch(0.560 0.130 var(--h)); flex:none; }
+.chip.off{ background:transparent; color:var(--ink-faint); border-color:var(--line); }
+.chip.off .dot{ background:var(--line); }
+.chip:hover{ transform:translateY(-1px); }
+.chip-all{ --h:248; cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--ink-soft);
+  background:none; border:none; text-decoration:underline; text-underline-offset:3px; padding:6px; }
+
+/* ---- "you are here" position cluster ---- */
+.pos{ display:flex; align-items:center; gap:16px; margin-left:auto; }
+.pos .poslabel{ font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:oklch(0.50 0.10 var(--h-primary)); display:flex; align-items:center; gap:7px; white-space:nowrap; }
+.pos .poslabel .pin{ width:9px; height:9px; border-radius:99px; background:oklch(0.55 0.12 var(--h-primary));
+  box-shadow:0 0 0 4px oklch(0.55 0.12 var(--h-primary) / .18); }
+.pos .hud{ text-align:right; line-height:1.12; min-width:0; }
+.pos .hud .d{ font-size:15px; font-weight:600; letter-spacing:.02em; }
+.pos .hud .p{ font-size:12px; color:var(--ink-faint); margin-top:3px; }
+.posctl{ display:flex; flex-direction:column; gap:7px; }
+.posctl input[type=range]{ -webkit-appearance:none; appearance:none; width:240px; height:4px;
+  border-radius:9px; outline:none;
+  background:linear-gradient(90deg, oklch(0.62 0.11 var(--h-primary)) 0 var(--fill,0%), var(--line) var(--fill,0%) 100%); }
+.posctl input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none;
+  width:18px; height:18px; border-radius:99px; background:var(--surface);
+  border:2px solid oklch(0.52 0.12 var(--h-primary)); cursor:grab; box-shadow:0 1px 5px rgba(40,60,90,.28); }
+.posctl input[type=range]::-moz-range-thumb{ width:18px; height:18px; border-radius:99px;
+  background:var(--surface); border:2px solid oklch(0.52 0.12 var(--h-primary)); cursor:grab; }
+.posctl .prog{ font-size:11.5px; color:var(--ink-faint); display:flex; justify-content:space-between; gap:10px; }
+.posctl .prog b{ color:oklch(0.46 0.10 var(--h-primary)); font-weight:600; }
+
+/* ---- stage: timeline + aside ---- */
+.stage{ display:grid; grid-template-columns:minmax(0,1fr) 296px; gap:34px; align-items:start; }
+
+/* ---- lane header ---- */
+.tl{ position:relative; }
+.lanehdr{ position:sticky; top:var(--ctrl-h); z-index:40; display:grid;
+  grid-template-columns:var(--rail-w) repeat(var(--lanes),minmax(0,1fr));
+  background:color-mix(in oklch, var(--bg) 90%, transparent);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line); height:var(--lanehdr-h); align-items:end; }
+.lanehdr .lh{ padding:0 10px 11px; display:flex; align-items:center; gap:7px;
+  font-size:13px; color:oklch(0.430 0.090 var(--h)); transition:opacity .2s; line-height:1.12; }
+.lanehdr .lh .dot{ width:9px; height:9px; border-radius:99px; background:oklch(0.560 0.130 var(--h)); }
+.lanehdr .lh.dim{ opacity:.32; }
+
+/* ---- segments ---- */
+.segments{ position:relative; }
+.tracks{ position:absolute; inset:0; display:grid;
+  grid-template-columns:var(--rail-w) repeat(var(--lanes),minmax(0,1fr)); pointer-events:none; z-index:0; }
+.tracks .trk{ position:relative; }
+.tracks .trk::before{ content:""; position:absolute; left:50%; top:0; bottom:0; width:1px;
+  background:var(--line-soft); transform:translateX(-.5px); }
+
+.seg{ position:relative; z-index:1; display:grid;
+  grid-template-columns:var(--rail-w) repeat(var(--lanes),minmax(0,1fr)); scroll-margin-top:130px; }
+.seg:has(.card:hover), .seg:has(.card:focus-within){ z-index:50; }
+
+/* rail */
+.rail{ padding:calc(14px * var(--d)) 10px 0 0; text-align:right; position:relative; }
+.rail .dnum{ font-size:12.5px; font-weight:600; letter-spacing:.04em; color:var(--ink); white-space:nowrap; }
+.rail .ddate{ font-size:10.5px; color:var(--ink-faint); margin-top:3px; letter-spacing:.02em; white-space:nowrap; }
+.rail.band .dnum{ color:var(--ink-faint); font-weight:500; }
+.rail .donecheck{ display:none; }
+
+/* event-day block */
+.dayblock{ padding:calc(11px * var(--d)) 0 calc(17px * var(--d)); }
+.cell{ padding:0 7px; }
+
+/* event card */
+.card{ position:relative; border:1px solid oklch(0.840 0.045 var(--h));
+  background:oklch(0.984 0.014 var(--h)); border-radius:13px; padding:calc(12px * var(--d)) 13px calc(13px * var(--d));
+  cursor:default; transition:opacity .22s, box-shadow .18s, transform .18s, border-color .18s; }
+.card::before{ content:""; position:absolute; left:0; top:13px; bottom:13px; width:3px;
+  border-radius:9px; background:oklch(0.585 0.130 var(--h)); }
+.card:hover{ box-shadow:0 10px 26px -14px oklch(0.45 0.08 var(--h) / .55); transform:translateY(-2px);
+  border-color:oklch(0.700 0.090 var(--h)); z-index:5; }
+.card .ctitle{ font-size:15px; font-weight:540; letter-spacing:-.005em; line-height:1.16;
+  padding-left:6px; display:flex; align-items:baseline; gap:7px; }
+.card .ctag{ display:flex; align-items:center; gap:6px; margin-top:7px; padding-left:6px;
+  font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:oklch(0.520 0.095 var(--h)); }
+.card .ctag .bts{ color:var(--ink-faint); font-style:italic; text-transform:none; letter-spacing:0;
+  font-size:12px; }
+.card .arrow{ display:inline-block; transform:translateY(1px); }
+
+/* hover popover */
+.pop{ position:absolute; top:calc(100% + 9px); width:266px; background:var(--surface);
+  border:1px solid oklch(0.820 0.050 var(--h)); border-radius:12px; padding:13px 15px;
+  box-shadow:0 18px 40px -16px rgba(38,54,82,.45); z-index:30; font-size:14.5px; line-height:1.5;
+  color:var(--ink-soft); opacity:0; visibility:hidden; transform:translateY(-4px); transition:.16s; }
+.pop.left{ left:6px; } .pop.right{ right:6px; }
+.card:hover .pop, .card:focus-within .pop{ opacity:1; visibility:visible; transform:translateY(0); }
+.pop b{ color:var(--ink); font-weight:560; }
+.pop .pday{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:oklch(0.560 0.110 var(--h));
+  margin-bottom:6px; }
+
+/* ===== you-are-here states ===== */
+/* past */
+.seg.is-past .card{ opacity:.62; }
+.seg.is-past .card::before{ background:oklch(0.72 0.05 var(--h)); }
+.seg.is-past .rail .dnum{ color:var(--ink-faint); }
+.seg.is-past .donecheck{ display:inline-flex; align-items:center; justify-content:center;
+  margin-left:auto; width:17px; height:17px; border-radius:99px; background:oklch(0.62 0.09 var(--h-pcp));
+  vertical-align:middle; }
+.seg.is-past .donecheck svg{ width:11px; height:11px; }
+.card .donecheck{ display:none; }
+.seg.is-past .card .donecheck{ display:inline-flex; align-items:center; justify-content:center;
+  width:18px; height:18px; border-radius:99px; background:oklch(0.64 0.10 var(--h)); flex:none; transform:translateY(1px); }
+.seg.is-past .card .donecheck svg{ width:11px; height:11px; }
+.seg.is-past .card .ctitle{ color:var(--ink-soft); }
+.seg.is-past:hover .card{ opacity:.92; }
+
+/* future */
+.seg.is-future .card{ background:var(--surface); border-style:dashed;
+  border-color:oklch(0.86 0.04 var(--h)); }
+.seg.is-future .card::before{ background:oklch(0.80 0.05 var(--h)); }
+.seg.is-future .card .ctitle{ color:var(--ink-soft); font-weight:500; }
+.seg.is-future .rail .ddate::before{ content:"~ "; }
+.seg.is-future .rail .dnum{ color:var(--ink-faint); font-weight:500; }
+
+/* now */
+.seg.is-now > .rail .dnum{ color:oklch(0.46 0.12 var(--h-primary)); }
+.seg.is-now .card{ border-color:oklch(0.66 0.11 var(--h)); box-shadow:0 14px 34px -18px oklch(0.45 0.10 var(--h) / .6); }
+.youhere{ grid-column:1 / -1; display:flex; align-items:center; gap:12px; padding:2px 0 12px; }
+.youhere .yline{ flex:1; height:0; border-top:2px dashed oklch(0.62 0.12 var(--h-primary)); }
+.youhere .ytag{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:oklch(0.46 0.13 var(--h-primary)); display:flex; align-items:center; gap:8px;
+  background:oklch(0.965 0.03 var(--h-primary)); border:1px solid oklch(0.84 0.07 var(--h-primary));
+  padding:5px 12px; border-radius:99px; white-space:nowrap; }
+.youhere .ytag .pin{ width:8px; height:8px; border-radius:99px; background:oklch(0.55 0.13 var(--h-primary));
+  box-shadow:0 0 0 4px oklch(0.55 0.13 var(--h-primary) / .2); }
+
+/* waiting band */
+.bandcell{ grid-column:2 / -1; padding:9px 9px; display:flex; }
+.band{ flex:1; border-radius:13px; border:1px dashed oklch(0.820 0.050 var(--h));
+  background:oklch(0.972 0.020 var(--h) / .55);
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+  padding:calc(18px * var(--d)) 26px; position:relative; overflow:hidden; transition:opacity .22s; }
+.band::after{ content:""; position:absolute; inset:0; opacity:.5; pointer-events:none;
+  background:repeating-linear-gradient(135deg, transparent 0 13px, oklch(0.86 0.04 var(--h) / .16) 13px 14px); }
+.band .bdays{ position:relative; font-size:13px; font-weight:600; letter-spacing:.05em;
+  color:oklch(0.520 0.105 var(--h)); white-space:nowrap; }
+.band .blabel{ position:relative; font-size:21px; font-weight:420; letter-spacing:-.01em;
+  margin-top:5px; max-width:30ch; line-height:1.15; }
+.band .bnote{ position:relative; font-size:14px; color:var(--ink-soft); margin-top:10px;
+  max-width:48ch; line-height:1.5; font-style:italic; }
+.band .hourglass{ position:relative; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-faint); margin-bottom:11px; }
+/* while-you-wait tip */
+.band .btip{ position:relative; margin-top:15px; display:flex; align-items:flex-start; gap:9px;
+  max-width:50ch; text-align:left; background:var(--surface); border:1px solid oklch(0.86 0.04 var(--h));
+  border-radius:11px; padding:11px 14px; }
+.band .btip .bk{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:oklch(0.55 0.10 var(--h)); flex:none; margin-top:2px; }
+.band .btip .bx{ font-size:13.5px; color:var(--ink-soft); line-height:1.5; }
+.seg.is-past .band{ opacity:.5; }
+.seg.is-future .band{ opacity:.78; }
+.band .bhere{ position:relative; margin-top:13px; font-family:var(--font-mono); font-size:11px;
+  letter-spacing:.12em; text-transform:uppercase; color:oklch(0.46 0.13 var(--h-primary));
+  display:flex; align-items:center; gap:8px; }
+.band .bhere .pin{ width:8px; height:8px; border-radius:99px; background:oklch(0.55 0.13 var(--h-primary));
+  box-shadow:0 0 0 4px oklch(0.55 0.13 var(--h-primary) / .2); }
+.seg.is-now .band{ border-color:oklch(0.66 0.11 var(--h-primary)); border-style:solid;
+  box-shadow:0 16px 40px -22px oklch(0.45 0.12 var(--h-primary) / .6); }
+
+/* ===== step-through: glow + flow arrows ===== */
+@keyframes beatGlow{
+  0%,100%{ box-shadow:0 0 0 0 oklch(0.60 0.13 var(--h) / 0), 0 14px 32px -18px oklch(0.45 0.10 var(--h) / .55); }
+  50%{ box-shadow:0 0 0 6px oklch(0.62 0.13 var(--h) / .15), 0 20px 42px -16px oklch(0.45 0.13 var(--h) / .72); }
+}
+.card.beat-on{ animation:beatGlow 1.9s ease-in-out infinite;
+  border-color:oklch(0.62 0.12 var(--h)); z-index:4; }
+.card.beat-on::before{ background:oklch(0.55 0.16 var(--h)); box-shadow:0 0 10px oklch(0.6 0.16 var(--h) / .6); }
+.seg.is-now .card.beat-on .ctitle{ color:oklch(0.34 0.06 var(--h)); }
+
+.flow-arrows{ position:absolute; top:0; left:0; pointer-events:none; overflow:visible; z-index:6; }
+.fa-path{ stroke-dasharray:7 6; animation:faflow 1s linear infinite; opacity:.8; }
+@keyframes faflow{ to{ stroke-dashoffset:-13; } }
+@media (prefers-reduced-motion: reduce){
+  .card.beat-on{ animation:none;
+    box-shadow:0 0 0 5px oklch(0.62 0.13 var(--h) / .15), 0 16px 36px -16px oklch(0.45 0.12 var(--h) / .6); }
+  .fa-path{ animation:none; stroke-dasharray:none; }
+}
+
+/* step controls */
+.stepper{ display:flex; align-items:center; gap:7px; }
+.stepper .sbtn{ width:31px; height:31px; border-radius:9px; border:1px solid var(--line);
+  background:var(--surface); color:var(--ink-soft); cursor:pointer; display:flex;
+  align-items:center; justify-content:center; padding:0; transition:.15s; }
+.stepper .sbtn svg{ width:14px; height:14px; }
+.stepper .sbtn:hover{ border-color:oklch(0.72 0.09 var(--h-primary));
+  color:oklch(0.45 0.12 var(--h-primary)); transform:translateY(-1px); }
+.stepper .sbtn.play{ background:oklch(0.55 0.12 var(--h-primary)); border-color:transparent; color:#fff; }
+.stepper .sbtn.play:hover{ background:oklch(0.48 0.13 var(--h-primary)); color:#fff; }
+.stepper .scount{ font-family:var(--font-mono); font-size:10.5px; color:var(--ink-faint);
+  letter-spacing:.06em; min-width:78px; text-align:center; white-space:nowrap; }
+.stepper .scount b{ color:oklch(0.46 0.11 var(--h-primary)); font-weight:600; }
+
+/* dimming for filter */
+.dimmed{ opacity:.1 !important; pointer-events:none; }
+.dimmed .pop{ display:none; }
+
+/* ---- floating "back to you are here" pill ---- */
+.herefab{ position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px);
+  z-index:80; background:var(--surface); border:1px solid oklch(0.80 0.08 var(--h-primary));
+  color:oklch(0.42 0.12 var(--h-primary)); border-radius:99px; padding:11px 20px; cursor:pointer;
+  font-family:var(--font-mono); font-size:12.5px; letter-spacing:.06em; display:flex; align-items:center; gap:10px;
+  box-shadow:0 18px 40px -16px rgba(38,54,82,.5); opacity:0; pointer-events:none; transition:.28s; }
+.herefab.show{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+.herefab .pin{ width:9px; height:9px; border-radius:99px; background:oklch(0.55 0.13 var(--h-primary));
+  box-shadow:0 0 0 4px oklch(0.55 0.13 var(--h-primary) / .2); }
+
+/* ---- aside checklist ---- */
+.aside{ position:sticky; top:calc(var(--ctrl-h) + 16px); }
+.checklist{ background:var(--surface); border:1px solid var(--line); border-radius:17px;
+  padding:19px 19px 13px; box-shadow:0 14px 40px -26px rgba(38,54,82,.5); }
+.checklist .chead{ display:flex; align-items:baseline; justify-content:space-between; gap:8px;
+  padding-bottom:13px; border-bottom:1px solid var(--line-soft); }
+.checklist .chead h3{ margin:0; font-size:18px; font-weight:540; letter-spacing:-.01em; }
+.checklist .chead .cnt{ font-size:12.5px; color:var(--ink-faint); }
+.checklist .csub{ font-size:12.5px; color:var(--ink-faint); margin:9px 0 4px; line-height:1.45; }
+/* next-up banner */
+.nextup{ margin:12px 0 4px; background:oklch(0.965 0.03 var(--h-primary));
+  border:1px solid oklch(0.86 0.06 var(--h-primary)); border-radius:11px; padding:11px 13px; }
+.nextup .nk{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.15em; text-transform:uppercase;
+  color:oklch(0.50 0.11 var(--h-primary)); }
+.nextup .nt{ font-size:14.5px; color:var(--ink); margin-top:4px; line-height:1.3; }
+.items{ list-style:none; margin:8px 0 0; padding:0; }
+.item{ display:flex; gap:11px; align-items:flex-start; padding:9px 4px 9px 2px;
+  border-bottom:1px solid var(--line-soft); transition:.25s; }
+.item:last-child{ border-bottom:none; }
+.item .box{ flex:none; width:19px; height:19px; border-radius:6px; border:1.5px solid var(--ink-faint);
+  margin-top:1px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  background:var(--surface); transition:.16s; }
+.item .box svg{ width:12px; height:12px; opacity:0; transform:scale(.6); transition:.16s; }
+.item.checked .box{ background:oklch(0.55 0.10 168); border-color:oklch(0.55 0.10 168); }
+.item.checked .box svg{ opacity:1; transform:scale(1); }
+.item .it-main{ flex:1; min-width:0; }
+.item .it-text{ font-size:15px; line-height:1.25; }
+.item .it-detail{ font-size:12.5px; color:var(--ink-faint); margin-top:3px; line-height:1.4; }
+.item.checked .it-text{ color:var(--ink-faint); text-decoration:line-through;
+  text-decoration-color:oklch(0.7 0.03 168); }
+.item.locked{ opacity:.42; }
+.item.locked .box{ border-style:dashed; cursor:default; background:transparent; }
+.item .it-day{ font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint);
+  margin-top:3px; }
+.item.isnext{ background:oklch(0.97 0.025 var(--h-primary)); border-radius:9px; }
+.item.justunlocked{ animation:pulse 1.1s ease; }
+@keyframes pulse{ 0%{ background:oklch(0.95 0.05 168 / .0);} 22%{ background:oklch(0.93 0.06 168 / .8);} 100%{ background:transparent; } }
+
+/* closing */
+.closing{ margin-top:18px; text-align:center; padding:46px 20px 10px; }
+.closing .big{ font-size:clamp(28px,3.4vw,42px); font-weight:380; letter-spacing:-.015em; line-height:1.12; }
+.closing .big em{ font-style:italic; color:oklch(0.52 0.10 var(--h-primary)); }
+.closing .small{ font-size:14.5px; color:var(--ink-soft); margin-top:16px; line-height:1.55; max-width:54ch;
+  margin-left:auto; margin-right:auto; }
+
+/* ---- references ---- */
+.reflink{ color:oklch(0.50 0.10 var(--h-primary)); text-decoration:underline;
+  text-underline-offset:3px; text-decoration-thickness:1px; cursor:pointer;
+  transition:color .16s; }
+.reflink:hover{ color:oklch(0.40 0.13 var(--h-primary)); }
+.refs{ margin-top:34px; padding-top:40px; border-top:1px solid var(--line);
+  scroll-margin-top:90px; }
+.refs-head{ max-width:62ch; }
+.refs-k{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint); }
+.refs-head h2{ font-weight:400; font-size:clamp(26px,3vw,34px); letter-spacing:-.015em;
+  margin:12px 0 0; }
+.refs-intro{ font-size:15.5px; color:var(--ink-soft); line-height:1.6; margin:14px 0 0; }
+.reflist{ list-style:none; margin:30px 0 0; padding:0; max-width:90ch;
+  border-top:1px solid var(--line-soft); }
+.refitem{ display:grid; grid-template-columns:42px 1fr; gap:8px 14px; align-items:start;
+  padding:18px 4px; border-bottom:1px solid var(--line-soft); }
+.refnum{ font-size:13px; color:oklch(0.55 0.10 var(--h-primary)); font-weight:600; padding-top:2px; }
+.reftitle{ font-size:17px; letter-spacing:-.005em; line-height:1.3; }
+.refsrc{ font-size:13.5px; color:var(--ink-soft); margin-top:5px; font-style:italic; }
+.refnote{ font-size:13.5px; color:var(--ink-faint); margin-top:7px; line-height:1.5; }
+
+@media (max-width:1080px){
+  .stage{ grid-template-columns:1fr; }
+  .aside{ position:relative; top:0; order:-1; }
+}
+@media (max-width:720px){
+  :root{ --rail-w:54px; }
+  .posctl input[type=range]{ width:150px; }
+  .hero{ padding:54px 0 30px; }
+  .pos{ width:100%; }
+}
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<template id="__bundler_thumbnail" data-bg-color="#dfeaf6">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#dfeaf6"></rect>
+    <g stroke="#9fb6d4" stroke-width="3" stroke-dasharray="6 8" opacity="0.6">
+      <line x1="300" y1="120" x2="300" y2="680"></line>
+      <line x1="500" y1="120" x2="500" y2="680"></line>
+      <line x1="700" y1="120" x2="700" y2="680"></line>
+      <line x1="900" y1="120" x2="900" y2="680"></line>
+    </g>
+    <g font-family="Georgia, serif">
+      <rect x="220" y="180" width="160" height="92" rx="16" fill="#ffffff" stroke="#5a78b0" stroke-width="3"></rect>
+      <circle cx="360" cy="208" r="13" fill="#4f72c4"></circle>
+      <rect x="420" y="340" width="160" height="92" rx="16" fill="#ffffff" stroke="#2f9e6f" stroke-width="3"></rect>
+      <circle cx="560" cy="368" r="13" fill="#2f9e6f"></circle>
+      <rect x="620" y="500" width="160" height="92" rx="16" fill="#ffffff" stroke="#c9982f" stroke-width="3"></rect>
+      <circle cx="760" cy="528" r="13" fill="#c9982f"></circle>
+      <rect x="820" y="340" width="160" height="92" rx="16" fill="#ffffff" stroke="#9d5bbf" stroke-width="3"></rect>
+      <circle cx="960" cy="368" r="13" fill="#9d5bbf"></circle>
+    </g>
+    <path d="M340 272 C340 320 500 300 500 340" fill="none" stroke="#4f72c4" stroke-width="4" stroke-dasharray="8 6"></path>
+    <path d="M560 432 C560 480 700 480 700 500" fill="none" stroke="#2f9e6f" stroke-width="4" stroke-dasharray="8 6"></path>
+    <text x="600" y="730" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="54" fill="#33415c">So you need radiology?</text>
+  </svg>
+</template>
+
+<!-- ============ DATA ============ -->
+<script>
+window.RAD = (function(){
+  const LANES = [
+    { id:"patient",   name:"Patient",      cls:"lane-patient" },
+    { id:"pcp",       name:"Primary Care", cls:"lane-pcp" },
+    { id:"insurance", name:"Insurance",    cls:"lane-insurance" },
+    { id:"radiology", name:"Radiology",    cls:"lane-radiology" },
+    { id:"digital",   name:"Digital Services", cls:"lane-digital" },
+    { id:"transport", name:"Transportation",   cls:"lane-transport" },
+  ];
+
+  const START = new Date(2026,0,1);
+
+  const EVENTS = [
+    { day:1,  lane:"patient",   title:"Notices the pain", seen:true,
+      desc:"“Should I be worried? I’ll give it a week.” Googling symptoms, scared about the cost." },
+    { day:8,  lane:"patient",   title:"Decides to schedule appointment", seen:true,
+      desc:"“Still bothering me, so I’m going to reach out to my doctor.”" },
+    { day:8,  lane:"pcp",       title:"Appointment scheduled", seen:false,
+      desc:"The practice books the patient into the first available slot." },
+    { day:8,  lane:"insurance", title:"Find an in-network practice", seen:true,
+      desc:"Before booking, the patient checks which primary-care practices their plan covers. The fastest ways: your insurer’s online “find a doctor” directory, the member portal or app, or the customer-service number on the back of your insurance card. In-network care costs far less than out-of-network — and asking the practice to confirm they take your specific plan avoids a surprise bill." },
+    { day:8,  lane:"digital",   title:"Requested online", seen:true,
+      desc:"The patient requests the visit through the practice’s patient portal or website form." },
+
+    { day:38, lane:"patient",   title:"Pain is still present, but has subsided", seen:true,
+      desc:"Pain decreasing, but the appointment is finally approaching." },
+
+    { day:39, lane:"patient",   title:"First PCP appointment", seen:true,
+      desc:"The first available appointment with the primary care provider finally arrives." },
+    { day:39, lane:"pcp",       title:"Examines the patient", seen:false,
+      desc:"Checks insurance eligibility, then assesses symptoms, reviews history and performs a physical exam. Determines that imaging is needed — but has to check with insurance first." },
+    { day:39, lane:"insurance", title:"Eligibility check", seen:false,
+      desc:"Same-day plan check: a benefit inquiry confirms the policy is active and determines financial responsibility (deductibles and copays)." },
+    { day:39, lane:"transport", title:"Getting there", seen:true,
+      desc:"The patient arranges a way to the first visit — driving, transit, a ride from family, or a paratransit/ride-share trip. Missing this can mean re-waiting weeks for another slot." },
+
+    { day:46, lane:"insurance", title:"Prior-auth decision", seen:false,
+      desc:"Insurance returns its decision on the prior authorization request. If documentation is incomplete or more clinical detail is needed, there are further delays." },
+
+    { day:47, lane:"pcp",       title:"Orders the imaging", seen:false,
+      desc:"With authorization in hand, the PCP places the imaging order." },
+    { day:47, lane:"radiology", title:"Order received", seen:false,
+      desc:"The order is transmitted to the imaging center; the scheduling department receives it." },
+
+    { day:48, lane:"patient",   title:"Calls to schedule", seen:true,
+      desc:"Patient calls the imaging center to make an appointment." },
+    { day:48, lane:"radiology", title:"Appointment scheduled", seen:false,
+      desc:"The imaging center books the scan into its first open slot." },
+    { day:48, lane:"digital",   title:"Self-scheduling", seen:true,
+      desc:"Some imaging centers let the patient pick the scan slot online and send portal reminders with prep instructions." },
+
+    { day:61, lane:"patient",   title:"Prepares for imaging", seen:true,
+      desc:"Follows prep instructions — for example, fasting before the scan." },
+
+    { day:62, lane:"patient",   title:"Imaging day", seen:true,
+      desc:"The first available imaging appointment." },
+    { day:62, lane:"insurance", title:"Verified again", seen:false,
+      desc:"Insurance is verified one more time before the scan proceeds." },
+    { day:62, lane:"radiology", title:"Imaging performed", seen:false,
+      desc:"Patient prep (contrast dye, positioning, consent), then the imaging is performed." },
+    { day:62, lane:"transport", title:"Ride arranged", seen:true,
+      desc:"Transportation to and from the scan — essential when contrast or sedation means the patient can’t drive afterward." },
+
+    { day:63, lane:"radiology", title:"Reads the images", seen:false,
+      desc:"The radiologist analyzes the images and writes the report." },
+
+    { day:64, lane:"patient",   title:"Result notification", seen:true,
+      desc:"Receives a notification in the patient portal and schedules the next available appointment with the PCP." },
+    { day:64, lane:"pcp",       title:"Receives the report", seen:false,
+      desc:"The report arrives; a follow-up appointment is scheduled." },
+    { day:64, lane:"radiology", title:"Report finalized", seen:false,
+      desc:"Report finalized and submitted." },
+    { day:64, lane:"digital",   title:"Results posted", seen:true,
+      desc:"The finalized report is released to the patient portal, often with an automated notification — sometimes before the doctor has reviewed it." },
+
+    { day:70, lane:"pcp",       title:"Reviews findings", seen:false,
+      desc:"The PCP reviews the report findings ahead of the visit." },
+
+    { day:71, lane:"patient",   title:"Returns to the PCP", seen:true,
+      desc:"Patient returns to the primary care provider for the results." },
+    { day:71, lane:"pcp",       title:"Explains the results", seen:false,
+      desc:"Explains the results and discusses next steps." },
+    { day:71, lane:"transport", title:"Return trip", seen:true,
+      desc:"The patient travels back to the practice for the results conversation." },
+    { day:71, lane:"digital",   title:"Visit summary shared", seen:true,
+      desc:"An after-visit summary and care plan are posted to the portal, with portal messaging for follow-up questions." },
+  ];
+
+  const BANDS = [
+    { start:2,  end:7,  lane:"patient",   label:"Waiting it out",
+      note:"“I’ll give it a week.” Hoping it passes on its own.",
+      tip:"Jot down when it started and what makes it better or worse. Those notes make your first visit faster." },
+    { start:10, end:37, lane:"patient",   label:"Waiting for the first available appointment",
+      note:"Nearly a month before the first open primary-care slot. The pain often fades before you’re ever seen.",
+      tip:"Ask the office to put you on their cancellation list, and call back if anything changes — new or worse symptoms can move you up." },
+    { start:40, end:45, lane:"insurance", label:"Prior authorization under review",
+      note:"Behind the scenes, insurance reviews the request — before any scan can be booked.",
+      tip:"Nothing is needed from you yet. If you want peace of mind, call your doctor’s office to confirm the request was submitted." },
+    { start:49, end:60, lane:"patient",   label:"Waiting for the imaging appointment",
+      note:"The first available imaging slot is weeks out.",
+      tip:"Confirm any prep instructions, double-check what your scan will cost, and line up a ride if you’ll get contrast or sedation." },
+    { start:65, end:69, lane:"pcp",       label:"Report waits to be reviewed",
+      note:"The finalized report sits in the queue until the PCP reviews it.",
+      tip:"Your results may already be visible in the patient portal. Write down any questions for your follow-up visit." },
+    { start:72, end:79, lane:"patient",   label:"Living with the answer",
+      note:"Following the plan discussed with the primary care provider.",
+      tip:"Book any follow-up imaging or referrals before you leave the visit, so you’re not starting this wait over again." },
+  ];
+
+  const CHECKLIST = [
+    { day:1,  text:"Notes on your symptoms",            detail:"When it started, what makes it better or worse." },
+    { day:2,  text:"Insurance card",                    detail:"Member ID and group number on hand." },
+    { day:2,  text:"Find an in-network practice",        detail:"Use your insurer’s online directory, member app, or the number on your card — then confirm the office takes your plan." },
+    { day:3,  text:"Request time off work",             detail:"You’ll need it for several appointments." },
+    { day:39, text:"Medical history & medications",     detail:"Bring a current list to the primary-care visit." },
+    { day:39, text:"Photo ID & copay",                  detail:"Payment for the visit." },
+    { day:47, text:"Prior-authorization number",        detail:"Confirm imaging is approved before you go." },
+    { day:48, text:"Arrange transportation",            detail:"Especially if contrast or sedation is involved." },
+    { day:61, text:"Follow prep instructions",          detail:"Fasting or other prep before the scan." },
+    { day:62, text:"Comfortable clothes, no metal",     detail:"Plus the consent form for the imaging visit." },
+    { day:64, text:"Check the patient portal",          detail:"Results may post before your visit." },
+    { day:71, text:"Questions for your follow-up",      detail:"Write them down before you go." },
+  ];
+
+  const PHASES = [
+    { from:1,  to:7,  name:"Should I worry?" },
+    { from:8,  to:38, name:"Waiting to be seen" },
+    { from:39, to:45, name:"At the doctor" },
+    { from:46, to:48, name:"Authorized & ordered" },
+    { from:49, to:60, name:"Waiting for imaging" },
+    { from:61, to:64, name:"Imaging" },
+    { from:65, to:71, name:"Results" },
+    { from:72, to:79, name:"Living with the answer" },
+  ];
+
+  const TOTAL_DAYS = 79;
+  const RESULTS_DAY = 71;   // patient sits down with results
+  return { LANES, EVENTS, BANDS, CHECKLIST, PHASES, TOTAL_DAYS, RESULTS_DAY, START };
+})();
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<script>
+(async () => {
+  // Prepend so page-supplied @page / break rules (deck-stage's margin:0,
+  // author CSS) keep source-order precedence over the baseline.
+  const baseCss = document.createElement('style');
+  baseCss.textContent = "@media print {\n  @page { margin: 0.5cm; }\n  html, body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }\n  section, article, figure, table { break-inside: avoid; }\n  *, *::before, *::after {\n    animation-delay: -99s !important; animation-duration: .001s !important;\n    animation-iteration-count: 1 !important; animation-fill-mode: both !important;\n    animation-play-state: running !important; transition-duration: 0s !important;\n  }\n}";
+  document.head.prepend(baseCss);
+  if (document.readyState === 'loading') {
+    await new Promise((r) => document.addEventListener('DOMContentLoaded', r, { once: true }));
+  }
+  let ds = document.querySelector('deck-stage');
+  // whenDefined never resolves when nothing registers the element, so only
+  // await it when a <deck-stage> tag exists (and race a timeout regardless).
+  if (ds && !customElements.get('deck-stage')) {
+    try {
+      await Promise.race([
+        customElements.whenDefined('deck-stage'),
+        new Promise((r) => setTimeout(r, 3000)),
+      ]);
+    } catch (e) {}
+    ds = document.querySelector('deck-stage');
+  }
+  // dc-runtime assigns window.DCLogic at init and mounts into #dc-root on
+  // DOMContentLoaded; settle on that subtree so React has rendered before
+  // print(). Non-DC pages fall through to weighing body.
+  const isDc = !ds && 'DCLogic' in window;
+  const settleRoot = ds || (isDc ? document.getElementById('dc-root') : null) || document.body;
+  if (settleRoot) {
+    // Weigh only content children — skip script/style/template so inline
+    // Babel/CSS doesn't register as stable "content" before the framework
+    // has mounted anything.
+    const MEDIA = 'img,svg,canvas,video,picture,iframe,embed,object';
+    const weigh = () => {
+      let text = 0, media = 0;
+      for (const c of settleRoot.children) {
+        const t = c.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+        text += (c.textContent || '').trim().length;
+        media += c.querySelectorAll(MEDIA).length + (c.matches(MEDIA) ? 1 : 0);
+      }
+      return text + media * 100;
+    };
+    // "Non-zero and stable" alone is not sufficient to mean rendered: generic
+    // body can carry a static shell while async main content is pending, and
+    // #dc-root can carry the root DC's static text while child refs are still
+    // .sc-placeholder boxes. Gate generic on readyState 'complete', and never
+    // accept stability while a dc-runtime placeholder is present.
+    const isGeneric = settleRoot === document.body;
+    const deadline = Date.now() + 15000;
+    let last = -1, stable = 0;
+    while (Date.now() < deadline) {
+      const n = weigh();
+      const ready =
+        (!isGeneric || document.readyState === 'complete') &&
+        !settleRoot.querySelector('.sc-placeholder');
+      if (n > 0 && n === last && ready) { if (++stable >= 2) break; } else { stable = 0; }
+      last = n;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+  }
+  try { await document.fonts.ready; } catch (e) {}
+  // Jump every animation to its end state so print() never captures a slide
+  // mid-entrance. Ordering matters: the 0s-transition style must be live
+  // BEFORE data-deck-active is set so attribute-keyed transitions don't
+  // start a (now-0s) run from the pre-active base.
+  const st = document.createElement('style');
+  st.textContent = '*,*::before,*::after{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}';
+  document.head.appendChild(st);
+  for (const d of document.querySelectorAll('deck-stage')) {
+    for (const c of d.children) {
+      const t = c.tagName;
+      if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+      c.setAttribute('data-deck-active', '');
+    }
+  }
+  try {
+    const sweep = () => {
+      for (const a of document.getAnimations()) {
+        try { a.finish(); } catch (e) {
+          try { a.currentTime = (a.effect && a.effect.getComputedTiming().duration) || 0; a.pause(); } catch (e2) {}
+        }
+      }
+    };
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+  } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 200);
+})();
+</script>
+</body>
+</html>
