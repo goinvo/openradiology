@@ -6,7 +6,7 @@
 <meta name="description" content="Every routine medical imaging type in the U.S., ranked by annual volume or by average cost.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Newsreader:ital,wght@0,400..700;1,400..700&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
 
 <style>
@@ -31,7 +31,7 @@
     --c-nuc:   #a8493b;  /* nuclear     : SPECT, PET */
     --c-endo:  #6b7d42;  /* endoscopy   */
 
-    --display: 'Junicode', 'Spectral', Georgia, 'Times New Roman', serif;
+    --display: 'Libertinus Serif', Georgia, 'Times New Roman', serif;
     --sans:  'Libertinus Serif', Georgia, 'Times New Roman', serif;
     --serif: var(--sans);
     --mono:  var(--sans);
@@ -67,7 +67,7 @@
   /* ---------- masthead ---------- */
   .masthead { padding-top: 18px; }
   h1.title {
-    font-family: 'Linux Libertine O', Georgia, 'Times New Roman', serif;
+    font-family: 'Libertinus Serif', Georgia, 'Times New Roman', serif;
     font-weight: 400;
     font-size: clamp(40px, 6.6vw, 78px);
     line-height: 1.0;
@@ -367,7 +367,7 @@
   .r101-footer .fl a { color: var(--ink-2); font-weight: 400; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--line-2); }
   .r101-footer .fl a:hover { color: var(--ink); text-decoration-color: var(--ink); }
   .r101-footer .fr { display: flex; align-items: baseline; gap: 30px; flex-wrap: wrap; }
-  .r101-footer .fr a { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 12.5px; letter-spacing: .04em; color: var(--ink-2); font-weight: 400; text-decoration: none; }
+  .r101-footer .fr a { font-family: var(--sans); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-2); font-weight: 400; text-decoration: none; }
   .r101-footer .fr a:hover { color: var(--ink); }
 
   @media (max-width: 720px) {
@@ -405,43 +405,43 @@
   /* ════════ FIELD AT A GLANCE — exact card spec, scoped to .glance ════════ */
   .glance { --cream:#eef7fc; --ink:#1a1512; --warm-gray:#8a8174; --light-gray:#CBDEEA;
     --amber:#1C3D52; --rust:#16324F; --dusty-rose:#C97B6E; --slate-blue:#4A6B7C; --hindsight:#7396B0; --rule:1px solid #c2dded;
-    --mono-num:'Linux Libertine O', system-ui, -apple-system, sans-serif;
-    font-family:'Linux Libertine O',sans-serif; font-weight:300; font-size:15px; line-height:1.6; color:var(--ink);
+    --mono-num:'Libertinus Serif', system-ui, -apple-system, sans-serif;
+    font-family:'Libertinus Serif',sans-serif; font-weight:300; font-size:15px; line-height:1.6; color:var(--ink);
     margin-top: clamp(80px, 11vw, 132px); }
   .glance *, .glance *::before, .glance *::after { box-sizing:border-box; margin:0; padding:0; }
-  .glance .page-eyebrow { font-family:'Linux Libertine O',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:16px; }
-  .glance .page-title { font-family:'Linux Libertine O', Georgia, 'Times New Roman', serif; font-size:clamp(40px,6.6vw,78px); font-weight:400; line-height:1.0; letter-spacing:-0.018em; margin-bottom:56px; }
+  .glance .page-eyebrow { font-family:'Libertinus Serif',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:16px; }
+  .glance .page-title { font-family:'Libertinus Serif', Georgia, 'Times New Roman', serif; font-size:clamp(40px,6.6vw,78px); font-weight:400; line-height:1.0; letter-spacing:-0.018em; margin-bottom:56px; }
   .glance .page-title em { font-style:italic; font-weight:400; color:var(--amber); }
   .glance .page-subtitle { font-family:var(--sans); font-size:16px; color:var(--warm-gray); max-width:560px; margin-bottom:72px; line-height:1.7; }
   .glance .stats-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:2px; }
   .glance .card { background:var(--cream); border:var(--rule); padding:36px 32px 40px; display:flex; flex-direction:column; gap:16px; position:relative; overflow:hidden; }
   .glance .span-3{grid-column:span 3;} .glance .span-4{grid-column:span 4;} .glance .span-5{grid-column:span 5;}
   .glance .span-6{grid-column:span 6;} .glance .span-7{grid-column:span 7;} .glance .span-8{grid-column:span 8;} .glance .span-12{grid-column:span 12;}
-  .glance .card-label { font-family:'Linux Libertine O',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--warm-gray); }
+  .glance .card-label { font-family:'Libertinus Serif',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--warm-gray); }
   .glance .card-body { font-size:13.5px; line-height:1.75; color:#5b5349; max-width:480px; }
   .glance .card-body strong { font-weight:500; color:var(--ink); }
-  .glance .card-source { font-family:'Linux Libertine O',monospace; font-size:10px; color:var(--warm-gray); margin-top:auto; }
-  .glance .card-foot { font-family:'Linux Libertine O',sans-serif; font-size:11px; line-height:1.55; color:var(--warm-gray); margin-top:4px; }
+  .glance .card-source { font-family:'Libertinus Serif',monospace; font-size:10px; color:var(--warm-gray); margin-top:auto; }
+  .glance .card-foot { font-family:'Libertinus Serif',sans-serif; font-size:11px; line-height:1.55; color:var(--warm-gray); margin-top:4px; }
   .glance .card-foot sup.ast { color:var(--amber); }
   .glance .card-source a { color:var(--amber); font-weight:500; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--amber); text-decoration-thickness:1.5px; cursor:pointer; }
   .glance .card-source a:hover { color:var(--ink); text-decoration-color:var(--ink); }
   .glance .donut-pair { display:flex; align-items:center; gap:40px; padding:8px 0; }
   .glance .donut-item { display:flex; flex-direction:column; align-items:center; gap:10px; }
   .glance .donut-item svg { overflow:visible; }
-  .glance .donut-pct { font-family:'Linux Libertine O',serif; font-size:18px; font-weight:400; fill:var(--ink); }
-  .glance .donut-sub { font-family:'Linux Libertine O',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--warm-gray); text-align:center; max-width:130px; line-height:1.6; }
-  .glance .vs { font-family:'Linux Libertine O',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--light-gray); align-self:center; }
+  .glance .donut-pct { font-family:'Libertinus Serif',serif; font-size:18px; font-weight:400; fill:var(--ink); }
+  .glance .donut-sub { font-family:'Libertinus Serif',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--warm-gray); text-align:center; max-width:130px; line-height:1.6; }
+  .glance .vs { font-family:'Libertinus Serif',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--light-gray); align-self:center; }
   .glance .lockup-8in10 { display:flex; align-items:baseline; gap:10px; line-height:1; }
   .glance .lockup-8in10 .big { font-family:var(--mono-num); font-size:clamp(54px,6.6vw,94px); font-weight:500; line-height:1; letter-spacing:-0.02em; color:var(--ink); }
-  .glance .lockup-8in10 .fraction-text { font-family:'Linux Libertine O',sans-serif; font-size:26px; font-weight:300; color:var(--warm-gray); }
-  .glance .geo-ratio { font-family:'Linux Libertine O',serif; font-size:clamp(48px,5vw,72px); font-weight:400; line-height:1; letter-spacing:-0.02em; }
-  .glance .geo-denom { font-family:'Linux Libertine O',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm-gray); margin-top:6px; margin-bottom:20px; }
+  .glance .lockup-8in10 .fraction-text { font-family:'Libertinus Serif',sans-serif; font-size:26px; font-weight:300; color:var(--warm-gray); }
+  .glance .geo-ratio { font-family:'Libertinus Serif',serif; font-size:clamp(48px,5vw,72px); font-weight:400; line-height:1; letter-spacing:-0.02em; }
+  .glance .geo-denom { font-family:'Libertinus Serif',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm-gray); margin-top:6px; margin-bottom:20px; }
   .glance .geo-divider { border:none; border-top:var(--rule); margin:4px 0 16px; }
   .glance .geo-disparity { list-style:none; display:flex; flex-direction:column; gap:8px; }
   .glance .geo-disparity li { display:flex; gap:10px; font-size:13px; color:var(--ink); line-height:1.5; }
-  .glance .geo-disparity li::before { content:'—'; color:var(--amber); flex-shrink:0; font-family:'Linux Libertine O',monospace; }
+  .glance .geo-disparity li::before { content:'—'; color:var(--amber); flex-shrink:0; font-family:'Libertinus Serif',monospace; }
   .glance .ai-bar-wrap { margin:12px 0 20px; }
-  .glance .ai-bar-labels { display:flex; justify-content:space-between; font-family:'Linux Libertine O',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:5px; }
+  .glance .ai-bar-labels { display:flex; justify-content:space-between; font-family:'Libertinus Serif',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:5px; }
   .glance .ai-bar { height:26px; width:100%; border-radius:2px; overflow:hidden; display:flex; }
   .glance .ai-bar-imaging { width:80%; background:var(--slate-blue); }
   .glance .ai-bar-other { width:20%; background:var(--light-gray); }
@@ -450,24 +450,24 @@
   /* AI hero — emphasize the 80% share */
   .glance .ai-hero { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
   .glance .ai-pct { font-family:var(--mono-num); font-size:clamp(60px,7.5vw,100px); font-weight:500; line-height:.82; letter-spacing:-0.02em; color:var(--ink); }
-  .glance .ai-cap { font-family:'Linux Libertine O',sans-serif; font-size:clamp(21px,2.3vw,30px); line-height:1.18; color:var(--ink); max-width:340px; font-weight:400; }
+  .glance .ai-cap { font-family:'Libertinus Serif',sans-serif; font-size:clamp(21px,2.3vw,30px); line-height:1.18; color:var(--ink); max-width:340px; font-weight:400; }
   .glance .ai-cap strong { color:var(--ink); font-weight:600; }
   /* shared big-sentence caption — matches the AI 80% treatment */
-  .glance .stat-cap { font-family:'Linux Libertine O',sans-serif; font-size:14.5px; line-height:1.45; color:var(--ink); font-weight:400; margin-top:14px; }
+  .glance .stat-cap { font-family:'Libertinus Serif',sans-serif; font-size:14.5px; line-height:1.45; color:var(--ink); font-weight:400; margin-top:14px; }
   .glance .stat-cap strong { color:var(--ink); font-weight:500; }
   .glance .wl-cap { font-size:clamp(21px,2.3vw,30px); line-height:1.18; font-weight:400; }
   .glance .wl-cap strong { font-weight:600; }
   .glance .donut-item .stat-cap { text-align:center; max-width:175px; margin-top:16px; }
-  .glance .wf-count { font-family:'Linux Libertine O',sans-serif; font-size:13.5px; color:var(--warm-gray); text-align:center; margin-top:7px; }
+  .glance .wf-count { font-family:'Libertinus Serif',sans-serif; font-size:13.5px; color:var(--warm-gray); text-align:center; margin-top:7px; }
   .glance .wf-count strong { color:var(--ink); font-weight:600; }
   /* Geographic — render as an explicit ratio (fraction lockup) */
   .glance .geo-fraction { display:inline-block; margin:8px 0 2px; }
   .glance .gf-num { display:flex; align-items:baseline; gap:12px; }
-  .glance .gf-big { font-family:'Linux Libertine O',serif; font-size:clamp(58px,6.5vw,86px); font-weight:400; line-height:1; letter-spacing:-0.02em; color:var(--ink); }
-  .glance .gf-unit { font-family:'Linux Libertine O',monospace; font-size:13px; letter-spacing:0.07em; text-transform:uppercase; color:var(--amber); }
+  .glance .gf-big { font-family:'Libertinus Serif',serif; font-size:clamp(58px,6.5vw,86px); font-weight:400; line-height:1; letter-spacing:-0.02em; color:var(--ink); }
+  .glance .gf-unit { font-family:'Libertinus Serif',monospace; font-size:13px; letter-spacing:0.07em; text-transform:uppercase; color:var(--amber); }
   .glance .gf-rule { height:2px; background:var(--ink); margin:9px 0; }
-  .glance .gf-den { font-family:'Linux Libertine O',monospace; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:var(--warm-gray); }
-  .glance .geo-tag { font-family:'Linux Libertine O',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-top:12px; }
+  .glance .gf-den { font-family:'Libertinus Serif',monospace; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; color:var(--warm-gray); }
+  .glance .geo-tag { font-family:'Libertinus Serif',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--warm-gray); margin-top:12px; }
   .glance .waffle { display:grid; grid-template-columns:repeat(10,10px); gap:3px; }
   .glance .waffle-sq { width:10px; height:10px; border-radius:1px; }
   .glance .waffle.waffle-lg { grid-template-columns:repeat(10,16px); gap:4px; }
@@ -475,7 +475,7 @@
   .glance .inv-waffle-row { display:flex; gap:30px; align-items:center; flex-wrap:wrap; }
   .glance .waffle-legend-col { flex-direction:column; gap:11px; margin-top:0; }
   .glance .waffle-legend { display:flex; gap:20px; margin-top:12px; flex-wrap:wrap; }
-  .glance .legend-item { display:flex; align-items:center; gap:6px; font-family:'Linux Libertine O',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--warm-gray); }
+  .glance .legend-item { display:flex; align-items:center; gap:6px; font-family:'Libertinus Serif',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--warm-gray); }
   .glance .legend-swatch { width:10px; height:10px; border-radius:1px; flex-shrink:0; }
   .glance .acc-layout { display:flex; gap:48px; align-items:center; flex-wrap:wrap; }
   .glance .acc-body { flex:1; min-width:240px; display:flex; flex-direction:column; gap:20px; }
@@ -497,38 +497,38 @@
   /* ════════ REDESIGN · six story-sequenced cards ════════ */
   /* editorial card label (sequence numbering) */
   .glance .card-step { display:none; }
-  .glance .card-step-removed { font-family:'Linux Libertine O',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--warm-gray); align-items:center; gap:9px; }
+  .glance .card-step-removed { font-family:'Libertinus Serif',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--warm-gray); align-items:center; gap:9px; }
   .glance .card-step::before { content:''; width:18px; height:1px; background:var(--amber); flex-shrink:0; }
 
   /* shared big display number */
   .glance .big-stat { font-family:var(--mono-num); font-weight:500; line-height:.92; letter-spacing:-0.02em; color:var(--ink); font-size:clamp(54px,6.6vw,94px); }
-  .glance .big-stat .pct, .glance .big-stat .unit { font-family:'Linux Libertine O',sans-serif; font-size:.42em; letter-spacing:0; color:var(--warm-gray); margin-left:.08em; }
+  .glance .big-stat .pct, .glance .big-stat .unit { font-family:'Libertinus Serif',sans-serif; font-size:.42em; letter-spacing:0; color:var(--warm-gray); margin-left:.08em; }
   .glance .big-stat .unit { font-style:italic; }
   .glance .big-stat.range { font-size:clamp(40px,4.6vw,62px); letter-spacing:-0.02em; }
   .glance .big-stat.range .unit { font-size:.32em; }
 
   /* ── workforce lockup ── */
   .glance .wf-lockup { display:flex; align-items:flex-end; gap:30px; flex-wrap:wrap; }
-  .glance .wf-headline { font-family:'Linux Libertine O',sans-serif; font-size:clamp(21px,2.3vw,30px); font-weight:400; line-height:1.18; color:var(--ink); max-width:300px; padding-bottom:10px; }
+  .glance .wf-headline { font-family:'Libertinus Serif',sans-serif; font-size:clamp(21px,2.3vw,30px); font-weight:400; line-height:1.18; color:var(--ink); max-width:300px; padding-bottom:10px; }
   .glance .wf-headline strong { font-weight:600; }
   .glance .wf-grounds { margin-top:18px; }
-  .glance .wf-ground { font-family:'Linux Libertine O',sans-serif; font-size:12.5px; line-height:1.5; color:#5b5349; margin-top:9px; }
+  .glance .wf-ground { font-family:'Libertinus Serif',sans-serif; font-size:12.5px; line-height:1.5; color:#5b5349; margin-top:9px; }
   .glance .wf-ground strong { font-family:var(--mono-num); color:var(--ink); font-weight:500; }
 
   /* reads-per-day comparison */
   .glance .reads { display:flex; align-items:stretch; margin-top:8px; border-top:1px solid #C7DCE9; padding-top:2px; }
   .glance .reads .col { flex:1; padding:18px 22px 2px 0; }
   .glance .reads .col + .col { padding-left:24px; border-left:1px solid #D5E5EF; }
-  .glance .reads .or { align-self:flex-start; padding:18px 12px 0; line-height:23px; text-align:center; font-family:'Linux Libertine O',sans-serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--warm-gray); }
+  .glance .reads .or { align-self:flex-start; padding:18px 12px 0; line-height:23px; text-align:center; font-family:'Libertinus Serif',sans-serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--warm-gray); }
   .glance .reads .rn { font-family:var(--mono-num); font-size:23px; font-weight:500; color:var(--ink); line-height:1; letter-spacing:-0.01em; }
-  .glance .reads .rl { font-family:'Linux Libertine O',monospace; font-size:9.5px; letter-spacing:0.13em; text-transform:uppercase; color:var(--warm-gray); margin-top:9px; }
+  .glance .reads .rl { font-family:'Libertinus Serif',monospace; font-size:9.5px; letter-spacing:0.13em; text-transform:uppercase; color:var(--warm-gray); margin-top:9px; }
   .glance .reads .rtrack { height:4px; background:#D5E5EF; border-radius:2px; margin-top:14px; overflow:hidden; }
   .glance .reads .rfill { height:100%; background:var(--amber); border-radius:2px; }
 
   /* humanizing ground line ($, per-person) */
-  .glance .ground-line { font-family:'Linux Libertine O',sans-serif; font-size:13.5px; line-height:1.5; color:#4A453E; font-weight:400; }
+  .glance .ground-line { font-family:'Libertinus Serif',sans-serif; font-size:13.5px; line-height:1.5; color:#4A453E; font-weight:400; }
   .glance .ground-line strong { font-family:var(--mono-num); font-size:18px; font-weight:600; color:var(--ink); letter-spacing:0; margin-right:3px; }
-  .glance .gl-even strong { font-family:'Linux Libertine O',sans-serif; font-size:13.5px; font-weight:600; margin-right:0; }
+  .glance .gl-even strong { font-family:'Libertinus Serif',sans-serif; font-size:13.5px; font-weight:600; margin-right:0; }
 
   /* 8-in-10 unit row */
   .glance .unit-row { display:flex; gap:5px; margin:6px 0 2px; }
@@ -540,7 +540,7 @@
   .glance .prop-bar .seg { height:100%; }
   .glance .prop-bar .seg-lo { background:#1B4A99; }
   .glance .prop-bar .seg-hi { background:var(--slate-blue); }
-  .glance .prop-labels { display:flex; justify-content:space-between; gap:10px; font-family:'Linux Libertine O',monospace; font-size:9px; letter-spacing:0.11em; text-transform:uppercase; color:var(--warm-gray); margin-top:8px; }
+  .glance .prop-labels { display:flex; justify-content:space-between; gap:10px; font-family:'Libertinus Serif',monospace; font-size:9px; letter-spacing:0.11em; text-transform:uppercase; color:var(--warm-gray); margin-top:8px; }
   .glance .prop-labels .hi { color:var(--slate-blue); }
 
   @media (max-width: 900px) {
@@ -567,12 +567,12 @@
         border-bottom:1px solid #c2dded;box-shadow:0 8px 26px -22px rgba(26,21,18,.4);}
       .r101-inner{max-width:1180px;margin:0 auto;padding:0 48px;
         display:flex;align-items:center;justify-content:space-between;gap:24px;}
-      .r101-wm{font-family:"Newsreader",Georgia,serif;font-size:23px;
+      .r101-wm{font-family:"Libertinus Serif",Georgia,serif;font-size:23px;
         font-weight:420;letter-spacing:-.01em;color:#1a1512;white-space:nowrap;text-decoration:none;}
       .r101-wm em{font-style:italic;color:#255B7E;}
       .r101-links{display:flex;align-items:center;gap:6px;}
       .r101-a{display:flex;align-items:baseline;gap:7px;padding:8px 13px;border-radius:8px;
-        font-family:"DM Sans",system-ui,sans-serif;font-size:13.5px;color:#5b5349;
+        font-family:"Libertinus Serif",Georgia,serif;font-size:13.5px;color:#5b5349;
         text-decoration:none;transition:color .25s,background .25s;}
       .r101-a .n{font-size:10.5px;letter-spacing:.08em;color:#8a8174;
         font-variant-numeric:tabular-nums;transition:color .25s;}
@@ -580,7 +580,7 @@
       .r101-a:hover .n,.r101-a.is-active .n{color:#255B7E;}
       .r101-a.is-active{color:#1a1512;}
       .r101-fb{display:flex;align-items:center;gap:8px;margin-left:10px;padding:9px 17px;
-        border-radius:999px;border:1px solid #1a1512;font-family:"DM Sans",system-ui,sans-serif;
+        border-radius:999px;border:1px solid #1a1512;font-family:"Libertinus Serif",Georgia,serif;
         font-size:13.5px;color:#1a1512;font-weight:500;text-decoration:none;transition:all .25s;}
       .r101-fb:hover{background:#1a1512;color:#E2F2FC;}
       .r101-dot{width:7px;height:7px;border-radius:50%;background:#255B7E;
