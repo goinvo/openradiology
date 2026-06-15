@@ -361,14 +361,20 @@
   @keyframes refflash { 0%,100%{ background:transparent; } 18%{ background:rgba(28,61,82,.13); } }
   .colophon { margin-top: 40px; font-family: var(--sans); font-size: 10.5px; letter-spacing: .03em; line-height: 1.7; color: var(--ink-3); max-width: 760px; }
 
-  .r101-footer { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line-2); display: flex; align-items: baseline; justify-content: space-between; gap: 14px 40px; flex-wrap: wrap; }
-  .r101-footer .fl { font-family: var(--display); font-size: 15px; letter-spacing: 0; line-height: 1.6; color: var(--ink-3); margin: 0; }
-  .r101-footer .fl strong { font-weight: 700; color: var(--ink-2); }
-  .r101-footer .fl a { color: var(--ink-2); font-weight: 400; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--line-2); }
-  .r101-footer .fl a:hover { color: var(--ink); text-decoration-color: var(--ink); }
-  .r101-footer .fr { display: flex; align-items: baseline; gap: 30px; flex-wrap: wrap; }
-  .r101-footer .fr a { font-family: var(--sans); font-size: 12.5px; letter-spacing: .04em; color: var(--ink-2); font-weight: 400; text-decoration: none; }
-  .r101-footer .fr a:hover { color: var(--ink); }
+  .r101-footer { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line-2); }
+  .footer-credit { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .footer-text { flex: 1; }
+  .footer-credit .gi-logo { height: 40px; width: auto; flex: none; display: block; transition: opacity .25s ease; }
+  .footer-credit a.gi-link { flex: none; }
+  .footer-credit a.gi-link:hover .gi-logo { opacity: .65; }
+  .footer-credit .byline { font-family: var(--serif); font-size: 17px; line-height: 1.4; color: var(--ink-2); }
+  .footer-license { margin-top: 10px; font-family: var(--serif); font-size: 14px; line-height: 1.5; color: var(--ink-3); }
+  .footer-license a { color: #255B7E; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--line-2); }
+  .footer-license a:hover { text-decoration-color: #255B7E; }
+  @media (max-width: 540px) {
+    .footer-credit { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+    .footer-credit .byline { font-size: 16px; }
+  }
 
   @media (max-width: 720px) {
     .thead { display: none; }
@@ -881,10 +887,14 @@
 
     <!-- ============ FOOTER ============ -->
     <footer class="r101-footer">
-      <p class="fl">Licensed by <strong>GoInvo</strong> under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> open-source license in 2026.</p>
-      <div class="fr">
-        <a href="https://github.com/goinvo/openradiology" target="_blank" rel="noopener">GitHub Repo ↗</a>
-        <a href="mailto:hello@goinvo.com">Give feedback</a>
+      <div class="footer-credit">
+        <div class="footer-text">
+          <p class="byline">By Alexandra Costen, Victoria Liu, and Niki Wang</p>
+          <p class="footer-license">This project and designs are licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="noopener">creative commons attribution</a>.</p>
+        </div>
+        <a class="gi-link" href="https://goinvo.com" target="_blank" rel="noopener" aria-label="GoInvo">
+          <img class="gi-logo" src="goinvo-logo.svg" alt="GoInvo" width="98" height="52">
+        </a>
       </div>
     </footer>
 

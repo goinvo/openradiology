@@ -431,32 +431,23 @@
 
   /* ── Site footer ── */
   .site-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    padding: 18px 4px;
+    padding: 28px 4px 18px;
     margin-top: 36px;
     border-top: 1px solid var(--line);
   }
-  .site-footer-license {
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
+  .footer-credit { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .footer-text { flex: 1; }
+  .footer-credit .gi-logo { height: 36px; width: auto; flex: none; display: block; transition: opacity .25s ease; }
+  .footer-credit a.gi-link { flex: none; }
+  .footer-credit a.gi-link:hover .gi-logo { opacity: .65; }
+  .footer-credit .byline { font-family: var(--serif); font-size: 16px; line-height: 1.4; color: var(--ink-soft); }
+  .footer-license { margin-top: 8px; font-family: var(--serif); font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .footer-license a { color: var(--m); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--line); }
+  .footer-license a:hover { text-decoration-color: var(--m); }
+  @media (max-width: 540px) {
+    .footer-credit { flex-direction: column-reverse; align-items: flex-start; gap: 16px; }
+    .footer-credit .byline { font-size: 15px; }
   }
-  .site-footer-license b { font-weight: 600; color: var(--ink-soft); }
-  .site-footer-license a { color: var(--muted); text-underline-offset: 2px; }
-  .site-footer-links {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    font-family: var(--mono);
-    font-size: 12px;
-  }
-  .site-footer-links a { color: var(--muted); text-decoration: none; }
-  .site-footer-links a:hover { color: var(--ink); }
 
   /* ── Responsive ── */
   @media (max-width: 760px) {
@@ -597,13 +588,15 @@
   </section>
 
   <footer class="site-footer">
-    <span class="site-footer-license">
-      Licensed by <b>GoInvo</b> under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> open-source license in 2026.
-    </span>
-    <nav class="site-footer-links">
-      <a href="https://github.com/goinvo/openradiology" target="_blank" rel="noopener">GitHub Repo ↗</a>
-      <a href="mailto:hello@goinvo.com">Give feedback</a>
-    </nav>
+    <div class="footer-credit">
+      <div class="footer-text">
+        <p class="byline">By Alexandra Costen, Victoria Liu, and Niki Wang</p>
+        <p class="footer-license">This project and designs are licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="noopener">creative commons attribution</a>.</p>
+      </div>
+      <a class="gi-link" href="https://goinvo.com" target="_blank" rel="noopener" aria-label="GoInvo">
+        <img class="gi-logo" src="goinvo-logo.svg" alt="GoInvo" width="98" height="52">
+      </a>
+    </div>
   </footer>
 
 </div>

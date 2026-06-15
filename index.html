@@ -324,6 +324,60 @@ em { font-style: italic; }
   .index-item .ix-num { font-size: 22px; width: 38px; }
   .index-item .ix-title { font-size: 21px; }
 }
+
+/* ── Footer ── */
+.site-footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--line);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 48px 64px;
+}
+.footer-credit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.footer-text { flex: 1; }
+.footer-credit .gi-logo {
+  height: 40px;
+  width: auto;
+  flex: none;
+  display: block;
+  transition: opacity .25s ease;
+}
+.footer-credit a.gi-link { flex: none; }
+.footer-credit a.gi-link:hover .gi-logo { opacity: .65; }
+.footer-credit .byline {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.footer-license {
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.footer-license a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line);
+}
+.footer-license a:hover { text-decoration-color: var(--accent); }
+@media (max-width: 880px) {
+  .site-footer { padding-left: 22px; padding-right: 22px; }
+}
+@media (max-width: 540px) {
+  .footer-credit { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+  .footer-credit .byline { font-size: 16px; }
+}
 </style>
 </head>
 <body>
@@ -399,6 +453,18 @@ em { font-style: italic; }
     </ol>
   </div>
 </header>
+
+<footer class="site-footer">
+  <div class="footer-credit">
+    <div class="footer-text">
+      <p class="byline">By Alexandra Costen, Victoria Liu, and Niki Wang</p>
+      <p class="footer-license">This project and designs are licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="noopener">creative commons attribution</a>.</p>
+    </div>
+    <a class="gi-link" href="https://goinvo.com" target="_blank" rel="noopener" aria-label="GoInvo">
+      <img class="gi-logo" src="goinvo-logo.svg" alt="GoInvo" width="98" height="52">
+    </a>
+  </div>
+</footer>
 
 <script>
   const topbar = document.getElementById('topbar');
