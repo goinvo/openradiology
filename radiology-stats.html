@@ -1206,6 +1206,12 @@
   @keyframes refflash { 0%,100%{ background:transparent; } 18%{ background:rgba(37,87,183,.13); } }
   .colophon { margin-top: 40px; font-family: var(--sans); font-size: 10.5px; letter-spacing: .03em; line-height: 1.7; color: var(--ink-3); max-width: 760px; }
 
+  .r101-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line-2); font-family: var(--sans); font-size: 10.5px; letter-spacing: .03em; line-height: 1.7; color: var(--ink-3); }
+  .r101-footer p { margin: 0 0 8px; }
+  .r101-footer p:last-child { margin-bottom: 0; }
+  .r101-footer a { color: #2557B7; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: #2557B7; text-decoration-thickness: 1.5px; }
+  .r101-footer a:hover { color: var(--ink); text-decoration-color: var(--ink); }
+
   @media (max-width: 720px) {
     .thead { display: none; }
     .statcol .sk { display: block; }
@@ -1711,6 +1717,12 @@
       </div>
       <p class="colophon">An open-source reference compiled for public understanding of diagnostic imaging in the United States. Every figure on this page is drawn directly from the cited sources above; no values are estimated or interpolated. Bar lengths are scaled for visual comparison only.</p>
     </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="r101-footer">
+      <p>Licensed by GoInvo under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> open-source license in 2026.</p>
+      <p><a href="https://github.com/goinvo/openradiology" target="_blank" rel="noopener">GitHub Repo ↗</a> · <a href="mailto:hello@goinvo.com">Give feedback</a></p>
+    </footer>
 
   </div>
 
