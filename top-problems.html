@@ -32,18 +32,20 @@
     --d: #C0433A;
   }
 
-  /* ── Radiology 101 shared nav ── */
-  .r101-topbar {
+  /* ── Top bar (shared header) ── */
+  .topbar {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 60;
+    z-index: 9000;
     padding: 11px 0;
     background: rgba(226,242,252,.92);
     backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid #c2dded;
     box-shadow: 0 8px 26px -22px rgba(26,21,18,.4);
+    transition: box-shadow .45s ease;
   }
-  .r101-topbar-inner {
+  .topbar.is-stuck { box-shadow: 0 8px 26px -18px rgba(26,21,18,.55); }
+  .topbar-inner {
     max-width: 1180px;
     margin: 0 auto;
     padding: 0 48px;
@@ -52,65 +54,65 @@
     justify-content: space-between;
     gap: 24px;
   }
-  .r101-wordmark {
+  .wordmark {
     font-family: "Libertinus Serif", Georgia, serif;
     font-size: 23px;
     font-weight: 420;
     letter-spacing: -.01em;
-    color: var(--ink);
+    color: #1a1512;
     white-space: nowrap;
     text-decoration: none;
   }
-  .r101-wordmark .wm-101 { font-style: italic; color: var(--m); }
-  .r101-topnav { display: flex; align-items: center; gap: 6px; }
-  .r101-link {
+  .wordmark .wm-101 { font-style: italic; color: #255B7E; }
+  .topnav { display: flex; align-items: center; gap: 6px; }
+  .topnav-link {
     display: flex;
     align-items: baseline;
     gap: 7px;
     padding: 8px 13px;
     border-radius: 8px;
-    font-family: "DM Sans", "Public Sans", system-ui, sans-serif;
+    font-family: "Libertinus Serif", Georgia, serif;
     font-size: 13.5px;
-    color: var(--muted);
+    color: #5b5349;
     text-decoration: none;
     transition: color .25s ease, background .25s ease;
   }
-  .r101-link .tnl-n {
+  .topnav-link .tnl-n {
     font-size: 10.5px;
     letter-spacing: .08em;
-    color: var(--faint);
+    color: #8a8174;
     font-variant-numeric: tabular-nums;
     transition: color .25s ease;
   }
-  .r101-link:hover { background: rgba(13,37,53,.05); color: var(--ink); }
-  .r101-link:hover .tnl-n,
-  .r101-link.is-active .tnl-n { color: var(--m); }
-  .r101-link.is-active { color: var(--ink); }
-  .r101-feedback {
+  .topnav-link:hover { background: rgba(26,21,18,.05); color: #1a1512; }
+  .topnav-link:hover .tnl-n,
+  .topnav-link.is-active .tnl-n { color: #255B7E; }
+  .topnav-link.is-active { color: #1a1512; }
+  .feedback-btn {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-left: 10px;
     padding: 9px 17px;
     border-radius: 999px;
-    border: 1px solid var(--ink);
-    font-family: "DM Sans", "Public Sans", system-ui, sans-serif;
+    border: 1px solid #1a1512;
+    font-family: "Libertinus Serif", Georgia, serif;
     font-size: 13.5px;
-    color: var(--ink);
+    color: #1a1512;
     font-weight: 500;
     text-decoration: none;
     transition: all .25s ease;
   }
-  .r101-feedback:hover { background: var(--ink); color: var(--paper); }
-  .r101-fb-dot {
+  .feedback-btn:hover { background: #1a1512; color: #E2F2FC; }
+  .fb-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: var(--m);
-    animation: r101pulse 2.4s infinite;
+    background: #255B7E;
+    animation: pulse 2.4s infinite;
     flex-shrink: 0;
   }
-  .r101-feedback:hover .r101-fb-dot { background: var(--paper); animation: none; }
-  @keyframes r101pulse {
+  .feedback-btn:hover .fb-dot { background: #E2F2FC; animation: none; }
+  @keyframes pulse {
     0%   { box-shadow: 0 0 0 0 rgba(37,91,126,.5); }
     70%  { box-shadow: 0 0 0 6px rgba(37,91,126,0); }
     100% { box-shadow: 0 0 0 0 rgba(37,91,126,0); }
@@ -459,9 +461,9 @@
   /* ── Responsive ── */
   @media (max-width: 760px) {
     body { padding: 72px 16px 90px; }
-    .r101-topbar-inner { padding: 0 22px; }
-    .r101-link .tnl-t { display: none; }
-    .r101-link { padding: 8px 9px; }
+    .topbar-inner { padding: 0 22px; }
+    .topnav-link .tnl-t { display: none; }
+    .topnav-link { padding: 8px 9px; }
     .legend { gap: 8px 18px; }
     .bar-head {
       grid-template-columns: 38px 1fr;
@@ -482,24 +484,24 @@
 </head>
 <body>
 
-<nav class="r101-topbar">
-  <div class="r101-topbar-inner">
-    <a class="r101-wordmark" href="index.html">Radiology<span class="wm-101"> 101</span></a>
-    <nav class="r101-topnav">
-      <a class="r101-link" href="radiology-stats.html">
+<nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="index.html">Radiology<span class="wm-101"> 101</span></a>
+    <nav class="topnav">
+      <a class="topnav-link" href="radiology-stats.html">
         <span class="tnl-n">01</span>
         <span class="tnl-t">Common Scans by Frequency</span>
       </a>
-      <a class="r101-link is-active" href="top-problems.html">
+      <a class="topnav-link is-active" href="top-problems.html">
         <span class="tnl-n">02</span>
         <span class="tnl-t">Top Problems</span>
       </a>
-      <a class="r101-link" href="patient-journey.html">
+      <a class="topnav-link" href="patient-journey.html">
         <span class="tnl-n">03</span>
         <span class="tnl-t">Patient Journey</span>
       </a>
-      <a class="r101-feedback" href="mailto:hello@goinvo.com">
-        <span class="r101-fb-dot"></span>
+      <a class="feedback-btn" href="mailto:hello@goinvo.com">
+        <span class="fb-dot"></span>
         Feedback
       </a>
     </nav>
@@ -878,13 +880,11 @@ window.PROBLEMS = [
 </script>
 
 <script>
-  /* Radiology 101 shared nav — shadow intensifies slightly past 60px scroll */
+  /* Top bar — shadow intensifies slightly past 60px scroll */
   (function() {
-    var bar = document.querySelector('.r101-topbar');
+    var bar = document.getElementById('topbar');
     window.addEventListener('scroll', function() {
-      bar.style.boxShadow = window.scrollY > 60
-        ? '0 8px 26px -18px rgba(26,21,18,.55)'
-        : '0 8px 26px -22px rgba(26,21,18,.4)';
+      bar.classList.toggle('is-stuck', window.scrollY > 60);
     }, { passive: true });
   })();
 </script>

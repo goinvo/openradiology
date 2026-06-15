@@ -562,62 +562,64 @@
   /* Radiology 101 nav */
   (function () {
     var CSS = `
-      #r101-nav{position:fixed;top:0;left:0;right:0;z-index:9000;padding:11px 0;
+      .topbar{position:fixed;top:0;left:0;right:0;z-index:9000;padding:11px 0;
         background:rgba(226,242,252,.92);backdrop-filter:blur(14px);
-        border-bottom:1px solid #c2dded;box-shadow:0 8px 26px -22px rgba(26,21,18,.4);}
-      .r101-inner{max-width:1180px;margin:0 auto;padding:0 48px;
+        border-bottom:1px solid #c2dded;box-shadow:0 8px 26px -22px rgba(26,21,18,.4);
+        transition:box-shadow .45s ease;}
+      .topbar.is-stuck{box-shadow:0 8px 26px -18px rgba(26,21,18,.55);}
+      .topbar-inner{max-width:1180px;margin:0 auto;padding:0 48px;
         display:flex;align-items:center;justify-content:space-between;gap:24px;}
-      .r101-wm{font-family:"Libertinus Serif",Georgia,serif;font-size:23px;
+      .wordmark{font-family:"Libertinus Serif",Georgia,serif;font-size:23px;
         font-weight:420;letter-spacing:-.01em;color:#1a1512;white-space:nowrap;text-decoration:none;}
-      .r101-wm em{font-style:italic;color:#255B7E;}
-      .r101-links{display:flex;align-items:center;gap:6px;}
-      .r101-a{display:flex;align-items:baseline;gap:7px;padding:8px 13px;border-radius:8px;
+      .wordmark .wm-101{font-style:italic;color:#255B7E;}
+      .topnav{display:flex;align-items:center;gap:6px;}
+      .topnav-link{display:flex;align-items:baseline;gap:7px;padding:8px 13px;border-radius:8px;
         font-family:"Libertinus Serif",Georgia,serif;font-size:13.5px;color:#5b5349;
         text-decoration:none;transition:color .25s,background .25s;}
-      .r101-a .n{font-size:10.5px;letter-spacing:.08em;color:#8a8174;
+      .topnav-link .tnl-n{font-size:10.5px;letter-spacing:.08em;color:#8a8174;
         font-variant-numeric:tabular-nums;transition:color .25s;}
-      .r101-a:hover{background:rgba(26,21,18,.05);color:#1a1512;}
-      .r101-a:hover .n,.r101-a.is-active .n{color:#255B7E;}
-      .r101-a.is-active{color:#1a1512;}
-      .r101-fb{display:flex;align-items:center;gap:8px;margin-left:10px;padding:9px 17px;
+      .topnav-link:hover{background:rgba(26,21,18,.05);color:#1a1512;}
+      .topnav-link:hover .tnl-n,.topnav-link.is-active .tnl-n{color:#255B7E;}
+      .topnav-link.is-active{color:#1a1512;}
+      .feedback-btn{display:flex;align-items:center;gap:8px;margin-left:10px;padding:9px 17px;
         border-radius:999px;border:1px solid #1a1512;font-family:"Libertinus Serif",Georgia,serif;
         font-size:13.5px;color:#1a1512;font-weight:500;text-decoration:none;transition:all .25s;}
-      .r101-fb:hover{background:#1a1512;color:#E2F2FC;}
-      .r101-dot{width:7px;height:7px;border-radius:50%;background:#255B7E;
-        animation:r101p 2.4s infinite;flex-shrink:0;}
-      .r101-fb:hover .r101-dot{background:#E2F2FC;animation:none;}
-      @keyframes r101p{0%{box-shadow:0 0 0 0 rgba(37,91,126,.5)}
+      .feedback-btn:hover{background:#1a1512;color:#E2F2FC;}
+      .fb-dot{width:7px;height:7px;border-radius:50%;background:#255B7E;
+        animation:pulse 2.4s infinite;flex-shrink:0;}
+      .feedback-btn:hover .fb-dot{background:#E2F2FC;animation:none;}
+      @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,91,126,.5)}
         70%{box-shadow:0 0 0 6px rgba(37,91,126,0)}
         100%{box-shadow:0 0 0 0 rgba(37,91,126,0)}}
       @media(max-width:880px){
-        .r101-inner{padding:0 22px;}
-        .r101-a .t{display:none;}
-        .r101-a{padding:8px 9px;}
+        .topbar-inner{padding:0 22px;}
+        .topnav-link .tnl-t{display:none;}
+        .topnav-link{padding:8px 9px;}
       }
     `;
 
     var HTML = `
-      <div class="r101-inner">
-        <a class="r101-wm" href="index.html">Radiology<em> 101</em></a>
-        <nav class="r101-links">
-          <a class="r101-a is-active" href="radiology-stats.html">
-            <span class="n">01</span><span class="t">Common Scans by Frequency</span>
+      <div class="topbar-inner">
+        <a class="wordmark" href="index.html">Radiology<span class="wm-101"> 101</span></a>
+        <nav class="topnav">
+          <a class="topnav-link is-active" href="radiology-stats.html">
+            <span class="tnl-n">01</span><span class="tnl-t">Common Scans by Frequency</span>
           </a>
-          <a class="r101-a" href="top-problems.html">
-            <span class="n">02</span><span class="t">Top Problems</span>
+          <a class="topnav-link" href="top-problems.html">
+            <span class="tnl-n">02</span><span class="tnl-t">Top Problems</span>
           </a>
-          <a class="r101-a" href="patient-journey.html">
-            <span class="n">03</span><span class="t">Patient Journey</span>
+          <a class="topnav-link" href="patient-journey.html">
+            <span class="tnl-n">03</span><span class="tnl-t">Patient Journey</span>
           </a>
-          <a class="r101-fb" href="mailto:hello@goinvo.com">
-            <span class="r101-dot"></span>Feedback
+          <a class="feedback-btn" href="mailto:hello@goinvo.com">
+            <span class="fb-dot"></span>Feedback
           </a>
         </nav>
       </div>
     `;
 
     function inject() {
-      if (document.getElementById('r101-nav')) return;
+      if (document.getElementById('topbar')) return;
       var style = document.createElement('style');
       style.textContent = CSS;
       (document.head || document.documentElement).appendChild(style);
@@ -625,9 +627,13 @@
       pad.textContent = 'body{padding-top:66px!important;}';
       (document.head || document.documentElement).appendChild(pad);
       var nav = document.createElement('nav');
-      nav.id = 'r101-nav';
+      nav.id = 'topbar';
+      nav.className = 'topbar';
       nav.innerHTML = HTML;
       document.body.insertBefore(nav, document.body.firstChild);
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('is-stuck', window.scrollY > 60);
+      }, { passive: true });
     }
 
     document.addEventListener('DOMContentLoaded', inject);
