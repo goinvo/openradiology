@@ -107,20 +107,6 @@ em { font-style: italic; }
   transition: all .25s ease;
 }
 .feedback-btn:hover { background: var(--ink); color: var(--cream); }
-.fb-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 0 var(--accent);
-  animation: pulse 2.4s infinite;
-  flex-shrink: 0;
-}
-.feedback-btn:hover .fb-dot { background: var(--cream); animation: none; }
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(37,91,126,.5); }
-  70%  { box-shadow: 0 0 0 6px rgba(37,91,126,0); }
-  100% { box-shadow: 0 0 0 0 rgba(37,91,126,0); }
-}
 
 /* ── Hero shell ── */
 .hero {
@@ -159,12 +145,12 @@ em { font-style: italic; }
   box-shadow: 0 0 26px 6px rgba(37,91,126,.4);
   opacity: 0;
 }
-.beam.is-go { animation: beamdrop 1.5s cubic-bezier(.6,0,.2,1) forwards; }
+.beam.is-go { animation: beamdrop 700ms cubic-bezier(.6,0,.2,1) forwards; }
 @keyframes beamdrop {
   0%   { opacity: 0; top: 0; }
   8%   { opacity: 1; }
   92%  { opacity: 1; }
-  100% { opacity: 0; top: 78vh; }
+  100% { opacity: 0; top: 100vh; }
 }
 
 /* ── Hero inner ── */
@@ -205,7 +191,7 @@ em { font-style: italic; }
   clip-path: inset(0 0 -.12em 0);
 }
 @media (prefers-reduced-motion: no-preference) {
-  .scan-title.is-in { animation: scanReveal 1s cubic-bezier(.6,0,.2,1) .35s both; }
+  .scan-title.is-in { animation: scanReveal 250ms cubic-bezier(.6,0,.2,1) 0s both; }
 }
 @keyframes scanReveal {
   from { clip-path: inset(0 0 100% 0); }
@@ -216,7 +202,7 @@ em { font-style: italic; }
 .r { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: no-preference) {
   .reveal-root.is-in .r {
-    animation: revUp .8s cubic-bezier(.2,.75,.2,1) both;
+    animation: revUp 500ms cubic-bezier(.2,.75,.2,1) both;
     animation-delay: var(--d, 0ms);
   }
 }
@@ -399,7 +385,6 @@ em { font-style: italic; }
         <span class="tnl-t">Patient Journey</span>
       </a>
       <a class="feedback-btn" href="mailto:hello@goinvo.com">
-        <span class="fb-dot"></span>
         <span class="fb-label">Feedback</span>
       </a>
     </nav>
@@ -412,12 +397,12 @@ em { font-style: italic; }
 
   <div class="hero-inner reveal-root" id="reveal">
 <h1 class="hero-title scan-title" id="scanTitle">Radiology <em>101</em></h1>
-    <p class="hero-lede r" style="--d:820ms">
+    <p class="hero-lede r" style="--d:200ms">
       A three part series on how medical imaging works in America: what it costs, where it strains, and what it feels like to be scanned.
     </p>
 
     <ol class="index-list">
-      <li class="index-item r" style="--d:980ms">
+      <li class="index-item r" style="--d:330ms">
         <a href="radiology-stats.html" style="display:contents">
           <span class="ix-num">01</span>
           <span class="ix-body">
@@ -428,7 +413,7 @@ em { font-style: italic; }
         </a>
         <span class="ix-rule"></span>
       </li>
-      <li class="index-item r" style="--d:1100ms">
+      <li class="index-item r" style="--d:400ms">
         <a href="top-problems.html" style="display:contents">
           <span class="ix-num">02</span>
           <span class="ix-body">
@@ -439,7 +424,7 @@ em { font-style: italic; }
         </a>
         <span class="ix-rule"></span>
       </li>
-      <li class="index-item r" style="--d:1220ms">
+      <li class="index-item r" style="--d:470ms">
         <a href="patient-journey.html" style="display:contents">
           <span class="ix-num">03</span>
           <span class="ix-body">
