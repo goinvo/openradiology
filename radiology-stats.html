@@ -11,6 +11,95 @@
     #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
     #__bundler_placeholder { color: #999; font-size: 14px; }
   </style>
+  <script>
+  /* Radiology 101 nav — injected after the bundler replaces the document */
+  (function () {
+    var FONT = '@font-face{font-family:"Belgiano Serif";src:url("fonts/Belgiano Serif 2.ttf") format("truetype");font-weight:100 900;font-style:normal;}';
+
+    var CSS = `
+      #r101-nav{position:fixed;top:0;left:0;right:0;z-index:9000;padding:11px 0;
+        background:rgba(226,242,252,.92);backdrop-filter:blur(14px);
+        border-bottom:1px solid #c2dded;box-shadow:0 8px 26px -22px rgba(26,21,18,.4);}
+      .r101-inner{max-width:1180px;margin:0 auto;padding:0 48px;
+        display:flex;align-items:center;justify-content:space-between;gap:24px;}
+      .r101-wm{font-family:"Belgiano Serif","Newsreader",Georgia,serif;font-size:23px;
+        font-weight:420;letter-spacing:-.01em;color:#1a1512;white-space:nowrap;text-decoration:none;}
+      .r101-wm em{font-style:italic;color:#255B7E;}
+      .r101-links{display:flex;align-items:center;gap:6px;}
+      .r101-a{display:flex;align-items:baseline;gap:7px;padding:8px 13px;border-radius:8px;
+        font-family:"DM Sans",system-ui,sans-serif;font-size:13.5px;color:#5b5349;
+        text-decoration:none;transition:color .25s,background .25s;}
+      .r101-a .n{font-size:10.5px;letter-spacing:.08em;color:#8a8174;
+        font-variant-numeric:tabular-nums;transition:color .25s;}
+      .r101-a:hover{background:rgba(26,21,18,.05);color:#1a1512;}
+      .r101-a:hover .n,.r101-a.is-active .n{color:#255B7E;}
+      .r101-a.is-active{color:#1a1512;}
+      .r101-fb{display:flex;align-items:center;gap:8px;margin-left:10px;padding:9px 17px;
+        border-radius:999px;border:1px solid #1a1512;font-family:"DM Sans",system-ui,sans-serif;
+        font-size:13.5px;color:#1a1512;font-weight:500;text-decoration:none;transition:all .25s;}
+      .r101-fb:hover{background:#1a1512;color:#E2F2FC;}
+      .r101-dot{width:7px;height:7px;border-radius:50%;background:#255B7E;
+        animation:r101p 2.4s infinite;flex-shrink:0;}
+      .r101-fb:hover .r101-dot{background:#E2F2FC;animation:none;}
+      @keyframes r101p{0%{box-shadow:0 0 0 0 rgba(37,91,126,.5)}
+        70%{box-shadow:0 0 0 6px rgba(37,91,126,0)}
+        100%{box-shadow:0 0 0 0 rgba(37,91,126,0)}}
+      @media(max-width:880px){
+        .r101-inner{padding:0 22px;}
+        .r101-a .t{display:none;}
+        .r101-a{padding:8px 9px;}
+      }
+    `;
+
+    var HTML = `
+      <div class="r101-inner">
+        <a class="r101-wm" href="index.html">Radiology<em> 101</em></a>
+        <nav class="r101-links">
+          <a class="r101-a is-active" href="radiology-stats.html">
+            <span class="n">01</span><span class="t">Common Scans by Frequency</span>
+          </a>
+          <a class="r101-a" href="top-problems.html">
+            <span class="n">02</span><span class="t">Top Problems</span>
+          </a>
+          <a class="r101-a" href="patient-journey.html">
+            <span class="n">03</span><span class="t">Patient Journey</span>
+          </a>
+          <a class="r101-fb" href="mailto:hello@goinvo.com">
+            <span class="r101-dot"></span>Feedback
+          </a>
+        </nav>
+      </div>
+    `;
+
+    function inject() {
+      if (document.getElementById('r101-nav')) return;
+      var style = document.createElement('style');
+      style.textContent = FONT + CSS;
+      (document.head || document.documentElement).appendChild(style);
+      var pad = document.createElement('style');
+      pad.textContent = 'body{padding-top:66px!important;}';
+      (document.head || document.documentElement).appendChild(pad);
+      var nav = document.createElement('nav');
+      nav.id = 'r101-nav';
+      nav.innerHTML = HTML;
+      document.body.insertBefore(nav, document.body.firstChild);
+    }
+
+    /* Poll until the bundler has replaced the document (loading overlay gone) */
+    var tries = 0;
+    var timer = setInterval(function () {
+      if (++tries > 200) { clearInterval(timer); return; } /* 10s timeout */
+      if (!document.getElementById('__bundler_thumbnail') && document.body) {
+        clearInterval(timer);
+        inject();
+      }
+    }, 50);
+
+    /* Fallback for when the page is already loaded */
+    window.addEventListener('load', function () { setTimeout(inject, 300); });
+  })();
+  </script>
+
   <noscript>
     <style>#__bundler_loading { display: none; }</style>
     <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
