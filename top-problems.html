@@ -104,20 +104,6 @@
     transition: all .25s ease;
   }
   .feedback-btn:hover { background: #1a1512; color: #E2F2FC; }
-  .fb-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #255B7E;
-    animation: pulse 2.4s infinite;
-    flex-shrink: 0;
-  }
-  .feedback-btn:hover .fb-dot { background: #E2F2FC; animation: none; }
-  @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(37,91,126,.5); }
-    70%  { box-shadow: 0 0 0 6px rgba(37,91,126,0); }
-    100% { box-shadow: 0 0 0 0 rgba(37,91,126,0); }
-  }
-
   html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
   body {
     background: var(--paper);
@@ -399,35 +385,64 @@
     padding-top: 28px;
     border-top: 1px solid var(--line);
   }
-  .references h2 {
+  .ref-label {
     font-family: var(--mono);
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
+    color: var(--faint);
+    margin-bottom: 16px;
   }
-  .references ol {
-    list-style: decimal;
-    padding-left: 28px;
+  .references h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .ref-list {
+    list-style: none;
+    padding: 0;
+  }
+  .ref-item {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .ref-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+    min-width: 22px;
+    padding-top: 3px;
+    flex-shrink: 0;
+  }
+  .ref-body {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px;
   }
-  .references li {
+  .ref-title {
     font-family: var(--serif);
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--ink);
+    text-decoration: none;
   }
-  .references li a {
-    color: var(--ink-soft);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-color: var(--line-strong);
+  .ref-title::after { content: " ↗"; font-size: 11px; color: var(--faint); }
+  .ref-title:hover { color: var(--m); }
+  .ref-meta {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--muted);
   }
-  .references li a:hover { color: var(--ink); text-decoration-color: var(--ink); }
 
   /* ── Site footer ── */
   .site-footer {
@@ -491,8 +506,7 @@
         <span class="tnl-n">03</span>
         <span class="tnl-t">Patient Journey</span>
       </a>
-      <a class="feedback-btn" href="mailto:hello@goinvo.com">
-        <span class="fb-dot"></span>
+      <a class="feedback-btn" href="mailto:hello@goinvo.com?subject=Radiology101%20Feedback">
         Feedback
       </a>
     </nav>
@@ -549,41 +563,240 @@
   <p class="footnote" id="footnote"></p>
 
   <section class="references">
+    <p class="ref-label">References</p>
     <h2>References</h2>
-    <ol>
-      <li><a href="https://www.ama-assn.org/practice-management/medicare-medicaid/medicare-physician-pay-has-plummeted-2001-find-out-why">American Medical Association. "Medicare Physician Payment Has Plummeted Since 2001." AMA, 2025.</a></li>
-      <li><a href="https://www.ama-assn.org/practice-management/prior-authorization/fixing-prior-auth-nearly-40-prior-authorizations-week-way">American Medical Association. "Prior Authorization Requirements, Burden, and Delay Survey 2024." AMA, 2024.</a></li>
-      <li><a href="https://medicushcs.com/resources/navigating-the-radiologist-shortage">Association for Advancing Physician and Provider Recruitment. <em>Physician Recruitment Benchmarking Report 2024.</em> AAPPR, 2024.</a></li>
-      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11192466/">Banerjee, Imon, et al. "Reading Race: AI Recognises Patient's Racial Identity in Medical Images." <em>Journal of the American College of Radiology</em> 20, no. 8 (2023): 776–785.</a></li>
-      <li><a href="https://link.springer.com/article/10.1007/s10278-023-00780-6">Beesley, Brent, et al. "FIND: An Automated Follow-Up and Notification Dashboard for Radiology Findings." <em>Journal of Imaging Informatics in Medicine</em> 36 (2023): 894–902.</a></li>
-      <li><a href="https://appliedradiology.com/articles/failure-of-radiologic-communication-an-increasing-cause-of-malpractice-litigation-and-harm-to-patients">Berlin, Leonard. "Failure of Radiologic Communication: An Increasing Cause of Malpractice Litigation and Harm to Patients." <em>Applied Radiology</em> 39, no. 5 (2010): 17–23.</a></li>
-      <li><a href="https://ajronline.org/doi/10.2214/AJR.07.2209">Berlin, Leonard. "Malpractice and Radiologists." <em>American Journal of Roentgenology</em> 189, no. 6 (2007): 1238–1246.</a></li>
-      <li><a href="https://www.nejm.org/doi/full/10.1056/NEJMra072149">Brenner, David J., and Eric J. Hall. "Computed Tomography — An Increasing Source of Radiation Exposure." <em>New England Journal of Medicine</em> 357, no. 22 (2007): 2277–2284.</a></li>
-      <li><a href="https://pubs.rsna.org/doi/abs/10.1148/rg.2015150023">Bruno, Michael A., William A. Walker, and Hani H. Abujudeh. "Understanding and Confronting Our Mistakes: The Epidemiology of Error in Radiology and Strategies for Error Reduction." <em>RadioGraphics</em> 35, no. 6 (2015): 1668–1676.</a></li>
-      <li><a href="https://www.rsna.org/news/2021/june/rural-radiology-equity">Eberth, Jan M. "Lung Cancer Screening in Rural America." <em>RSNA News,</em> June 2021.</a></li>
-      <li><a href="https://www.sciencedirect.com/science/article/pii/S1546144025002291">Forsberg, Danielle, et al. "Radiologist Workload Trends: Analysis of 46.4 Million Exams Across 167 Practices." <em>Journal of the American College of Radiology</em> 22, no. 3 (2025).</a></li>
-      <li><a href="https://theimagingwire.com">The Imaging Wire. "FDA Radiology AI Clearance Tracker." <em>The Imaging Wire,</em> March 2026.</a></li>
-      <li><a href="https://pubs.rsna.org/doi/full/10.1148/rg.2018180021">Itri, Jason N., and Larry A. Yeh. "Recognizing and Preventing Errors in Diagnostic Radiology." <em>RadioGraphics</em> 38, no. 6 (2018): 1719–1731.</a></li>
-      <li><a href="https://www.kff.org/medicare/issue-brief/medicare-advantage-prior-authorization-denials/">Kaiser Family Foundation. "Medicare Advantage Prior Authorization: Analysis of CMS Prior Authorization Data, 2021–2023." KFF, January 2025.</a></li>
-      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8903084/">Kohli, Marc, and Ronilda Lacson. "Radiology AI Deployment and Assessment Rubric (RADAR)." <em>npj Digital Medicine</em> 5, no. 1 (2022): 1–5.</a></li>
-      <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S1939865424004466">Koontz, Nicholas A., et al. "Mobile Imaging Units as a Solution to Rural Radiology Access Gaps." <em>Journal of the American College of Radiology</em> 21, no. 8 (2024): 1234–1241.</a></li>
-      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11425057/">Krevsky, Benjamin, et al. "The Impact of Prior Authorization on Patient Access and Clinical Outcomes." <em>PMC / National Library of Medicine,</em> 2024.</a></li>
-      <li><a href="https://pubs.rsna.org/doi/10.1148/radiol.11101396">Larson, Paul A., et al. "Actionable Findings and the Radiology Report." <em>Radiology</em> 262, no. 2 (2012): 393–399.</a></li>
-      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8492512/">McDonald, Elizabeth S., et al. "Racial Disparities in Diagnostic Delay Among Women with Breast Cancer." <em>Journal of the American College of Radiology</em> 18, no. 11 (2021): 1520–1528.</a></li>
-      <li><a href="https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext">Moy, Ernest, et al. "Imaging Use in the United States: Disparities by Race/Ethnicity and Insurance Status." <em>Journal of the American College of Radiology</em> 19, no. 1 (2022): 53–61.</a></li>
-      <li><a href="https://www.ncrppublications.org/Reports/160">National Council on Radiation Protection and Measurements. <em>Ionizing Radiation Exposure of the Population of the United States.</em> NCRP Report No. 160. Bethesda, MD: NCRP, 2009.</a></li>
-      <li><a href="https://www.neimanhpi.org/press-releases/new-studies-shed-light-on-the-future-radiologist-workforce-shortage-by-projecting-future-radiologist-supply-and-demand-for-imaging/">Nicola, Gregory N., et al. "Radiologist Workforce Projections 2024–2055." Neiman Health Policy Institute, 2024.</a></li>
-      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12208078/">Ortega, Mario, et al. "Racial Disparities in Abdominal Imaging Utilization in Older Adults." <em>PMC,</em> 2025.</a></li>
-      <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12150564/">PMC / NCI. "Socioeconomic Status and Imaging Access Delays in Oncology." <em>PMC,</em> 2025.</a></li>
-      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5745590/">Reyes, Andres M., et al. "Radiology Services Availability and Inter-Facility Transfer Rates in Rural Hospitals." <em>PMC,</em> 2017.</a></li>
-      <li><a href="https://www.clinicalradiologyonline.net/article/S0009-9260(22)00667-5/fulltext">Rouzrokh, Pouria, et al. "Mitigating Bias in Radiology Machine Learning: 1. Data Handling." <em>Clinical Radiology</em> 78, no. 2 (2023): 100–108.</a></li>
-      <li><a href="https://radiologybusiness.com">Siewert, Bettina, et al. "Trends in Radiology Workload and Reimbursement." <em>Journal of the American College of Radiology,</em> 2024.</a></li>
-      <li><a href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2829581">Smith-Bindman, Rebecca, et al. "Projected Cancer Risks From Computed Tomographic Scans Performed in the United States in 2023." <em>JAMA Internal Medicine,</em> April 14, 2025.</a></li>
-      <li><a href="https://pubmed.ncbi.nlm.nih.gov/20008690/">Smith-Bindman, Rebecca, et al. "Radiation Dose Associated with Common Computed Tomography Examinations and the Associated Lifetime Attributable Risk of Cancer." <em>Archives of Internal Medicine</em> 169, no. 22 (2009): 2078–2086.</a></li>
-      <li><a href="https://pubs.rsna.org/doi/abs/10.1148/radiol.2511081296">Sodickson, Aaron, et al. "Recurrent CT, Cumulative Radiation Exposure, and Associated Radiation-Induced Cancer Risks from CT of Adults." <em>Radiology</em> 251, no. 1 (2009): 175–184.</a></li>
-      <li><a href="https://pubs.rsna.org/doi/abs/10.1148/radiol.2021203742">Waite, Sandra, et al. "Disparities in Breast Cancer Diagnostics: The Challenges and Approaches to Equal Care." <em>Radiology</em> 301, no. 2 (2021): 390–400.</a></li>
-      <li><a href="https://ajronline.org/doi/10.2214/AJR.16.16963">Waite, Scott, et al. "Tired in the Reading Room: The Influence of Fatigue in Radiology." <em>American Journal of Roentgenology</em> 208, no. 2 (2017): 247–254.</a></li>
-      <li><a href="https://ajronline.org/doi/10.2214/AJR.24.31357">Yun, Brian J., et al. "Trends in Radiology Practice Consolidation and Financial Impact, 2014–2023." <em>American Journal of Roentgenology</em> 223, no. 4 (2024).</a></li>
+    <ol class="ref-list">
+      <li class="ref-item">
+        <span class="ref-num">01</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.ama-assn.org/practice-management/medicare-medicaid/medicare-physician-pay-has-plummeted-2001-find-out-why" target="_blank" rel="noopener">Medicare Physician Payment Has Plummeted Since 2001</a>
+          <span class="ref-meta">American Medical Association · 2025</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">02</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.ama-assn.org/practice-management/prior-authorization/fixing-prior-auth-nearly-40-prior-authorizations-week-way" target="_blank" rel="noopener">Prior Authorization Requirements, Burden, and Delay Survey 2024</a>
+          <span class="ref-meta">American Medical Association · 2024</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">03</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://medicushcs.com/resources/navigating-the-radiologist-shortage" target="_blank" rel="noopener">Navigating the Radiologist Shortage</a>
+          <span class="ref-meta">Medicus HCS · 2025</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">04</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11192466/" target="_blank" rel="noopener">Reading Race: AI Recognises Patient's Racial Identity in Medical Images</a>
+          <span class="ref-meta">Banerjee et al. · JACR 2023</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">05</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://link.springer.com/article/10.1007/s10278-023-00780-6" target="_blank" rel="noopener">FIND: An Automated Follow-Up and Notification Dashboard for Radiology Findings</a>
+          <span class="ref-meta">Beesley et al. · Journal of Imaging Informatics in Medicine 2023</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">06</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://appliedradiology.com/articles/failure-of-radiologic-communication-an-increasing-cause-of-malpractice-litigation-and-harm-to-patients" target="_blank" rel="noopener">Failure of Radiologic Communication: An Increasing Cause of Malpractice Litigation and Harm to Patients</a>
+          <span class="ref-meta">Berlin · Applied Radiology 2010</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">07</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://ajronline.org/doi/10.2214/AJR.07.2209" target="_blank" rel="noopener">Malpractice and Radiologists</a>
+          <span class="ref-meta">Berlin · American Journal of Roentgenology 2007</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">08</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.nejm.org/doi/full/10.1056/NEJMra072149" target="_blank" rel="noopener">Computed Tomography — An Increasing Source of Radiation Exposure</a>
+          <span class="ref-meta">Brenner & Hall · New England Journal of Medicine 2007</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">09</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pubs.rsna.org/doi/abs/10.1148/rg.2015150023" target="_blank" rel="noopener">Understanding and Confronting Our Mistakes: The Epidemiology of Error in Radiology</a>
+          <span class="ref-meta">Bruno et al. · RadioGraphics 2015</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">10</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.rsna.org/news/2021/june/rural-radiology-equity" target="_blank" rel="noopener">Rural Areas Face Imaging Obstacles on the Road to Health Care Equity</a>
+          <span class="ref-meta">Eberth · RSNA News 2021</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">11</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.sciencedirect.com/science/article/pii/S1546144025002291" target="_blank" rel="noopener">Radiologist Workload Trends: Analysis of 46.4 Million Exams Across 167 Practices</a>
+          <span class="ref-meta">Forsberg et al. · JACR 2025</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">12</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://theimagingwire.com" target="_blank" rel="noopener">FDA Radiology AI Clearance Tracker</a>
+          <span class="ref-meta">The Imaging Wire · March 2026</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">13</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pubs.rsna.org/doi/full/10.1148/rg.2018180021" target="_blank" rel="noopener">Recognizing and Preventing Errors in Diagnostic Radiology</a>
+          <span class="ref-meta">Itri & Yeh · RadioGraphics 2018</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">14</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.kff.org/medicare/medicare-advantage-insurers-made-nearly-53-million-prior-authorization-determinations-in-2024/" target="_blank" rel="noopener">Medicare Advantage Insurers Made Nearly 53 Million Prior Authorization Determinations in 2024</a>
+          <span class="ref-meta">Kaiser Family Foundation · 2026</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">15</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8903084/" target="_blank" rel="noopener">What's Needed to Bridge the Gap Between US FDA Clearance and Real-world Use of AI Algorithms</a>
+          <span class="ref-meta">Lin · Academic Radiology 2021</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">16</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.sciencedirect.com/science/article/abs/pii/S1939865424004466" target="_blank" rel="noopener">Mobile Imaging Units as a Solution to Rural Radiology Access Gaps</a>
+          <span class="ref-meta">Koontz et al. · JACR 2024</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">17</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11425057/" target="_blank" rel="noopener">The Impact of Prior Authorization on Patient Access and Clinical Outcomes</a>
+          <span class="ref-meta">Krevsky et al. · Health Affairs Scholar 2024</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">18</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pubs.rsna.org/doi/10.1148/radiol.11101396" target="_blank" rel="noopener">Actionable Findings and the Radiology Report</a>
+          <span class="ref-meta">Larson et al. · Radiology 2012</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">19</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8492512/" target="_blank" rel="noopener">Racial Disparities in Diagnostic Delay Among Women with Breast Cancer</a>
+          <span class="ref-meta">Miller-Kleinhenz et al. · JACR 2021</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">20</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext" target="_blank" rel="noopener">Imaging Use in the United States: Disparities by Race/Ethnicity and Insurance Status</a>
+          <span class="ref-meta">Moy et al. · JACR 2022</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">21</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.ncrppublications.org/Reports/160" target="_blank" rel="noopener">Ionizing Radiation Exposure of the Population of the United States</a>
+          <span class="ref-meta">NCRP Report No. 160 · 2009</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">22</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.neimanhpi.org/press-releases/new-studies-shed-light-on-the-future-radiologist-workforce-shortage-by-projecting-future-radiologist-supply-and-demand-for-imaging/" target="_blank" rel="noopener">Radiologist Workforce Projections 2024–2055</a>
+          <span class="ref-meta">Nicola et al. · Neiman Health Policy Institute 2024</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">23</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12208078/" target="_blank" rel="noopener">Images in Black and White: Disparities in Utilization of CT and Ultrasound for Older Adults with Abdominal Pain</a>
+          <span class="ref-meta">Unachukwu et al. · Western Journal of Emergency Medicine 2025</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">24</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12150564/" target="_blank" rel="noopener">Socioeconomic Factors Predictive of Access Delays in Oncology</a>
+          <span class="ref-meta">Chen · BMC Public Health 2025</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">25</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5745590/" target="_blank" rel="noopener">Lack of CT Scanner in a Rural Emergency Department Increases Inter-Facility Transfers</a>
+          <span class="ref-meta">Bergeron et al. · BMC Research Notes 2017</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">26</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://www.clinicalradiologyonline.net/article/S0009-9260(22)00667-5/fulltext" target="_blank" rel="noopener">Mitigating Bias in Radiology Machine Learning: 1. Data Handling</a>
+          <span class="ref-meta">Rouzrokh et al. · Clinical Radiology 2023</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">27</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://radiologybusiness.com" target="_blank" rel="noopener">Trends in Radiology Workload and Reimbursement</a>
+          <span class="ref-meta">Siewert et al. · JACR 2024</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">28</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://doi.org/10.1001/jamainternmed.2025.0505" target="_blank" rel="noopener">Projected Lifetime Cancer Risks From Current Computed Tomography Imaging</a>
+          <span class="ref-meta">Smith-Bindman et al. · JAMA Internal Medicine 2025</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">29</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pubmed.ncbi.nlm.nih.gov/20008690/" target="_blank" rel="noopener">Radiation Dose Associated with Common CT Examinations and the Associated Lifetime Attributable Risk of Cancer</a>
+          <span class="ref-meta">Smith-Bindman et al. · Archives of Internal Medicine 2009</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">30</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pubs.rsna.org/doi/abs/10.1148/radiol.2511081296" target="_blank" rel="noopener">Recurrent CT, Cumulative Radiation Exposure, and Associated Radiation-Induced Cancer Risks from CT of Adults</a>
+          <span class="ref-meta">Sodickson et al. · Radiology 2009</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">31</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://pubs.rsna.org/doi/abs/10.1148/radiol.2021203742" target="_blank" rel="noopener">Disparities in Breast Cancer Diagnostics: The Challenges and Approaches to Equal Care</a>
+          <span class="ref-meta">Waite et al. · Radiology 2021</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">32</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://ajronline.org/doi/10.2214/AJR.16.16963" target="_blank" rel="noopener">Tired in the Reading Room: The Influence of Fatigue in Radiology</a>
+          <span class="ref-meta">Waite et al. · American Journal of Roentgenology 2017</span>
+        </div>
+      </li>
+      <li class="ref-item">
+        <span class="ref-num">33</span>
+        <div class="ref-body">
+          <a class="ref-title" href="https://ajronline.org/doi/10.2214/AJR.24.31357" target="_blank" rel="noopener">Trends in Radiology Practice Consolidation and Financial Impact, 2014–2023</a>
+          <span class="ref-meta">Yun et al. · American Journal of Roentgenology 2024</span>
+        </div>
+      </li>
     </ol>
   </section>
 

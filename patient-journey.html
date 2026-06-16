@@ -126,11 +126,6 @@
     border-radius:999px;border:1px solid #1a1512;font-family:"Libertinus Serif",Georgia,serif;
     font-size:13.5px;color:#1a1512;font-weight:500;text-decoration:none;transition:all .25s;}
   .feedback-btn:hover{background:#1a1512;color:#E2F2FC;}
-  .fb-dot{width:7px;height:7px;border-radius:50%;background:#255B7E;
-    animation:pulse 2.4s infinite;flex-shrink:0;}
-  .feedback-btn:hover .fb-dot{background:#E2F2FC;animation:none;}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,91,126,.5)}
-    70%{box-shadow:0 0 0 6px rgba(37,91,126,0)}100%{box-shadow:0 0 0 0 rgba(37,91,126,0)}}
   @media(max-width:880px){
     .topbar-inner{padding:0 22px;}
     .topnav-link .tnl-t{display:none;}
@@ -531,8 +526,8 @@
       <a class="topnav-link is-active" href="patient-journey.html">
         <span class="tnl-n">03</span><span class="tnl-t">Patient Journey</span>
       </a>
-      <a class="feedback-btn" href="mailto:hello@goinvo.com">
-        <span class="fb-dot"></span>Feedback
+      <a class="feedback-btn" href="mailto:hello@goinvo.com?subject=Radiology101%20Feedback">
+        Feedback
       </a>
     </nav>
   </div>
