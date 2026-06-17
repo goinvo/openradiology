@@ -140,18 +140,19 @@
 .hero{ padding:84px 0 44px; position:relative; margin-top:66px; }
 .hero .kicker{ font-size:13px; letter-spacing:.32em; text-transform:uppercase;
   color:var(--ink-faint); margin:0 0 22px; }
-.hero h1{ font-weight:380; font-size:clamp(46px,6.6vw,92px); line-height:.98;
-  letter-spacing:-.022em; margin:0; }
-.hero h1 em{ font-style:italic; color:var(--accent); }
-.hero .sub{ font-size:clamp(19px,2vw,25px); color:var(--ink-soft); font-weight:340;
-  margin:24px 0 0; max-width:32ch; line-height:1.34; }
+.hero h1{ font-family:'Libertinus Serif', Georgia, 'Times New Roman', serif;
+  font-weight:400; font-size:clamp(40px, 6.6vw, 78px); line-height:1.0;
+  letter-spacing:-0.018em; margin:0; }
+.hero h1 em{ font-style:italic; color:#255B7E; }
+.hero .sub{ font-family:'Libertinus Serif', Georgia, 'Times New Roman', serif;
+  font-size:clamp(15px, 1.7vw, 17px); color:#5b5349;
+  margin:24px 0 0; max-width:640px; line-height:1.64; }
 .hero .meta{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px 40px; margin-top:40px;
   padding-top:30px; border-top:1px solid var(--line); max-width:660px; }
 .metric .n{ font-size:34px; font-weight:420; letter-spacing:-.01em; line-height:1; color:var(--accent); }
 .metric .l{ font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
   color:var(--ink-faint); margin-top:8px; }
-.hero .howto{ margin-top:30px; font-size:15.5px; color:var(--ink-soft); max-width:660px;
-  line-height:1.6; }
+.hero .howto{ margin-top:30px; font-size:15.5px; color:var(--ink-soft); line-height:1.6; }
 .hero .howto b{ font-weight:560; color:var(--ink); }
 
 /* ---- fixed left scroll slider (always visible) ---- */
@@ -1690,6 +1691,29 @@ function App() {
         <p className="cp-note">
           Not medical or financial advice — talk to your provider and your insurer about what's right for you. Rules on
           medical debt and credit reporting vary by state and change over time.
+        </p>
+      </section>
+
+      {/* LOOKING TO THE FUTURE */}
+      <section className="careplan">
+        <h2>Looking to <em>the future</em></h2>
+        <p className="cp-lede">
+          This timeline reveals where the system strains. Here's what's worth changing — and what a better version could look like.
+        </p>
+        <ul className="cp-list">
+          <li><b>The wait is too long.</b> On this timeline, it takes roughly <b>40 days</b> just to be seen by a physician — before any imaging is ordered, before any diagnosis is made. Long appointment wait times are a structural bottleneck that delays care for everyone.</li>
+          <li><b>Prior authorization is a gate, not a guardrail.</b> Insurers require physicians to seek approval before ordering imaging. In practice, this adds days of paperwork and sometimes overrides clinical judgment — slowing down the process even when the need is clear.</li>
+          <li><b>We only image when something is already wrong.</b> The current model is reactive: symptoms appear, a physician orders imaging, and we investigate. By the time imaging happens, a problem has often been developing for months or years undetected.</li>
+        </ul>
+        <p className="cp-lede" style={{ marginTop: "28px" }}>
+          A different approach is possible.
+        </p>
+        <ul className="cp-list">
+          <li><b>Routine whole-body imaging as a standard of care.</b> Just as cars receive periodic full inspections — checking every system before something fails — people could receive baseline scans on a regular schedule, establishing what's normal and surfacing anomalies early, when they're most treatable.</li>
+          <li><b>Proactive, preventative care instead of reactive response.</b> Shifting imaging upstream — before symptoms appear — changes the role of radiology from diagnostic tool to early-warning system, giving patients and physicians time to act rather than react.</li>
+        </ul>
+        <p className="cp-note">
+          Not medical advice. The future of radiology is still being written — by researchers, policymakers, patients, and clinicians working together.
         </p>
       </section>
 
