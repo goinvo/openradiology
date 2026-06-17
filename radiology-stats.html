@@ -148,7 +148,7 @@
   .statcol .sk { display: none; font-family: var(--sans); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; margin-bottom: 7px; }
   .statcol .sv { position: relative; font-family: var(--sans); font-size: clamp(16px, 1.8vw, 20px); font-weight: 400; color: var(--ink); letter-spacing: -0.01em; white-space: nowrap; }
   .statcol .sv .approx { position: absolute; right: 100%; }
-  .statcol .sv .vol-ref { font-size: 10px; vertical-align: super; margin-left: 3px; color: #1C3D52; font-weight: 700; text-decoration: none; letter-spacing: .02em; line-height: 1; }
+  .statcol .sv .vol-ref { font-size: 10px; vertical-align: super; margin-left: 6px; color: #7396B0; font-weight: 700; text-decoration: none; letter-spacing: .02em; line-height: 1; }
   .statcol .sv .vol-ref:hover { text-decoration: underline; }
   .statcol .sv-range { font-weight: 400; color: var(--ink-2); }
   .metric { display: grid; grid-template-columns: 102px clamp(150px, 26vw, 250px) max-content 1fr; align-items: center; gap: 14px; transition: opacity .25s ease; }
@@ -502,7 +502,7 @@
   .glance .reads-stack .rn { font-size:clamp(46px,5.2vw,72px); letter-spacing:-0.02em; line-height:.92; }
   .glance .reads-stack .rl { font-size:11px; letter-spacing:0.12em; margin-top:11px; }
 
-  .glance .ref-sup { font-size:10px; vertical-align:super; margin-left:2px; color:var(--amber); font-weight:600; text-decoration:none; line-height:1; }
+  .glance .ref-sup { font-size:10px; vertical-align:super; margin-left:6px; color:#7396B0; font-weight:600; text-decoration:none; line-height:1; }
   .glance .ref-sup:hover { text-decoration:underline; }
 
   /* ════════ REDESIGN · six story-sequenced cards ════════ */
@@ -661,9 +661,9 @@
       <div class="th-name">Imaging type</div>
       <div class="barcell">
         <div class="statcell">
-          <div class="statcol"><div class="th-lbl">Annual scan volume<sup class="ast">*</sup></div></div>
-          <div class="statcol"><div class="th-lbl">Avg. out-of-pocket<sup class="ast">**</sup></div></div>
-          <div class="statcol"><div class="th-lbl">Price range<sup class="ast">**</sup></div></div>
+          <div class="statcol"><div class="th-lbl">Annual scan volume</div></div>
+          <div class="statcol"><div class="th-lbl">Avg. out-of-pocket</div></div>
+          <div class="statcol"><div class="th-lbl">Price range</div></div>
         </div>
       </div>
     </div>
@@ -736,21 +736,21 @@
         <div class="card span-6" data-screen-label="Card 1 · Workforce" data-comment-anchor="50ff1f4f28-div">
           <div class="card-step">01 · The workforce</div>
           <div class="wf-lockup">
-            <div class="big-stat">~3.6<span class="pct">%</span></div>
-            <p class="wf-headline">of all U.S. physicians are <strong>radiologists</strong><a class="ref-sup" href="#ref-14" title="Jump to source">14</a></p>
+            <div class="big-stat">3.6<span class="pct">%</span></div>
+            <p class="wf-headline">of all U.S. physicians are <strong>radiologists</strong><a class="ref-sup" href="#ref-14" title="Jump to source">[14]</a></p>
           </div>
           <div class="wf-grounds">
-            <p class="wf-ground"><strong>38,929</strong> of 1,082,187 physicians<a class="ref-sup" href="#ref-15" title="Jump to source">15</a></p>
-            <p class="wf-ground"><strong>0.305</strong> interventional radiologists per 100,000 people, on average<a class="ref-sup" href="#ref-16" title="Jump to source">16</a></p>
+            <p class="wf-ground"><strong>39,000</strong> of 1,082,187 physicians<a class="ref-sup" href="#ref-15" title="Jump to source">[15]</a></p>
+            <p class="wf-ground"><strong>0.305</strong> interventional radiologists per 100,000 people, on average<a class="ref-sup" href="#ref-16" title="Jump to source">[16]</a></p>
           </div>
         </div>
 
         <!-- 02 · THE WORKLOAD (span 6) -->
         <div class="card span-6" data-screen-label="Card 2 · Workload">
           <div class="card-step">02 · The workload</div>
-          <div class="big-stat">607<span class="unit">M</span></div>
-          <p class="stat-cap wl-cap">imaging scans performed in the U.S. <strong>yearly</strong><a class="ref-sup" href="#ref-17" title="Jump to source">17</a></p>
-          <p class="ground-line"><strong>≈ 1.8</strong> scans for every person in the country</p>
+          <div class="big-stat">870<span class="unit">M</span></div>
+          <p class="stat-cap wl-cap">imaging scans performed in the U.S. <strong>yearly</strong></p>
+          <p class="ground-line">Calculated by adding up the annual scan volumes for each imaging type above.</p>
         </div>
 
         <!-- 03 · THE INVESTMENT (span 7) -->
@@ -759,8 +759,8 @@
           <div class="inv-lead">
             <div class="big-stat">$470<span class="unit">B</span></div>
             <p class="stat-cap wl-cap">total U.S. imaging spend</p>
-            <p class="ground-line gl-even">out of <strong>$5.3 trillion</strong> in U.S. yearly health spend in 2024 — accounting for nearly <strong>8.9%</strong> of the spend.<a class="ref-sup" href="#ref-18" title="Jump to source">18</a><a class="ref-sup" href="#ref-19" title="Jump to source">19</a></p>
-            <p class="ground-line gl-even">Dental care alone was <strong>$189 billion</strong> — about <strong>3.6%</strong> of that total<a class="ref-sup" href="#ref-20" title="Jump to source">20</a>.</p>
+            <p class="ground-line gl-even">out of <strong>$5.3 trillion</strong> in U.S. yearly health spend in 2024 — accounting for nearly <strong>8.9%</strong> of the spend.<a class="ref-sup" href="#ref-18" title="Jump to source">[18]</a><a class="ref-sup" href="#ref-19" title="Jump to source">[19]</a></p>
+            <p class="ground-line gl-even">This figure excludes dental imaging spend, which we could not find a reliable estimate for.</p>
           </div>
         </div>
 
@@ -771,7 +771,7 @@
             <span class="big">8</span>
             <span class="fraction-text">in 10</span>
           </div>
-          <p class="stat-cap wl-cap">of all hospital visits in the U.S. involve some form of <strong>diagnostic imaging</strong><a class="ref-sup" href="#ref-21" title="Jump to source">21</a>.</p>
+          <p class="stat-cap wl-cap">of all hospital visits in the U.S. involve some form of <strong>diagnostic imaging</strong><a class="ref-sup" href="#ref-20" title="Jump to source">[20]</a>.</p>
         </div>
 
         <!-- 05 · THE IMPACT — emotional center (span 8) -->
@@ -780,7 +780,7 @@
           <div class="acc-layout inv-layout">
             <div class="inv-lead">
               <div class="big-stat">+0.67<span class="unit">yrs avg.</span></div>
-              <p class="stat-cap wl-cap">of added <strong>life expectancy</strong> credited, on average, to advanced medical imaging<a class="ref-sup" href="#ref-22" title="Jump to source">22</a>.</p>
+              <p class="stat-cap wl-cap">of added <strong>life expectancy</strong> credited, on average, to advanced medical imaging<a class="ref-sup" href="#ref-21" title="Jump to source">[21]</a>.</p>
             </div>
             <div class="acc-body">
               <div class="prop-bar" role="img" aria-label="Imaging contributed an average 0.67 of a total 2.37-year gain">
@@ -797,7 +797,7 @@
         <!-- 06 · A TYPICAL DAY (span 4) -->
         <div class="card span-4" data-screen-label="Card 6 · A typical day">
           <div class="card-step">06 · A typical day</div>
-          <p class="card-body">In one day, a clinical radiologist typically reads an average of <strong>35 CT or MRI scans</strong>, <strong>100 screening mammograms</strong>, or <strong>175 X-rays</strong><a class="ref-sup" href="#ref-23" title="Jump to source">23</a>.</p>
+          <p class="card-body">In one day, a clinical radiologist typically reads an average of <strong>35 CT or MRI scans</strong>, <strong>100 screening mammograms</strong>, or <strong>175 X-rays</strong><a class="ref-sup" href="#ref-22" title="Jump to source">[22]</a>.</p>
           <div class="reads reads-stack">
             <div class="col">
               <div class="rn">175</div>
@@ -822,7 +822,7 @@
           <div class="acc-layout">
             <div class="waffle" id="waffle"></div>
             <div class="acc-body">
-              <p class="card-body" style="max-width:520px;">Real-time error means roughly <strong>4% of exams</strong> worldwide contain a mistake — in the moment the radiologist reads them. In retrospect, <strong>~30% show some error</strong><a class="ref-sup" href="#ref-24" title="Jump to source">24</a>.</p>
+              <p class="card-body" style="max-width:520px;">Real-time error means roughly <strong>4% of exams</strong> worldwide contain a mistake — in the moment the radiologist reads them. In retrospect, <strong>~30% show some error</strong><a class="ref-sup" href="#ref-23" title="Jump to source">[23]</a>.</p>
               <div class="waffle-legend">
                 <div class="legend-item">
                   <div class="legend-swatch" style="background:var(--rust);"></div>
@@ -842,7 +842,7 @@
           <div class="card-step">08 · The innovation</div>
           <div class="ai-hero">
             <span class="ai-pct">76%</span>
-            <span class="ai-cap">of <strong>every AI-enabled device the FDA has cleared</strong> is for radiology<a class="ref-sup" href="#ref-25" title="Jump to source">25</a></span>
+            <span class="ai-cap">of <strong>every AI-enabled device the FDA has cleared</strong> is for radiology<a class="ref-sup" href="#ref-24" title="Jump to source">[24]</a></span>
           </div>
           <div class="ai-bar-wrap">
             <div class="ai-bar">
@@ -903,6 +903,7 @@
         <li class="refitem" id="ref-10"><span class="refnum">10</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.marketreportsworld.com/market-reports/single-photon-emission-computed-tomography-spect-market-14714553" target="_blank" rel="noopener">Single-Photon Emission Computed Tomography (SPECT) Market Size, Share, Growth, and Industry Analysis, By Type (Standalone SPECT, Hybrid SPECT), By Application (Cardiology, Oncology, General Imaging, Neurology, Others), Regional Insights and Forecast to 2033<span class="refext"> ↗</span></a><p class="refsrc">Market Reports World, 2025</p></div>
           <div class="refentry"><a class="reftitle" href="https://www.med.upenn.edu/physics-and-instrumentation-group/cardiac-spect" target="_blank" rel="noopener">Cardiac-SPECT<span class="refext"> ↗</span></a><p class="refsrc">Perelman School of Medicine at the University of Pennsylvania, 2026</p></div>
+          <p class="refnote">8M only accounts for cardiac SPECTs. The exact number of annual SPECT scans in the U.S. is unclear.</p>
         </div></li>
         <li class="refitem" id="ref-11"><span class="refnum">11</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.sciencedirect.com/science/article/abs/pii/S1094695023001063" target="_blank" rel="noopener">Dual-energy X-ray Absorptiometry Trends Among US Medicare Beneficiaries: 2005–2019<span class="refext"> ↗</span></a><p class="refsrc">Prout et al., 2023</p></div>
@@ -936,21 +937,18 @@
           <div class="refentry"><a class="reftitle" href="https://www.healthaffairs.org/doi/10.1377/hlthaff.2025.01683" target="_blank" rel="noopener">National Health Care Spending Increased 7.2 Percent In 2024 As Utilization Remained Elevated<span class="refext"> ↗</span></a><p class="refsrc">Hartman et al., 2026</p></div>
         </div></li>
         <li class="refitem" id="ref-20"><span class="refnum">20</span><div>
-          <div class="refentry"><a class="reftitle" href="https://www.ada.org/resources/research/health-policy-institute/dental-care-market/national-dental-expenses" target="_blank" rel="noopener">National Dental Expenditures, 2024<span class="refext"> ↗</span></a><p class="refsrc">American Dental Association, 2026</p></div>
-        </div></li>
-        <li class="refitem" id="ref-21"><span class="refnum">21</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.statnews.com/sponsor/2022/02/14/almost-every-patient-story-starts-with-an-image/" target="_blank" rel="noopener">Almost every patient story starts with an image<span class="refext"> ↗</span></a><p class="refsrc">Durlach, 2026</p></div>
         </div></li>
-        <li class="refitem" id="ref-22"><span class="refnum">22</span><div>
+        <li class="refitem" id="ref-21"><span class="refnum">21</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.nber.org/papers/w15068" target="_blank" rel="noopener">The Quality of Medical Care, Behavioral Risk Factors, and Longevity Growth<span class="refext"> ↗</span></a><p class="refsrc">Lichtenberg, 2009</p></div>
         </div></li>
-        <li class="refitem" id="ref-23"><span class="refnum">23</span><div>
+        <li class="refitem" id="ref-22"><span class="refnum">22</span><div>
           <div class="refentry"><a class="reftitle" href="https://nyulangone.org/news/your-radiologist-most-important-doctor-youve-never-met-until-now" target="_blank" rel="noopener">Your Radiologist Is the Most Important Doctor You’ve Never Met—Until Now<span class="refext"> ↗</span></a><p class="refsrc">NYU Langone</p></div>
         </div></li>
-        <li class="refitem" id="ref-24"><span class="refnum">24</span><div>
+        <li class="refitem" id="ref-23"><span class="refnum">23</span><div>
           <div class="refentry"><a class="reftitle" href="https://ajronline.org/doi/full/10.2214/AJR.12.10375" target="_blank" rel="noopener">Cognitive and System Factors Contributing to Diagnostic Errors in Radiology<span class="refext"> ↗</span></a><p class="refsrc">Lee et al., 2013</p></div>
         </div></li>
-        <li class="refitem" id="ref-25"><span class="refnum">25</span><div>
+        <li class="refitem" id="ref-24"><span class="refnum">24</span><div>
           <div class="refentry"><a class="reftitle" href="https://theimagingwire.com/2026/03/11/numbers-from-the-fda-show-radiology-is-maintaining-its-lead/" target="_blank" rel="noopener">FDA Updates AI List with New Clearances<span class="refext"> ↗</span></a><p class="refsrc">Casey, 2026</p></div>
         </div></li>
       </ol>
@@ -984,9 +982,9 @@
     ------------------------------------------------------------------------- */
     var DATA = [
       { key:"dental", name:"Dental", cat:"radio",
-        volume:320, volDisp:"~320M / yr",
-        avgCost:'$66<a class="vol-ref" href="#ref-2" title="Jump to source">2</a>',
-        oopRange:'$25 – $750<a class="vol-ref" href="#ref-3" title="Jump to source">3</a>',
+        volume:320, volDisp:"320M / yr",
+        avgCost:'$66<a class="vol-ref" href="#ref-2" title="Jump to source">[2]</a>',
+        oopRange:'$25 – $750<a class="vol-ref" href="#ref-3" title="Jump to source">[3]</a>',
         volNote:"Derived: 691M total imaging procedures minus 275M X-ray, 93M CT and 2M PET ≈ 321M dental.",
         note:"The most common radiographic image in the country — the bitewing and panoramic films taken at routine dental visits.",
         sources:[ {t:"PubMed (2023)"}, {t:"PMC · NIH"} ] },
@@ -1008,7 +1006,7 @@
         sources:[ {t:"NIH (2023)"} ] },
 
       { key:"us", name:"Ultrasound", cat:"sono",
-        volume:60, volDisp:"~60M / yr",
+        volume:60, volDisp:"60M / yr",
         cost:1151.17, costDisp:"$1,151", avgCost:"$1,151", oopRange:"$571 – $2,755",
         volNote:"59.8 million in 2021, including 12 million+ pregnancy-related ultrasounds.",
         costRange:"Range $100 – $1,000+",
@@ -1016,7 +1014,7 @@
         sources:[ {t:"Won et al. (2024)"} ] },
 
       { key:"mammo", name:"Mammography", cat:"radio",
-        volume:45, volDisp:"~45M / yr",
+        volume:45, volDisp:"45M / yr",
         cost:931.40, costDisp:"$931", avgCost:"$931", oopRange:"$354 – $1,735",
         volNote:"~45 million as of 2025.",
         costRange:"~$234 out-of-pocket for 2D · Range $100 – $600 (2D/3D)",
@@ -1024,7 +1022,7 @@
         sources:[ {t:"FDA (2025)"} ] },
 
       { key:"mri", name:"MRI", cat:"mag",
-        volume:40, volDisp:"~40M / yr",
+        volume:40, volDisp:"40M / yr",
         cost:4248.42, costDisp:"$4,248", avgCost:"$4,248", oopRange:"$1,517 – $7,209",
         volNote:"37.98 million, cross-referenced as 'nearly 40 million.'",
         costRange:"Range $400 – $12,000",
@@ -1056,7 +1054,7 @@
         sources:[ {t:"Prout et al. (2019)"} ] },
 
       { key:"pet", name:"PET Scan", cat:"nuc",
-        volume:2, volDisp:"~2M / yr",
+        volume:2, volDisp:"2M / yr",
         cost:10111.58, costDisp:"$10,112", avgCost:"$10,112", oopRange:"$6,311 – $15,220",
         volNote:"1.9 million PET/CT as of 2016.",
         costRange:"Range $1,300 – $12,848",
@@ -1138,10 +1136,10 @@
         var vref = VREF[d.key] || (i+1);
         var statBlock =
           '<div class="statcell">' +
-            '<div class="statcol"><div class="sk">Annual scan volume<sup class="ast">*</sup></div><div class="sv">'+volNum+'<a class="vol-ref" href="#ref-'+vref+'" title="Jump to source">'+vref+'</a></div></div>' +
+            '<div class="statcol"><div class="sk">Annual scan volume</div><div class="sv">'+volNum+'<a class="vol-ref" href="#ref-'+vref+'" title="Jump to source">['+vref+']</a></div></div>' +
             (d.avgCost
-              ? '<div class="statcol"><div class="sk">Avg. out-of-pocket<sup class="ast">**</sup></div><div class="sv">'+d.avgCost+'</div></div>' +
-                '<div class="statcol"><div class="sk">Price range<sup class="ast">**</sup></div><div class="sv sv-range">'+d.oopRange+'</div></div>'
+              ? '<div class="statcol"><div class="sk">Avg. out-of-pocket</div><div class="sv">'+d.avgCost+'</div></div>' +
+                '<div class="statcol"><div class="sk">Price range</div><div class="sv sv-range">'+d.oopRange+'</div></div>'
               : '<div class="statcol"><div class="sk">Out-of-pocket</div><div class="sv sv-range">Not available</div></div>') +
           '</div>';
 
