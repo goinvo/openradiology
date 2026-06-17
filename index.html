@@ -6,7 +6,7 @@
 <title>Radiology 101</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..600&family=Libertinus+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --cream:   #E2F2FC;
@@ -17,7 +17,7 @@
   --accent:  #255B7E;
   --line:    #c2dded;
   --serif:   "Libertinus Serif", Georgia, serif;
-  --sans:    "DM Sans", system-ui, -apple-system, sans-serif;
+  --sans:    "Libertinus Serif", Georgia, serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -107,20 +107,6 @@ em { font-style: italic; }
   transition: all .25s ease;
 }
 .feedback-btn:hover { background: var(--ink); color: var(--cream); }
-.fb-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 0 var(--accent);
-  animation: pulse 2.4s infinite;
-  flex-shrink: 0;
-}
-.feedback-btn:hover .fb-dot { background: var(--cream); animation: none; }
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(37,91,126,.5); }
-  70%  { box-shadow: 0 0 0 6px rgba(37,91,126,0); }
-  100% { box-shadow: 0 0 0 0 rgba(37,91,126,0); }
-}
 
 /* ── Hero shell ── */
 .hero {
@@ -159,12 +145,12 @@ em { font-style: italic; }
   box-shadow: 0 0 26px 6px rgba(37,91,126,.4);
   opacity: 0;
 }
-.beam.is-go { animation: beamdrop 1.5s cubic-bezier(.6,0,.2,1) forwards; }
+.beam.is-go { animation: beamdrop 700ms cubic-bezier(.6,0,.2,1) forwards; }
 @keyframes beamdrop {
   0%   { opacity: 0; top: 0; }
   8%   { opacity: 1; }
   92%  { opacity: 1; }
-  100% { opacity: 0; top: 78vh; }
+  100% { opacity: 0; top: 100vh; }
 }
 
 /* ── Hero inner ── */
@@ -205,7 +191,7 @@ em { font-style: italic; }
   clip-path: inset(0 0 -.12em 0);
 }
 @media (prefers-reduced-motion: no-preference) {
-  .scan-title.is-in { animation: scanReveal 1s cubic-bezier(.6,0,.2,1) .35s both; }
+  .scan-title.is-in { animation: scanReveal 250ms cubic-bezier(.6,0,.2,1) 0s both; }
 }
 @keyframes scanReveal {
   from { clip-path: inset(0 0 100% 0); }
@@ -216,7 +202,7 @@ em { font-style: italic; }
 .r { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: no-preference) {
   .reveal-root.is-in .r {
-    animation: revUp .8s cubic-bezier(.2,.75,.2,1) both;
+    animation: revUp 500ms cubic-bezier(.2,.75,.2,1) both;
     animation-delay: var(--d, 0ms);
   }
 }
@@ -324,6 +310,60 @@ em { font-style: italic; }
   .index-item .ix-num { font-size: 22px; width: 38px; }
   .index-item .ix-title { font-size: 21px; }
 }
+
+/* ── Footer ── */
+.site-footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--line);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 48px 64px;
+}
+.footer-credit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+.footer-text { flex: 1; }
+.footer-credit .gi-logo {
+  height: 40px;
+  width: auto;
+  flex: none;
+  display: block;
+  transition: opacity .25s ease;
+}
+.footer-credit a.gi-link { flex: none; }
+.footer-credit a.gi-link:hover .gi-logo { opacity: .65; }
+.footer-credit .byline {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.footer-license {
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.footer-license a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line);
+}
+.footer-license a:hover { text-decoration-color: var(--accent); }
+@media (max-width: 880px) {
+  .site-footer { padding-left: 22px; padding-right: 22px; }
+}
+@media (max-width: 540px) {
+  .footer-credit { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+  .footer-credit .byline { font-size: 16px; }
+}
 </style>
 </head>
 <body>
@@ -344,8 +384,7 @@ em { font-style: italic; }
         <span class="tnl-n">03</span>
         <span class="tnl-t">Patient Journey</span>
       </a>
-      <a class="feedback-btn" href="mailto:hello@goinvo.com">
-        <span class="fb-dot"></span>
+      <a class="feedback-btn" href="mailto:hello@goinvo.com?subject=Radiology101%20Feedback">
         <span class="fb-label">Feedback</span>
       </a>
     </nav>
@@ -358,12 +397,12 @@ em { font-style: italic; }
 
   <div class="hero-inner reveal-root" id="reveal">
 <h1 class="hero-title scan-title" id="scanTitle">Radiology <em>101</em></h1>
-    <p class="hero-lede r" style="--d:820ms">
+    <p class="hero-lede r" style="--d:200ms">
       A three part series on how medical imaging works in America: what it costs, where it strains, and what it feels like to be scanned.
     </p>
 
     <ol class="index-list">
-      <li class="index-item r" style="--d:980ms">
+      <li class="index-item r" style="--d:330ms">
         <a href="radiology-stats.html" style="display:contents">
           <span class="ix-num">01</span>
           <span class="ix-body">
@@ -374,7 +413,7 @@ em { font-style: italic; }
         </a>
         <span class="ix-rule"></span>
       </li>
-      <li class="index-item r" style="--d:1100ms">
+      <li class="index-item r" style="--d:400ms">
         <a href="top-problems.html" style="display:contents">
           <span class="ix-num">02</span>
           <span class="ix-body">
@@ -385,7 +424,7 @@ em { font-style: italic; }
         </a>
         <span class="ix-rule"></span>
       </li>
-      <li class="index-item r" style="--d:1220ms">
+      <li class="index-item r" style="--d:470ms">
         <a href="patient-journey.html" style="display:contents">
           <span class="ix-num">03</span>
           <span class="ix-body">
@@ -399,6 +438,18 @@ em { font-style: italic; }
     </ol>
   </div>
 </header>
+
+<footer class="site-footer">
+  <div class="footer-credit">
+    <div class="footer-text">
+      <p class="byline">By Alexandra Coston, Victoria Liu, and Niki Wang, with Eric Benoit, Juhan Sonin, and Shirley Xu</p>
+      <p class="footer-license">This project and designs are licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="noopener">creative commons attribution</a>.</p>
+    </div>
+    <a class="gi-link" href="https://goinvo.com" target="_blank" rel="noopener" aria-label="GoInvo">
+      <img class="gi-logo" src="goinvo-logo.svg" alt="GoInvo" width="98" height="52">
+    </a>
+  </div>
+</footer>
 
 <script>
   const topbar = document.getElementById('topbar');
