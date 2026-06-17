@@ -416,19 +416,17 @@
 .refnote{ font-size:13.5px; color:var(--ink-faint); margin-top:7px; line-height:1.5; }
 
 /* ---- footer ---- */
-.sitefooter{ margin-top:54px; }
-.sitefooter .ft-rule{ height:1px; background:var(--line); }
-.sitefooter .ft-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
-  gap:12px 28px; padding:24px 2px 8px; }
-.sitefooter .ft-license{ margin:0; font-size:13.5px; color:var(--ink-faint); line-height:1.5; }
-.sitefooter .ft-license b{ color:var(--ink-soft); font-weight:560; }
-.sitefooter .ft-license a{ color:var(--accent); text-decoration:none;
+.site-footer{ margin-top:54px; border-top:1px solid var(--line); padding-top:24px; padding-bottom:32px; }
+.footer-credit{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px 28px; }
+.footer-text{ display:flex; flex-direction:column; gap:4px; }
+.byline{ margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.5; }
+.footer-license{ margin:0; font-size:13px; color:var(--ink-faint); line-height:1.5; }
+.footer-license a{ color:var(--accent); text-decoration:none;
   border-bottom:1px solid color-mix(in srgb, var(--accent) 38%, transparent); }
-.sitefooter .ft-license a:hover{ color:var(--accent-deep); }
-.sitefooter .ft-links{ display:flex; gap:22px; align-items:center; }
-.sitefooter .ft-links a{ font-family:var(--font-mono); font-size:12px; letter-spacing:.04em;
-  color:var(--ink-soft); text-decoration:none; }
-.sitefooter .ft-links a:hover{ color:var(--accent); }
+.footer-license a:hover{ color:var(--accent-deep); }
+.gi-link{ display:inline-flex; flex-shrink:0; }
+.gi-logo{ display:block; opacity:.75; }
+.gi-logo:hover{ opacity:1; }
 
 @media (max-width:1080px){
   .stage{ grid-template-columns:1fr; }
@@ -735,5 +733,17 @@ window.RAD = (function(){
     }, { passive: true });
   })();
 </script>
+
+<footer class="site-footer">
+  <div class="footer-credit">
+    <div class="footer-text">
+      <p class="byline">By Alexandra Coston, Victoria Liu, and Niki Wang, with Eric Benoit, Juhan Sonin, and Shirley Xu</p>
+      <p class="footer-license">This project and designs are licensed under <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="noopener">creative commons attribution</a>.</p>
+    </div>
+    <a class="gi-link" href="https://goinvo.com" target="_blank" rel="noopener" aria-label="GoInvo">
+      <img class="gi-logo" src="goinvo-logo.svg" alt="GoInvo" width="98" height="52">
+    </a>
+  </div>
+</footer>
 </body>
 </html>
