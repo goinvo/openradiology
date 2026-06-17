@@ -160,7 +160,7 @@ em { font-style: italic; }
   z-index: 2;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 120px 48px 90px;
+  padding: 90px 48px 24px;
   width: 100%;
 }
 .hero-eyebrow {
@@ -369,11 +369,20 @@ em { font-style: italic; }
 }
 
 /* ---------- references ---------- */
-.refs { max-width: 1180px; margin: clamp(64px, 9vw, 104px) auto 0; padding: 28px 48px 0; border-top: 1px solid var(--line-2); scroll-margin-top: 96px; box-sizing: border-box; }
+.refs { max-width: 1180px; margin: clamp(64px, 9vw, 104px) auto 0; padding: 0 48px 64px; scroll-margin-top: 96px; box-sizing: border-box; }
 .refs-head { max-width: 62ch; }
 .refs-k { font-family: var(--sans); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
-.refs-head h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -.015em; color: var(--ink); margin: 10px 0 0; }
-.reflist { list-style: none; margin: 26px 0 0; padding: 0; max-width: 760px; border-top: 1px solid var(--line); }
+.refs-toggle {
+  appearance: none; border: 0; background: none; cursor: pointer;
+  font-family: var(--sans); font-size: 13.5px; letter-spacing: .02em; font-weight: 600;
+  color: var(--ink); padding: 0; margin-top: 14px;
+  border-bottom: 1px solid var(--line-2); transition: border-color .2s ease, color .2s ease;
+}
+.refs-toggle::after { content: " ↓"; color: var(--accent); }
+.refs-toggle[aria-expanded="true"]::after { content: " ↑"; }
+.refs-toggle:hover { border-color: var(--ink); }
+.reflist { display: none; list-style: none; margin: 26px 0 0; padding: 0; max-width: 760px; border-top: 1px solid var(--line); }
+.reflist.open { display: block; }
 .refitem { display: grid; grid-template-columns: 34px 1fr; gap: 6px 16px; align-items: start; padding: 16px 2px; border-bottom: 1px solid var(--line); scroll-margin-top: 96px; }
 .refnum { font-family: var(--sans); font-size: 12px; color: #1C3D52; font-weight: 600; padding-top: 2px; font-feature-settings: "tnum"; }
 .refentry + .refentry { margin-top: 14px; }
@@ -391,7 +400,7 @@ em { font-style: italic; }
   --amber:#1C3D52; --rust:#16324F; --dusty-rose:#C97B6E; --slate-blue:#4A6B7C; --hindsight:#7396B0; --rule:1px solid #c2dded;
   --mono-num:'Libertinus Serif', system-ui, -apple-system, sans-serif;
   font-family:'Libertinus Serif',sans-serif; font-weight:300; font-size:15px; line-height:1.6; color:var(--ink);
-  max-width: 1180px; margin: clamp(40px, 6vw, 72px) auto 0; padding: 0 48px; box-sizing: border-box; }
+  max-width: 1180px; margin: clamp(8px, 2vw, 16px) auto 0; padding: 0 48px; box-sizing: border-box; }
 .glance *, .glance *::before, .glance *::after { box-sizing:border-box; margin:0; padding:0; }
 .glance .page-eyebrow { font-family:'Libertinus Serif',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--warm-gray); margin-bottom:16px; }
 .glance .page-title { font-family:'Libertinus Serif', Georgia, 'Times New Roman', serif; font-size:clamp(40px,6.6vw,78px); font-weight:400; line-height:1.0; letter-spacing:-0.018em; margin-bottom:56px; }
@@ -740,9 +749,9 @@ em { font-style: italic; }
 <section class="refs">
   <div class="refs-head">
     <div class="refs-k">References</div>
-    <h2>Sources &amp; Citations.</h2>
   </div>
-  <ol class="reflist">
+  <button class="refs-toggle" id="refs-toggle" aria-expanded="false" aria-controls="reflist">Show references</button>
+  <ol class="reflist" id="reflist">
     <li class="refitem" id="ref-1"><span class="refnum">01</span><div>
       <div class="refentry"><a class="reftitle" href="https://medicushcs.com/resources/navigating-the-radiologist-shortage" target="_blank" rel="noopener">Navigating the Radiologist Shortage: Strategies for Meeting the Rising Demand in Healthcare<span class="refext"> ↗</span></a><p class="refsrc">Medicus Healthcare Solutions, 2025</p></div>
       <div class="refentry"><a class="reftitle" href="https://www.jacr.org/article/S1546-1440(24)00909-8/fulltext" target="_blank" rel="noopener">Projected US Radiologist Supply, 2025 to 2055<span class="refext"> ↗</span></a><p class="refsrc">Christensen et al., 2025</p></div>
@@ -827,6 +836,34 @@ em { font-style: italic; }
                           : (k < RUST_COUNT + ROSE_COUNT ? "var(--hindsight)" : "var(--light-gray)");
       waffle.appendChild(sq);
     }
+  })();
+
+  // references toggle
+  (function(){
+    var btn = document.getElementById('refs-toggle');
+    var list = document.getElementById('reflist');
+    if (!btn || !list) return;
+
+    function openList(){
+      list.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.textContent = 'Hide references';
+    }
+
+    btn.addEventListener('click', function(){
+      var open = list.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Hide references' : 'Show references';
+    });
+
+    // jumping to a citation (ref-sup links, or a direct #ref-N URL) should open the list
+    document.querySelectorAll('.ref-sup').forEach(function(a){
+      a.addEventListener('click', openList);
+    });
+    if (/^#ref-/.test(location.hash)) openList();
+    window.addEventListener('hashchange', function(){
+      if (/^#ref-/.test(location.hash)) openList();
+    });
   })();
 </script>
 
