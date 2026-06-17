@@ -361,18 +361,22 @@
   @keyframes refflash { 0%,100%{ background:transparent; } 18%{ background:rgba(28,61,82,.13); } }
   .colophon { margin-top: 40px; font-family: var(--sans); font-size: 10.5px; letter-spacing: .03em; line-height: 1.7; color: var(--ink-3); max-width: 760px; }
 
-  .r101-footer { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line-2); }
-  .footer-credit { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.r101-footer { margin-top: 36px; }
+  .footer-credit {
+    padding: 28px 4px 18px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
   .footer-text { flex: 1; }
-  .footer-credit .gi-logo { height: 40px; width: auto; flex: none; display: block; transition: opacity .25s ease; }
+  .footer-credit .gi-logo { height: 36px; width: auto; flex: none; display: block; opacity: 1; transition: opacity .25s ease; }
   .footer-credit a.gi-link { flex: none; }
   .footer-credit a.gi-link:hover .gi-logo { opacity: .65; }
-  .footer-credit .byline { font-family: var(--serif); font-size: 17px; line-height: 1.4; color: var(--ink-2); }
-  .footer-license { margin-top: 10px; font-family: var(--serif); font-size: 14px; line-height: 1.5; color: var(--ink-3); }
-  .footer-license a { color: #255B7E; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--line-2); }
+  .footer-credit .byline { margin: 0; font-family: 'Libertinus Serif', Georgia, serif; font-size: 16px; line-height: 1.4; color: #1C3D52; }
+  .footer-license { margin: 8px 0 0; font-family: 'Libertinus Serif', Georgia, serif; font-size: 13px; line-height: 1.5; color: #4A7490; }
+  .footer-license a { color: #255B7E; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: var(--line); }
   .footer-license a:hover { text-decoration-color: #255B7E; }
   @media (max-width: 540px) {
-    .footer-credit { flex-direction: column-reverse; align-items: flex-start; gap: 20px; }
+    .footer-credit { flex-direction: column-reverse; align-items: flex-start; gap: 16px; }
     .footer-credit .byline { font-size: 16px; }
   }
 
