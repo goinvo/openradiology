@@ -413,8 +413,15 @@
 .refnote{ font-size:13.5px; color:var(--ink-faint); margin-top:7px; line-height:1.5; }
 
 /* ---- footer ---- */
-.site-footer{ margin-top:54px; border-top:1px solid var(--line); padding-top:24px; padding-bottom:32px; }
-.footer-credit{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px 28px; }
+.site-footer{ margin-top:54px; padding-bottom:32px; }
+.footer-credit{
+  max-width:1500px;
+  margin:0 auto;
+  padding:24px 28px 0 104px;
+  border-top:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:16px 28px;
+}
 .footer-text{ display:flex; flex-direction:column; gap:4px; }
 .byline{ margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.5; }
 .footer-license{ margin:0; font-size:13px; color:var(--ink-faint); line-height:1.5; }
