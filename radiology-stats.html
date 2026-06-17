@@ -135,6 +135,7 @@
   .name { font-family: var(--display); font-size: clamp(19px, 2.3vw, 25px); font-weight: 600; line-height: 1.12; letter-spacing: -0.01em; }
   .cat { display: flex; align-items: baseline; gap: 7px; margin-top: 8px; flex-wrap: wrap; }
   .cat .lbl { font-family: var(--sans); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-2); }
+  .uses { font-family: var(--sans); font-size: 10px; letter-spacing: .01em; color: var(--ink-2); margin-top: 4px; max-width: 220px; }
   .cat .csep { font-family: var(--sans); font-size: 10px; color: var(--line-2); }
   .cat .oop { font-family: var(--sans); font-size: 11px; letter-spacing: .02em; color: var(--ink); font-weight: 500; }
   .cat .src { font-family: var(--sans); font-size: 10.5px; letter-spacing: .01em; color: var(--ink-3); }
@@ -656,6 +657,7 @@
     ------------------------------------------------------------------------- */
     var DATA = [
       { key:"dental", name:"Dental", cat:"radio",
+        uses:"Cavities, bone loss, root infections, wisdom teeth",
         volume:320, volDisp:"320M / yr",
         avgCost:'$66<a class="vol-ref" href="#ref-2" title="Jump to source">[2]</a>',
         oopRange:'$25 – $750<a class="vol-ref" href="#ref-3" title="Jump to source">[3]</a>',
@@ -664,6 +666,7 @@
         sources:[ {t:"PubMed (2023)"}, {t:"PMC · NIH"} ] },
 
       { key:"xray", name:"X-Ray", cat:"radio",
+        uses:"Bones, fractures, chest & lungs",
         volume:275, volDisp:"275M / yr",
         cost:753.64, costDisp:"$754", avgCost:"$754", oopRange:"$56 – $1,813",
         volNote:"275 million conventional radiology procedures (2016). Some sources cite this as 275 million medical X-ray exams. Separately: 8.1M interventional and 320M dental procedures.",
@@ -672,6 +675,7 @@
         sources:[ {t:"Mahesh et al. (2024)"}, {t:"NYT"}, {t:"KFF Health News"} ] },
 
       { key:"ct", name:"CT Scan", cat:"tomo",
+        uses:"Trauma, internal bleeding, tumors, stroke",
         volume:93, volDisp:"93M / yr",
         cost:3109.10, costDisp:"$3,109", avgCost:"$3,109", oopRange:"$1,108 – $6,334",
         volNote:"93 million scans in 2023.",
@@ -680,6 +684,7 @@
         sources:[ {t:"NIH (2023)"} ] },
 
       { key:"us", name:"Ultrasound", cat:"sono",
+        uses:"Pregnancy, abdominal organs, cardiac",
         volume:60, volDisp:"60M / yr",
         cost:1151.17, costDisp:"$1,151", avgCost:"$1,151", oopRange:"$571 – $2,755",
         volNote:"59.8 million in 2021, including 12 million+ pregnancy-related ultrasounds.",
@@ -688,6 +693,7 @@
         sources:[ {t:"Won et al. (2024)"} ] },
 
       { key:"mammo", name:"Mammography", cat:"radio",
+        uses:"Breast cancer screening",
         volume:45, volDisp:"45M / yr",
         cost:931.40, costDisp:"$931", avgCost:"$931", oopRange:"$354 – $1,735",
         volNote:"~45 million as of 2025.",
@@ -696,6 +702,7 @@
         sources:[ {t:"FDA (2025)"} ] },
 
       { key:"mri", name:"MRI", cat:"mag",
+        uses:"Brain, spine, soft tissue, joints",
         volume:40, volDisp:"40M / yr",
         cost:4248.42, costDisp:"$4,248", avgCost:"$4,248", oopRange:"$1,517 – $7,209",
         volNote:"37.98 million, cross-referenced as 'nearly 40 million.'",
@@ -704,6 +711,7 @@
         sources:[ {t:"Statista"}, {t:"Shah & Aran (2023)"}, {t:"UC Berkeley"} ] },
 
       { key:"fluoro", name:"Fluoroscopy", cat:"radio",
+        uses:"GI studies, catheter & joint guidance",
         volume:24, volDisp:"24M / yr",
         cost:4353.83, costDisp:"$4,354", avgCost:"$4,354", oopRange:"$921 – $14,010",
         volNote:"24 million as of 2020.",
@@ -712,6 +720,7 @@
         sources:[ {t:"IAEA"}, {t:"ORSIF"} ] },
 
       { key:"spect", name:"SPECT Scan", cat:"nuc",
+        uses:"Cardiac perfusion, brain blood flow, bone scans",
         volume:8, volDisp:"8M / yr",
         cost:6727.78, costDisp:"$6,728", avgCost:"$6,728", oopRange:"$1,478 – $9,794",
         volNote:"8 million cardiac SPECT scans.",
@@ -720,6 +729,7 @@
         sources:[ {t:"UPenn"} ] },
 
       { key:"dexa", name:"DEXA Scan", cat:"radio",
+        uses:"Bone density, osteoporosis",
         volume:2.7, volDisp:"2.7M / yr",
         cost:692.38, costDisp:"$692", avgCost:"$692", oopRange:"$340 – $1,883",
         volNote:"2.7 million as of 2019.",
@@ -728,6 +738,7 @@
         sources:[ {t:"Prout et al. (2019)"} ] },
 
       { key:"pet", name:"PET Scan", cat:"nuc",
+        uses:"Cancer staging, metabolic & brain activity",
         volume:2, volDisp:"2M / yr",
         cost:10111.58, costDisp:"$10,112", avgCost:"$10,112", oopRange:"$6,311 – $15,220",
         volNote:"1.9 million PET/CT as of 2016.",
@@ -736,6 +747,7 @@
         sources:[ {t:"Mettler et al. (2020)"} ] },
 
       { key:"angio", name:"Angiography", cat:"radio",
+        uses:"Blood-vessel blockages, aneurysms, stents",
         volume:1, volDisp:"1M / yr",
         cost:4803.17, costDisp:"$4,803", avgCost:"$4,803", oopRange:"$2,099 – $9,104",
         volNote:"1 million invasive coronary angiography as of 2014.",
@@ -822,6 +834,7 @@
           '<div class="namecell">' +
             '<div class="name">' + d.name + '</div>' +
             '<div class="cat"><span class="lbl">'+c.label+'</span></div>' +
+            (d.uses ? '<div class="uses">'+d.uses+'</div>' : '') +
           '</div>' +
           '<div class="barcell">' + statBlock + '</div>';
 
