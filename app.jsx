@@ -540,20 +540,6 @@ function App() {
         </ol>
       </section>
 
-      {/* footer */}
-      <footer className="sitefooter">
-        <div className="ft-rule"></div>
-        <div className="ft-row">
-          <p className="ft-license">
-            Licensed by <b>GoInvo</b> under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC&nbsp;BY&nbsp;4.0</a> open-source license in 2026.
-          </p>
-          <nav className="ft-links">
-            <a href="https://github.com/goinvo" target="_blank" rel="noopener noreferrer">GitHub Repo ↗</a>
-            <a href="mailto:hello@goinvo.com">Give feedback</a>
-          </nav>
-        </div>
-      </footer>
-
       {/* fixed left scrubber (day 1 → day 89) */}
       <div className="scrollrail">
         <div className="sr-cap">Day 1</div>
