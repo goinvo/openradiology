@@ -117,8 +117,24 @@
   .container { max-width: 940px; margin: 0 auto; }
   a { color: inherit; }
 
+  /* ── Scan-grid motif ── */
+  .scan-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(0deg, rgba(26,21,18,.05) 1px, transparent 1px) 0 0 / 100% 46px,
+      linear-gradient(90deg, rgba(26,21,18,.05) 1px, transparent 1px) 0 0 / 46px 100%;
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 40%, #000, transparent 78%);
+    mask-image: radial-gradient(120% 90% at 50% 40%, #000, transparent 78%);
+    opacity: 0;
+    transition: opacity .6s;
+  }
+  [data-motif="on"] .scan-grid { opacity: .7; }
+
   /* ── Masthead ── */
-  .masthead { border-bottom: 2px solid var(--ink); padding-top: clamp(34px, calc(2.6vw + 18px), 56px); padding-bottom: 22px; margin-bottom: 26px; }
+  .masthead { position: relative; overflow: hidden; border-bottom: 2px solid var(--ink); padding-top: clamp(34px, calc(2.6vw + 18px), 56px); padding-bottom: 22px; margin-bottom: 26px; }
   .masthead h1 {
     font-family: 'Libertinus Serif', Georgia, 'Times New Roman', serif;
     font-weight: 400;
@@ -507,6 +523,7 @@
 <div class="container">
 
   <header class="masthead">
+    <div class="scan-grid"></div>
     <h1>Top Problems in Radiology</h1>
     <p class="standfirst">A ranked assessment of the structural failures facing diagnostic radiology, ranked by patient reach and monetary cost, and sourced from peer-reviewed journals, medical societies, and federal data.</p>
   </header>
@@ -1016,6 +1033,7 @@ window.PROBLEMS = [
     window.addEventListener('scroll', function() {
       bar.classList.toggle('is-stuck', window.scrollY > 60);
     }, { passive: true });
+    setTimeout(function() { document.documentElement.dataset.motif = 'on'; }, 60);
   })();
 </script>
 </body>

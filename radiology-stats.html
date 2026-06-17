@@ -64,8 +64,24 @@
   }
   .eyebrow .sep { color: var(--line-2); margin: 0 .55em; }
 
+  /* ---------- scan-grid motif ---------- */
+  .scan-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(0deg, rgba(26,21,18,.05) 1px, transparent 1px) 0 0 / 100% 46px,
+      linear-gradient(90deg, rgba(26,21,18,.05) 1px, transparent 1px) 0 0 / 46px 100%;
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 40%, #000, transparent 78%);
+    mask-image: radial-gradient(120% 90% at 50% 40%, #000, transparent 78%);
+    opacity: 0;
+    transition: opacity .6s;
+  }
+  [data-motif="on"] .scan-grid { opacity: .7; }
+
   /* ---------- masthead ---------- */
-  .masthead { padding-top: 18px; }
+  .masthead { position: relative; overflow: hidden; padding-top: 18px; }
   h1.title {
     font-family: 'Libertinus Serif', Georgia, 'Times New Roman', serif;
     font-weight: 400;
@@ -487,6 +503,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', inject);
+    setTimeout(function() { document.documentElement.dataset.motif = 'on'; }, 60);
   })();
 </script>
 </head>
@@ -495,6 +512,7 @@
 
     <!-- ============ MASTHEAD ============ -->
     <header class="masthead">
+      <div class="scan-grid"></div>
       <h1 class="title">The Most Common Medical Scans in the U.S.</h1>
       <p class="dek">Every major imaging exam in the U.S., ranked by how often it’s performed.</p>
     </header>

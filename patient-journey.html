@@ -520,6 +520,23 @@
   .mrow{ grid-template-columns:46px minmax(0,1fr); gap:8px; }
   .hero h1{ font-size:42px; }
 }
+
+/* ---- scan-grid motif ---- */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(0deg, rgba(26,21,18,.05) 1px, transparent 1px) 0 0 / 100% 46px,
+    linear-gradient(90deg, rgba(26,21,18,.05) 1px, transparent 1px) 0 0 / 46px 100%;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 40%, #000, transparent 78%);
+  mask-image: radial-gradient(120% 90% at 50% 40%, #000, transparent 78%);
+  opacity: 0;
+  transition: opacity .6s;
+}
+[data-motif="on"] .hero::before { opacity: .7; }
 </style>
 </head>
 <body>
@@ -724,6 +741,7 @@ window.RAD = (function(){
   const RESULTS_DAY = 41;   // results land in the portal
   return { LANES, EVENTS, BANDS, CHECKLIST, PHASES, TOTAL_DAYS, RESULTS_DAY };
 })();
+setTimeout(function() { document.documentElement.dataset.motif = 'on'; }, 60);
 </script>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
