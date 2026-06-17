@@ -140,18 +140,19 @@
 .hero{ padding:84px 0 44px; position:relative; margin-top:66px; }
 .hero .kicker{ font-size:13px; letter-spacing:.32em; text-transform:uppercase;
   color:var(--ink-faint); margin:0 0 22px; }
-.hero h1{ font-weight:380; font-size:clamp(46px,6.6vw,92px); line-height:.98;
-  letter-spacing:-.022em; margin:0; }
-.hero h1 em{ font-style:italic; color:var(--accent); }
-.hero .sub{ font-size:clamp(19px,2vw,25px); color:var(--ink-soft); font-weight:340;
-  margin:24px 0 0; max-width:32ch; line-height:1.34; }
+.hero h1{ font-family:'Libertinus Serif', Georgia, 'Times New Roman', serif;
+  font-weight:400; font-size:clamp(40px, 6.6vw, 78px); line-height:1.0;
+  letter-spacing:-0.018em; margin:0; }
+.hero h1 em{ font-style:italic; color:#255B7E; }
+.hero .sub{ font-family:'Libertinus Serif', Georgia, 'Times New Roman', serif;
+  font-size:clamp(15px, 1.7vw, 17px); color:#5b5349;
+  margin:24px 0 0; max-width:640px; line-height:1.64; }
 .hero .meta{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px 40px; margin-top:40px;
   padding-top:30px; border-top:1px solid var(--line); max-width:660px; }
 .metric .n{ font-size:34px; font-weight:420; letter-spacing:-.01em; line-height:1; color:var(--accent); }
 .metric .l{ font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
   color:var(--ink-faint); margin-top:8px; }
-.hero .howto{ margin-top:30px; font-size:15.5px; color:var(--ink-soft); max-width:660px;
-  line-height:1.6; }
+.hero .howto{ margin-top:30px; font-size:15.5px; color:var(--ink-soft); line-height:1.6; }
 .hero .howto b{ font-weight:560; color:var(--ink); }
 
 /* ---- fixed left scroll slider (always visible) ---- */
@@ -727,8 +728,1042 @@ window.RAD = (function(){
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="app.jsx"></script>
+<script type="text/babel">
+// @ds-adherence-ignore -- omelette starter scaffold (raw elements/hex/px by design)
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;box-sizing:border-box;width:100%;min-width:0;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;box-sizing:border-box;min-width:0;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;
+    padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;
+    box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);
+    transition:transform .12s cubic-bezier(.3,.7,.4,1),box-shadow .12s}
+  .twk-chip:hover{transform:translateY(-1px);
+    box-shadow:0 0 0 .5px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.12)}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),
+    0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;
+    display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i:first-child{box-shadow:none}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+`;
+
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-omelette-chrome=""
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">
+          {children}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function TweakSection({ label, children }) {
+  return (
+    <>
+      <div className="twk-sect">{label}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+  return (
+    <TweakRow label={label} value={`${value}${unit}`}>
+      <input type="range" className="twk-slider" min={min} max={max} step={step}
+             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  const labelLen = (o) => String(typeof o === 'object' ? o.label : o).length;
+  const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
+  const fitsAsSegments = maxLen <= ({ 2: 16, 3: 10 }[options.length] ?? 0);
+  if (!fitsAsSegments) {
+    const resolve = (s) => {
+      const m = options.find((o) => String(typeof o === 'object' ? o.value : o) === s);
+      return m === undefined ? s : typeof m === 'object' ? m.value : m;
+    };
+    return <TweakSelect label={label} value={value} options={options}
+                        onChange={(s) => onChange(resolve(s))} />;
+  }
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakText({ label, value, placeholder, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <input className="twk-field" type="text" value={value} placeholder={placeholder}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+  const clamp = (n) => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({ x: 0, val: 0 });
+  const onScrubStart = (e) => {
+    e.preventDefault();
+    startRef.current = { x: e.clientX, val: value };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = (ev) => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div className="twk-num">
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <input type="number" value={value} min={min} max={max} step={step}
+             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+      {unit && <span className="twk-num-unit">{unit}</span>}
+    </div>
+  );
+}
+
+function __twkIsLight(hex) {
+  const h = String(hex).replace('#', '');
+  const x = h.length === 3 ? h.replace(/./g, (c) => c + c) : h.padEnd(6, '0');
+  const n = parseInt(x.slice(0, 6), 16);
+  if (Number.isNaN(n)) return true;
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return r * 299 + g * 587 + b * 114 > 148000;
+}
+
+const __TwkCheck = ({ light }) => (
+  <svg viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M3 7.2 5.8 10 11 4.2" fill="none" strokeWidth="2.2"
+          strokeLinecap="round" strokeLinejoin="round"
+          stroke={light ? 'rgba(0,0,0,.78)' : '#fff'} />
+  </svg>
+);
+
+function TweakColor({ label, value, options, onChange }) {
+  if (!options || !options.length) {
+    return (
+      <div className="twk-row twk-row-h">
+        <div className="twk-lbl"><span>{label}</span></div>
+        <input type="color" className="twk-swatch" value={value}
+               onChange={(e) => onChange(e.target.value)} />
+      </div>
+    );
+  }
+  const key = (o) => String(JSON.stringify(o)).toLowerCase();
+  const cur = key(value);
+  return (
+    <TweakRow label={label}>
+      <div className="twk-chips" role="radiogroup">
+        {options.map((o, i) => {
+          const colors = Array.isArray(o) ? o : [o];
+          const [hero, ...rest] = colors;
+          const sup = rest.slice(0, 4);
+          const on = key(o) === cur;
+          return (
+            <button key={i} type="button" className="twk-chip" role="radio"
+                    aria-checked={on} data-on={on ? '1' : '0'}
+                    aria-label={colors.join(', ')} title={colors.join(' · ')}
+                    style={{ background: hero }}
+                    onClick={() => onChange(o)}>
+              {sup.length > 0 && (
+                <span>
+                  {sup.map((c, j) => <i key={j} style={{ background: c }} />)}
+                </span>
+              )}
+              {on && <__TwkCheck light={__twkIsLight(hero)} />}
+            </button>
+          );
+        })}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakButton({ label, onClick, secondary = false }) {
+  return (
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+            onClick={onClick}>{label}</button>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+  TweakText, TweakNumber, TweakColor, TweakButton,
+});
+</script>
+<script type="text/babel">
+const { useState, useEffect, useRef, useMemo, useCallback, useLayoutEffect } = React;
+const { LANES, EVENTS, BANDS, CHECKLIST, PHASES, TOTAL_DAYS, RESULTS_DAY } = window.RAD;
+
+const UNIT = 52; // px per calendar day — uniform, so every day is evenly spaced
+const PAD = 28; // top padding inside the flow
+
+/* ------------------------------------------------------ references --- */
+const REFERENCES = [
+{ title: "Survey of Physician Appointment Wait Times",
+  source: "AMN Healthcare / Merritt Hawkins", year: "2022",
+  url: "https://www.amnhealthcare.com/amn-insights/physician/surveys/" },
+{ title: "Prior Authorization Physician Survey",
+  source: "American Medical Association", year: "2023",
+  url: "https://www.ama-assn.org/practice-management/prior-authorization/prior-authorization-research-reports" },
+{ title: "X-ray: Imaging test quickly helps find diagnosis",
+  source: "Mayo Clinic", year: "2024",
+  url: "https://www.mayoclinic.org/tests-procedures/x-ray/about/pac-20395303" },
+{ title: "Imaging Interpretation Turnaround Time More Than Doubled Between 2014 and 2023",
+  source: "Neiman Health Policy Institute / JACR", year: "2026",
+  url: "https://www.neimanhpi.org/press-releases/imaging-interpretation-turnaround-time-more-than-doubled-between-2014-and-2023/" },
+{ title: "Quantifying the Impact of Noninterpretive Tasks on Radiology Report Turn-Around Time",
+  source: "PubMed-indexed radiology turnaround study", year: "2017",
+  url: "https://pubmed.ncbi.nlm.nih.gov/28916177/" },
+{ title: "How Long Is the Medical Billing Cycle?",
+  source: "Shoreline Medical Billing", year: "",
+  url: "https://www.shorelinemb.com/blog/how-long-medical-billing-cycle.html" }];
+
+
+/* ------------------------------------------------------ tone copy --- */
+const COPY = {
+  guide: {
+    kicker: "",
+    sub: "A timeline of the medical imaging process, from when symptoms first begin to when clarity is achieved.",
+    checkSub: "Items appear as you reach them. Tick them off as you go!"
+  },
+  plain: {
+    kicker: "",
+    sub: "From first symptom to getting back on your feet is about 94 days and six parties. This shows every step and how long each one takes.",
+    checkSub: "Items unlock as you reach that day. Check them off as you go."
+  },
+  reassure: {
+    kicker: "",
+    sub: "If the waiting feels long, it isn't just you. Here's the whole path, so you always know what comes next.",
+    checkSub: "We'll surface what to bring as you reach each step. Tick things off as you go."
+  }
+};
+
+/* ------------------------------------------------------ tweak config --- */
+const PALETTES = [
+{ name: "Clinical", hues: [240, 168, 64, 305, 200, 28], primary: 240 },
+{ name: "Forest", hues: [250, 150, 95, 330, 200, 35], primary: 250 },
+{ name: "Dusk", hues: [285, 200, 60, 22, 235, 0], primary: 285 }];
+
+const FONTS = {
+  Editorial: { body: '"Linux Libertine", "Newsreader", Georgia, serif', mono: '"IBM Plex Mono", ui-monospace, monospace' },
+  Classic: { body: 'Georgia, "Times New Roman", serif', mono: '"IBM Plex Mono", ui-monospace, monospace' },
+  Modern: { body: '"Inter", system-ui, sans-serif', mono: '"IBM Plex Mono", ui-monospace, monospace' }
+};
+const DENSITY = { compact: 0.82, regular: 1, comfy: 1.2 };
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": "Clinical",
+  "font": "Editorial",
+  "density": "regular",
+  "tone": "guide"
+} /*EDITMODE-END*/;
+
+/* ------------------------------------------------------ helpers --- */
+const laneById = Object.fromEntries(LANES.map((l) => [l.id, l]));
+function phaseFor(day) {const p = PHASES.find((p) => day >= p.from && day <= p.to);return p ? p.name : "";}
+const CheckIcon = () =>
+<svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>;
+
+function buildLayout() {
+  const evDays = [...new Set(EVENTS.map((e) => e.day))].sort((a, b) => a - b);
+  const firstDay = evDays[0],lastDay = evDays[evDays.length - 1];
+  const slots = {};LANES.forEach((l) => {slots[l.id] = [];});
+  evDays.forEach((day) => LANES.forEach((l) => {
+    const evs = EVENTS.filter((e) => e.day === day && e.lane === l.id);
+    if (evs.length) slots[l.id].push({ day, events: evs });
+  }));
+  const bandsByLane = {};LANES.forEach((l) => {bandsByLane[l.id] = [];});
+  BANDS.forEach((b) => bandsByLane[b.lane].push(b));
+  return { evDays, firstDay, lastDay, slots, bandsByLane };
+}
+
+/* ------------------------------------------------------ EventCard --- */
+function EventCard({ ev, side, active, lit }) {
+  const lane = laneById[ev.lane];
+  return (
+    <div className={`card ${lane.cls} ${active ? "" : "dimmed"} ${lit && active ? "lit" : ""}`} tabIndex={0}>
+      <div className="clane"><span className="dot"></span>{lane.name}{ev.billing ? " · Billing" : ""}</div>
+      <div className="ctitle">
+        <span>{ev.title}</span>
+        <span className="donecheck"><CheckIcon /></span>
+      </div>
+      <div className={`pop ${side}`}>
+        <div className="pday mono">{phaseFor(ev.day)}{ev.billing && phaseFor(ev.day) !== "Billing" ? " · Billing" : ""}</div>
+        {ev.desc}
+      </div>
+    </div>);
+}
+
+/* ------------------------------------------------------ Checklist --- */
+function Checklist({ currentDay, activeDay, copy, onJump }) {
+  const [checked, setChecked] = useState(() => {
+    try {return JSON.parse(localStorage.getItem("rad_checked")) || CHECKLIST.map(() => false);}
+    catch {return CHECKLIST.map(() => false);}
+  });
+  const prevUnlocked = useRef(0);
+  const [justIdx, setJustIdx] = useState(-1);
+
+  const unlockedCount = CHECKLIST.filter((c) => currentDay >= c.day).length;
+  useEffect(() => {
+    if (unlockedCount > prevUnlocked.current) {
+      setJustIdx(unlockedCount - 1);
+      const t = setTimeout(() => setJustIdx(-1), 1200);
+      prevUnlocked.current = unlockedCount;
+      return () => clearTimeout(t);
+    }
+    prevUnlocked.current = unlockedCount;
+  }, [unlockedCount]);
+
+  const toggle = (i) => setChecked((c) => {
+    const n = [...c];n[i] = !n[i];
+    try {localStorage.setItem("rad_checked", JSON.stringify(n));} catch {}
+    return n;
+  });
+
+  const nextIdx = CHECKLIST.findIndex((c, i) => currentDay >= c.day && !checked[i]);
+
+  return (
+    <div className="checklist">
+      <div className="chead">
+        <h3>What you'll need</h3>
+        <span className="cnt mono">{unlockedCount} / {CHECKLIST.length}</span>
+      </div>
+      <p className="csub">{copy.checkSub}</p>
+      <div className="cnow"><span className="pin"></span>{phaseFor(currentDay)}</div>
+      {nextIdx >= 0 &&
+      <div className="nextup">
+          <div className="nk">Next, bring</div>
+          <div className="nt">{CHECKLIST[nextIdx].text}</div>
+        </div>
+      }
+      <ul className="items">
+        {CHECKLIST.map((c, i) => {
+          const unlocked = currentDay >= c.day;
+          const isChecked = checked[i] && unlocked;
+          const isActive = activeDay != null && c.day === activeDay;
+          return (
+            <li key={i}
+            className={`item ${unlocked ? "" : "locked"} ${isChecked ? "checked" : ""} ${i === nextIdx ? "isnext" : ""} ${isActive ? "active" : ""} ${justIdx === i ? "justunlocked" : ""}`}
+            onClick={() => onJump(c.day)} title={`Jump to day ${c.day}`}>
+              <div className="box" onClick={(e) => {e.stopPropagation();if (unlocked) toggle(i);}} role="checkbox" aria-checked={isChecked}>
+                <CheckIcon />
+              </div>
+              <div className="it-main">
+                <div className="it-row">
+                  <span className="it-text">{c.text}</span>
+                  <span className="it-daytag mono">Day {c.day}</span>
+                </div>
+                <div className="it-detail">{c.detail}</div>
+              </div>
+            </li>);
+        })}
+      </ul>
+    </div>);
+}
+
+/* ------------------------------------------------------ Tweaks --- */
+function PaletteControl({ value, onChange }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: "4px 0 2px" }}>
+      {PALETTES.map((p) => {
+        const sel = p.name === value;
+        return (
+          <button key={p.name} onClick={() => onChange(p.name)}
+          style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer",
+            background: sel ? "rgba(255,255,255,.07)" : "transparent",
+            border: "1px solid " + (sel ? "rgba(255,255,255,.35)" : "rgba(255,255,255,.12)"),
+            borderRadius: 9, padding: "8px 11px", color: "inherit", font: "inherit", textAlign: "left" }}>
+            <span style={{ display: "flex", gap: 4 }}>
+              {p.hues.map((h, i) => <span key={i} style={{ width: 13, height: 13, borderRadius: 99, background: `oklch(0.6 0.13 ${h})` }} />)}
+            </span>
+            <span style={{ fontSize: 13 }}>{p.name}</span>
+          </button>);
+      })}
+    </div>);
+}
+
+function TweaksUI({ t, setTweak }) {
+  return (
+    <TweaksPanel>
+      <TweakSection label="Accent palette" />
+      <PaletteControl value={t.palette} onChange={(v) => setTweak("palette", v)} />
+      <TweakSection label="Typography" />
+      <TweakRadio label="Type" value={t.font} options={["Editorial", "Classic", "Modern"]} onChange={(v) => setTweak("font", v)} />
+      <TweakSection label="Layout" />
+      <TweakRadio label="Density" value={t.density} options={["compact", "regular", "comfy"]} onChange={(v) => setTweak("density", v)} />
+      <TweakSection label="Tone of voice" />
+      <TweakRadio label="Tone" value={t.tone} options={["guide", "plain", "reassure"]} onChange={(v) => setTweak("tone", v)} />
+    </TweaksPanel>);
+}
+
+/* ------------------------------------------------------ App --- */
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const { evDays, firstDay, lastDay, slots, bandsByLane } = useMemo(buildLayout, []);
+  const [activeLanes, setActiveLanes] = useState(() => new Set(LANES.map((l) => l.id)));
+  const copy = COPY[t.tone] || COPY.guide;
+
+  // ---- responsive: single-column chronological model on mobile ----
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 760px)").matches);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 760px)");
+    const on = () => setIsMobile(mq.matches);
+    mq.addEventListener ? mq.addEventListener("change", on) : mq.addListener(on);
+    return () => {mq.removeEventListener ? mq.removeEventListener("change", on) : mq.removeListener(on);};
+  }, []);
+
+  const mRows = useMemo(() => {
+    const dayMap = {};
+    EVENTS.forEach((e) => {(dayMap[e.day] = dayMap[e.day] || []).push(e);});
+    const items = [];
+    Object.keys(dayMap).map(Number).forEach((d) => items.push({ type: "day", day: d, key: "d" + d, events: dayMap[d] }));
+    BANDS.forEach((b, i) => items.push({ type: "band", day: b.start, endDay: b.end, key: "b" + i, band: b }));
+    items.sort((a, b) => a.day - b.day || (a.type === "band" ? -1 : 1));
+    return items;
+  }, []);
+
+  const y = (day) => PAD + (day - firstDay) * UNIT;
+  const flowH = PAD + (lastDay - firstDay) * UNIT + 96;
+
+  // ---- apply tweaks ----
+  useEffect(() => {
+    const r = document.documentElement.style;
+    const pal = PALETTES.find((p) => p.name === t.palette) || PALETTES[0];
+    const ln = ["patient", "physician", "insurance", "radiology", "digital", "transport"];
+    pal.hues.forEach((h, i) => r.setProperty(`--h-${ln[i]}`, h));
+    r.setProperty("--h-primary", pal.primary);
+    const f = FONTS[t.font] || FONTS.Editorial;
+    r.setProperty("--font-body", f.body);
+    r.setProperty("--font-mono", f.mono);
+    r.setProperty("--d", DENSITY[t.density] || 1);
+  }, [t.palette, t.font, t.density]);
+
+  // ---- scroll-spy ----
+  const flowRef = useRef(null);
+  const mflowRef = useRef(null);
+  const mPosRef = useRef([]);
+  const geoRef = useRef({ top: 0, colLeft: 120, right: 900 });
+  const [geo, setGeo] = useState({ colLeft: 120, right: 900 });
+  const [spy, setSpy] = useState({ day: firstDay, visible: false });
+  const LINE = 0.46;
+
+  const measureMobilePositions = useCallback(() => {
+    const flow = mflowRef.current;if (!flow) return;
+    const rows = [...flow.querySelectorAll("[data-day]")];
+    mPosRef.current = rows.map((el) => {
+      const r = el.getBoundingClientRect();
+      return {
+        day: +el.dataset.day,
+        endDay: el.dataset.endDay ? +el.dataset.endDay : +el.dataset.day,
+        type: el.dataset.type,
+        top: r.top + window.scrollY,
+        bottom: r.bottom + window.scrollY
+      };
+    }).sort((a, b) => a.top - b.top);
+  }, []);
+
+  const recompute = useCallback(() => {
+    if (isMobile) {
+      measureMobilePositions();
+      const m = 16;
+      const w = window.innerWidth;
+      setGeo((g) => g.colLeft === m && g.right === w - m ? g : { colLeft: m, right: w - m });
+      const flow = mflowRef.current;
+      if (flow) {const fr = flow.getBoundingClientRect();geoRef.current = { top: fr.top + window.scrollY, colLeft: m, right: w - m };}
+      return;
+    }
+    const flow = flowRef.current;if (!flow) return;
+    const fr = flow.getBoundingClientRect();
+    const railW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--rail-w")) || 72;
+    geoRef.current = { top: fr.top + window.scrollY, colLeft: fr.left + railW, right: fr.right };
+    setGeo((g) => g.colLeft === fr.left + railW && g.right === fr.right ? g : { colLeft: fr.left + railW, right: fr.right });
+  }, [isMobile, measureMobilePositions]);
+
+  const measure = useCallback(() => {
+    const lineDoc = window.scrollY + window.innerHeight * LINE;
+    if (isMobile) {
+      const arr = mPosRef.current;
+      const flow = mflowRef.current;
+      if (!arr.length || !flow) {setSpy((p) => p.visible ? { ...p, visible: false } : p);return;}
+      let cur = arr[0];
+      for (const row of arr) {if (lineDoc >= row.top) cur = row;else break;}
+      let day = cur.day;
+      if (cur.type === "band" && cur.bottom > cur.top) {
+        const frac = Math.max(0, Math.min(1, (lineDoc - cur.top) / (cur.bottom - cur.top)));
+        day = cur.day + frac * (cur.endDay + 1 - cur.day);
+      }
+      day = Math.max(firstDay, Math.min(lastDay, day));
+      const fr = flow.getBoundingClientRect();
+      const visible = fr.top < window.innerHeight * LINE && fr.bottom > window.innerHeight * LINE + 10;
+      setSpy((prev) => Math.abs(prev.day - day) < 0.05 && prev.visible === visible ? prev : { day, visible });
+      return;
+    }
+    const { top } = geoRef.current;
+    let day = firstDay + (lineDoc - top - PAD) / UNIT;
+    day = Math.max(firstDay, Math.min(lastDay, day));
+    const fr = flowRef.current && flowRef.current.getBoundingClientRect();
+    const visible = fr ? fr.top < window.innerHeight * LINE && fr.bottom > window.innerHeight * LINE + 10 : false;
+    setSpy((prev) => Math.abs(prev.day - day) < 0.08 && prev.visible === visible ? prev : { day, visible });
+  }, [isMobile, firstDay, lastDay]);
+
+  const scrollToDay = useCallback((target, smooth) => {
+    if (isMobile) {
+      const arr = mPosRef.current;if (!arr.length) return;
+      let row = arr.find((r) => target >= r.day && target <= r.endDay);
+      if (!row) row = arr.reduce((best, r) => Math.abs(r.day - target) < Math.abs(best.day - target) ? r : best, arr[0]);
+      let docY = row.top;
+      if (row.type === "band" && row.endDay > row.day) {
+        const frac = (target - row.day) / (row.endDay + 1 - row.day);
+        docY = row.top + frac * (row.bottom - row.top);
+      }
+      window.scrollTo({ top: docY - window.innerHeight * LINE, behavior: smooth ? "smooth" : "auto" });
+      return;
+    }
+    const { top } = geoRef.current;
+    const docY = top + PAD + (target - firstDay) * UNIT;
+    window.scrollTo({ top: docY - window.innerHeight * LINE, behavior: smooth ? "smooth" : "auto" });
+  }, [isMobile, firstDay]);
+
+  useLayoutEffect(() => {recompute();measure();}, [t.density, t.font, isMobile, recompute, measure]);
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {if (raf) return;raf = requestAnimationFrame(() => {raf = 0;measure();});};
+    const onResize = () => {recompute();measure();};
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    const ro = new ResizeObserver(() => {recompute();measure();});
+    if (document.body) ro.observe(document.body);
+    const t1 = setTimeout(() => {recompute();measure();}, 350);
+    const t2 = setTimeout(() => {recompute();measure();}, 900);
+    recompute();measure();
+    return () => {window.removeEventListener("scroll", onScroll);window.removeEventListener("resize", onResize);ro.disconnect();clearTimeout(t1);clearTimeout(t2);};
+  }, [recompute, measure]);
+
+  // ---- derive lit/statuses ----
+  const dayCont = spy.day;
+  const sliderDay = Math.round(dayCont);
+  const nearEvent = evDays.reduce((best, d) => Math.abs(d - dayCont) < Math.abs(best - dayCont) ? d : best, evDays[0]);
+  const activeBand = BANDS.find((b) => dayCont >= b.start && dayCont < b.end + 1);
+  const litDay = activeBand ? null : nearEvent;
+
+  const slotStatus = (d) => litDay != null ?
+  d < litDay ? "past" : d === litDay ? "now" : "future" :
+  d < dayCont ? "past" : "future";
+  const railStatus = (d) => litDay != null && d === litDay ? "now" : d < dayCont ? "past" : "future";
+  const bandStatus = (b) => dayCont >= b.end + 1 ? "past" : dayCont < b.start ? "future" : "now";
+
+  // ---- filters ----
+  const toggleLane = (id) => setActiveLanes((prev) => {
+    const n = new Set(prev);
+    if (n.size === LANES.length) return new Set([id]);
+    if (n.has(id)) n.delete(id);else n.add(id);
+    if (n.size === 0) return new Set(LANES.map((l) => l.id));
+    return n;
+  });
+  const allOn = activeLanes.size === LANES.length;
+  const fill = (sliderDay - 1) / (TOTAL_DAYS - 1) * 100;
+
+  return (
+    <div className="app">
+      {/* HERO */}
+      <header className="hero">
+        {copy.kicker ? <p className="kicker mono">{copy.kicker}</p> : null}
+        <h1>So you need <em>radiology?</em></h1>
+        <p className="sub">{copy.sub}</p>
+        <div className="meta">
+          <div className="metric"><div className="n mono">94</div><div className="l">days, start to finish</div></div>
+          <div className="metric"><div className="n mono">38</div><div className="l">days before the first visit</div></div>
+          <div className="metric"><div className="n mono">6</div><div className="l">parties involved</div></div>
+        </div>
+        <p className="howto">
+          <em>Imagine <b>you are 19 years old</b> and in your second year of university. Fond of running, you often jog each
+          morning before your classes. However, <b>you've recently started feeling a sharp pain in your right shin</b> as you
+          begin your run, leaving you limping when you walk the rest of the day. <b>The pain quickly worsens and you know it
+          is time to seek medical help.</b></em>
+          <br /><br />
+          <b>Scroll through the timeline</b> to move along the journey.
+
+          <b> Tap or hover any event</b> to read what's happening, and use the
+          <b> filters up top</b> to focus on who's involved.
+          <br /><a href="#references" className="reflink" onClick={(e) => {e.preventDefault();const el = document.getElementById("references");if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });}}>Timeline based on national averages — see references ↓</a>
+        </p>
+      </header>
+
+      {/* STAGE */}
+      <div className="stage">
+        <div className="tl">
+          {/* sticky filter headers, one per column */}
+          <div className="colhead">
+            <div className="ch-rail">{!allOn && <button className="ch-all" onClick={() => setActiveLanes(new Set(LANES.map((l) => l.id)))}>Show<br />all</button>}</div>
+            {LANES.map((lane) =>
+            <button key={lane.id} className={`colchip ${lane.cls} ${activeLanes.has(lane.id) ? "" : "off"}`} onClick={() => toggleLane(lane.id)}>
+                <span className="dot"></span>{lane.name}
+              </button>
+            )}
+          </div>
+
+          <div className="flow" ref={flowRef} style={{ height: flowH, display: isMobile ? "none" : "grid" }}>
+            <div className="tracks">
+              <div></div>
+              {LANES.map((l) => <div className="trk" key={l.id}></div>)}
+            </div>
+
+            {/* rail: day numbers + waiting-range labels */}
+            <div className="railcol">
+              {evDays.map((d) =>
+              <div key={"d" + d} className={`rday ${railStatus(d)}`} style={{ top: y(d) }}>
+                  <span className="dnum mono">DAY {d}</span>
+                </div>
+              )}
+              {BANDS.map((b, i) =>
+              <div key={"r" + i} className="rrange mono" style={{ top: PAD + ((b.start + b.end + 1) / 2 - firstDay) * UNIT - 7 }}>
+                  DAY {b.start}{b.end > b.start ? `–${b.end}` : ""}
+                </div>
+              )}
+            </div>
+
+            {/* lane columns */}
+            {LANES.map((lane, li) => {
+              const side = li >= 3 ? "right" : "left";
+              const on = activeLanes.has(lane.id);
+              return (
+                <div className={`lanecol ${lane.cls}`} key={lane.id}>
+                  {bandsByLane[lane.id].map((b, i) => {
+                    const dn = b.end - b.start + 1;
+                    return (
+                      <div key={"b" + i} className={`band-abs is-${bandStatus(b)}`} style={{ top: y(b.start), height: dn * UNIT }}>
+                        <div className={`band ${dn <= 5 ? "compact" : ""} ${on ? "" : "dimmed"}`}>
+                          <div className="bdays">{dn} {dn === 1 ? "day" : "days"} pass</div>
+                          <div className="blabel">{b.label}</div>
+                          {b.note && dn >= 4 && <div className="bnote">{b.note}</div>}
+                          {b.tip && dn >= 9 &&
+                          <div className="btip"><span className="bk">While you wait</span><span className="bx">{b.tip}</span></div>}
+                        </div>
+                      </div>);
+                  })}
+                  {slots[lane.id].map((s, i) =>
+                  <div key={"s" + i} className={`slot is-${slotStatus(s.day)}`} style={{ top: y(s.day) }}>
+                      {s.events.map((ev, j) =>
+                    <EventCard key={j} ev={ev} side={side} active={on} lit={litDay != null && s.day === litDay} />
+                    )}
+                    </div>
+                  )}
+                </div>);
+            })}
+          </div>
+
+          {/* mobile: single chronological column */}
+          <div className="mflow" ref={mflowRef} style={{ display: isMobile ? "block" : "none" }}>
+            {mRows.map((row) => {
+              if (row.type === "day") {
+                const st = slotStatus(row.day);
+                return (
+                  <div className="mrow" data-day={row.day} data-type="day" key={row.key}>
+                    <div className={`mday mono ${railStatus(row.day)}`}>DAY {row.day}</div>
+                    <div className={`slot is-${st}`}>
+                      {row.events.map((ev, j) =>
+                      <EventCard key={j} ev={ev} side="left" active={activeLanes.has(ev.lane)} lit={litDay != null && row.day === litDay} />
+                      )}
+                    </div>
+                  </div>);
+              }
+              const b = row.band,dn = b.end - b.start + 1,on = activeLanes.has(b.lane),lane = laneById[b.lane];
+              const h = Math.max(116, Math.min(248, dn * 7));
+              return (
+                <div className="mrow mrow-band" data-day={b.start} data-end-day={b.end} data-type="band" key={row.key}>
+                  <div className="mday mono">DAY {b.start}{b.end > b.start ? `–${b.end}` : ""}</div>
+                  <div className={`band-abs is-${bandStatus(b)} ${lane.cls}`} style={{ height: h }}>
+                    <div className={`band ${dn <= 5 ? "compact" : ""} ${on ? "" : "dimmed"}`}>
+                      <div className="mband-lane"><span className="dot"></span>{lane.name}</div>
+                      <div className="bdays">{dn} {dn === 1 ? "day" : "days"} pass</div>
+                      <div className="blabel">{b.label}</div>
+                      {b.note && <div className="bnote">{b.note}</div>}
+                      {b.tip && dn >= 9 &&
+                      <div className="btip"><span className="bk">While you wait</span><span className="bx">{b.tip}</span></div>}
+                    </div>
+                  </div>
+                </div>);
+            })}
+          </div>
+        </div>
+
+        <aside className="aside">
+          <Checklist currentDay={Math.max(1, Math.floor(dayCont))} activeDay={litDay} copy={copy} onJump={(d) => scrollToDay(d, true)} />
+        </aside>
+      </div>
+
+      {/* CARE PLAN — paying the bill */}
+      <section className="careplan">
+        <h2>Paying <em>the bill</em></h2>
+        <p className="cp-lede">
+          The timeline ends, but your part doesn't. Here's how to close out the cost without overpaying.
+        </p>
+        <ul className="cp-list">
+          <li>Check the bill against your <b>explanation of benefits (EOB)</b> first. Request an <b>itemized bill</b> and make sure you're not charged for anything insurance already covered.</li>
+          <li>Ask the billing office about an <b>interest-free payment plan</b>, a <b>prompt-pay discount</b>, or <b>financial assistance / charity care</b> (many offer it but rarely advertise it).</li>
+          <li><b>Dispute errors</b>: appeal denials with your insurer in writing, and use the <b>No Surprises Act</b> for unexpected out-of-network charges.</li>
+          <li>Don't ignore it! Unpaid balances can go to <b>collections</b> after roughly 60–120 days; you generally have a one-year grace period before most medical debt can appear on your credit report.</li>
+        </ul>
+        <p className="cp-note">
+          Not medical or financial advice — talk to your provider and your insurer about what's right for you. Rules on
+          medical debt and credit reporting vary by state and change over time.
+        </p>
+      </section>
+
+      {/* LOOKING TO THE FUTURE */}
+      <section className="careplan">
+        <h2>Looking to <em>the future</em></h2>
+        <p className="cp-lede">
+          This timeline reveals where the system strains. Here's what's worth changing and what a future version could look like.
+        </p>
+        <ul className="cp-list">
+          <li><b>The wait is too long.</b> On this timeline, it takes roughly <b>40 days</b> just to be seen by a physician, before any imaging is ordered or any diagnosis is made. Long appointment wait times are a structural bottleneck that delays care for everyone.</li>
+          <li><b>Prior authorization is a gate, not a guardrail.</b> Insurers require physicians to seek approval before ordering imaging. In practice, this adds days of paperwork and sometimes overrides clinical judgment, consequently slowing down the process even when the need is clear.</li>
+          <li><b>Society is used to only imaging when something is already wrong.</b> The current model is reactive: symptoms appear, a physician orders imaging, and an investigation follows. By the time imaging happens, a problem has often been developing for months or years undetected.</li>
+        </ul>
+        <p className="cp-lede" style={{ marginTop: "28px" }}>
+          A different approach is possible...
+        </p>
+        <ul className="cp-list">
+          <li><b>Routine whole-body imaging as a standard of care.</b> Just as cars receive periodic full inspections—checking every system before something fails—people could receive baseline scans on a regular schedule, establishing what's normal and surfacing anomalies early, when they're most treatable.</li>
+          <li><b>Proactive, preventative care instead of reactive response.</b> Shifting imaging upstream changes the role of radiology from a diagnostic tool to an early-warning system, giving patients and physicians time to act.</li>
+        </ul>
+        <p className="cp-note">
+          Not medical advice. The future of radiology is still being written by researchers, policymakers, patients, and clinicians working together.
+        </p>
+      </section>
+
+      {/* references */}
+      <section id="references" className="refs">
+        <div className="refs-head">
+          <span className="refs-k mono">References</span>
+          <h2>How this timeline was built</h2>
+          <p className="refs-intro">
+            Day counts reflect national averages drawn from the sources below. Your own experience will vary with your plan,
+            your providers, and how busy they are. This is an orientation tool, not medical or scheduling advice.
+          </p>
+        </div>
+        <ol className="reflist">
+          {REFERENCES.map((r, i) =>
+          <li key={i} className="refitem">
+              <span className="refnum mono">{String(i + 1).padStart(2, "0")}</span>
+              <div className="refbody">
+                <a className="reftitle" href={r.url} target="_blank" rel="noopener noreferrer">{r.title} <span className="refext">↗</span></a>
+                <div className="refsrc">{r.source}{r.year ? ` · ${r.year}` : ""}</div>
+              </div>
+            </li>
+          )}
+        </ol>
+      </section>
+
+      {/* fixed left scrubber (day 1 → day 89) */}
+      <div className="scrollrail">
+        <div className="sr-cap">Day 1</div>
+        <div className="sr-track">
+          <input type="range" min="1" max={TOTAL_DAYS} value={sliderDay} style={{ "--fill": fill + "%" }}
+          onChange={(e) => scrollToDay(+e.target.value)} aria-label="Scrub through the journey" />
+        </div>
+        <div className="sr-cap">Day {TOTAL_DAYS}</div>
+      </div>
+
+      {/* always-visible you-are-here line (spans the timeline only) */}
+      <div className={`hereline ${spy.visible ? "on" : ""}`}>
+        <div className="hl-line" style={{ left: geo.colLeft, width: Math.max(0, geo.right - geo.colLeft) }}></div>
+        <div className="hl-tag" style={{ right: Math.max(8, (typeof window !== "undefined" ? window.innerWidth : 1200) - geo.colLeft) }}>
+          <span className="k">You are here</span><span className="d">Day {sliderDay}</span>
+        </div>
+      </div>
+
+      <TweaksUI t={t} setTweak={setTweak} />
+    </div>);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
 
 
 <script>
