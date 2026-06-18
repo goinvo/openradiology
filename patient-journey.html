@@ -515,11 +515,23 @@
   .careplan{ margin-top:30px; padding-top:32px; }
   .cp-list li{ font-size:14px; }
   .reflist{ }
+  .aside{ display:none; }
 }
 @media (max-width:380px){
   .mrow{ grid-template-columns:46px minmax(0,1fr); gap:8px; }
   .hero h1{ font-size:42px; }
 }
+
+/* ---- case study vignette bar ---- */
+.vignette-bar{ position:relative; padding:12px 15px 12px 20px; font-size:15px;
+  line-height:1.65; color:var(--ink-soft);
+  border-radius:9px; background:oklch(0.972 0.026 240); border:1px solid oklch(0.88 0.04 240);
+  margin-bottom:14px; }
+.vignette-bar::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+  border-radius:9px 0 0 9px; background:oklch(0.56 0.13 240); }
+.vignette-bar b{ font-weight:580; color:var(--ink); }
+.vignette-q{ margin-top:10px; padding-top:10px; border-top:1px solid oklch(0.88 0.04 240);
+  font-size:15px; font-style:italic; color:var(--accent); font-weight:500; }
 </style>
 </head>
 <body>
@@ -1560,18 +1572,16 @@ function App() {
           <div className="metric"><div className="n mono">38</div><div className="l">days before the first visit</div></div>
           <div className="metric"><div className="n mono">6</div><div className="l">parties involved</div></div>
         </div>
-        <p className="howto">
-          <em>Imagine <b>you are 19 years old</b> and in your second year of university. Fond of running, you often jog each
-          morning before your classes. However, <b>you've recently started feeling a sharp pain in your right shin</b> as you
-          begin your run, leaving you limping when you walk the rest of the day. <b>The pain quickly worsens and you know it
-          is time to seek medical help.</b></em>
-          <br /><br />
-          <b>Scroll through the timeline</b> to move along the journey.
-
-          <b> Tap or hover any event</b> to read what's happening, and use the
-          <b> filters up top</b> to focus on who's involved.
-          <br /><a href="#references" className="reflink" onClick={(e) => {e.preventDefault();const el = document.getElementById("references");if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });}}>Timeline based on national averages — see references ↓</a>
-        </p>
+        <div className="howto">
+          <div className="vignette-bar">
+            You're <b>19 years old</b>, in your second year of university.<br />
+            You <b>go running</b> every morning before class.<br />
+            A <b>sharp pain in your right shin</b> flares up as you jog and you end up <b>limping through the rest of the day</b>.<br />
+            The pain keeps getting worse. <b>Time to see a doctor.</b>
+            <div className="vignette-q">What will the process look like, end-to-end?</div>
+          </div>
+          <a href="#references" className="reflink" onClick={(e) => {e.preventDefault();const el = document.getElementById("references");if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });}}>Timeline based on national averages — see references ↓</a>
+        </div>
       </header>
 
       {/* STAGE */}
@@ -1712,6 +1722,7 @@ function App() {
         <ul className="cp-list">
           <li><b>Routine whole-body imaging as a standard of care.</b> Just as cars receive periodic full inspections—checking every system before something fails—people could receive baseline scans on a regular schedule, establishing what's normal and surfacing anomalies early, when they're most treatable.</li>
           <li><b>Proactive, preventative care instead of reactive response.</b> Shifting imaging upstream changes the role of radiology from a diagnostic tool to an early-warning system, giving patients and physicians time to act.</li>
+          <li><b>Humans and machines can work together to provide better care.</b> Health Agents help patients, clinicians, and administrators smooth care planning, healthcare access, and treatment for better life outcomes.</li>
         </ul>
         <p className="cp-note">
           Not medical advice. The future of radiology is still being written by researchers, policymakers, patients, and clinicians working together.
