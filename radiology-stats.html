@@ -97,7 +97,7 @@
     max-width: 640px;
     margin: 24px 0 0;
     font-family: var(--sans);
-    font-size: clamp(15px, 1.7vw, 17px);
+    font-size: 14.5px;
     line-height: 1.64;
     color: #5b5349;
   }
@@ -133,8 +133,8 @@
   /* ---------- table ---------- */
   .ranking { position: relative; margin-top: 40px; }
   .thead { position: sticky; top: 0; z-index: 6; background: var(--paper); display: grid; grid-template-columns: 52px minmax(160px, 220px) 1fr; gap: 22px; align-items: end; padding: 16px 6px 13px 0; border-bottom: 1px solid var(--ink); }
-  .thead .th-name { font-family: var(--sans); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
-  .thead .th-lbl { font-family: var(--sans); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+  .thead .th-name { font-family: var(--sans); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+  .thead .th-lbl { font-family: var(--sans); font-size: 14.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
   .table { border-top: 0; }
   .row {
     display: grid;
@@ -151,8 +151,8 @@
 
   .name { font-family: var(--display); font-size: clamp(19px, 2.3vw, 25px); font-weight: 600; line-height: 1.12; letter-spacing: -0.01em; }
   .cat { display: flex; align-items: baseline; gap: 7px; margin-top: 8px; flex-wrap: wrap; }
-  .cat .lbl { font-family: var(--sans); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-2); }
-  .uses { font-family: var(--sans); font-size: 10px; letter-spacing: .01em; color: var(--ink-2); margin-top: 4px; max-width: 220px; }
+  .cat .lbl { font-family: var(--sans); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+  .uses { font-family: var(--sans); font-size: 14.5px; letter-spacing: .01em; color: var(--ink-2); margin-top: 4px; max-width: 220px; }
   .cat .csep { font-family: var(--sans); font-size: 10px; color: var(--line-2); }
   .cat .oop { font-family: var(--sans); font-size: 11px; letter-spacing: .02em; color: var(--ink); font-weight: 500; }
   .cat .src { font-family: var(--sans); font-size: 10.5px; letter-spacing: .01em; color: var(--ink-3); }
@@ -202,6 +202,8 @@
 
   .method { margin-top: 26px; font-family: var(--sans); font-size: 13.5px; line-height: 1.7; letter-spacing: .01em; color: var(--ink-3); max-width: 840px; }
   .method b { color: var(--ink-2); font-weight: 600; }
+  .method .vol-ref { font-size: 9px; vertical-align: super; margin-left: 2px; color: #7396B0; font-weight: 700; text-decoration: none; letter-spacing: .02em; }
+  .method .vol-ref:hover { text-decoration: underline; }
 
   .ast { color: #1C3D52; font-weight: 600; }
   sup.ast { font-size: 1.15em; margin-left: 1px; top: -0.1em; }
@@ -536,6 +538,7 @@
     </div>
 
     <p class="method"> Volumes are drawn from different years and definitions, so the ranking serves as a benchmark.</p>
+    <p class="method">The annual X-Ray scan volume includes 320M dental scans. The average out-of-pocket cost for a dental scan is $66<a class="vol-ref" href="#ref-12" title="Jump to source">[12]</a>, and the price range is $25 – $750<a class="vol-ref" href="#ref-13" title="Jump to source">[13]</a>.</p>
     <p class="costnote"> Avg. out-of-pocket cost and price range are directional benchmarks.
       <button class="cm-toggle" id="cm-toggle" aria-expanded="false" aria-controls="costmethod">Understand the methodology</button>
     </p>
@@ -593,8 +596,7 @@
     <!-- ============ REFERENCES ============ -->
     <section class="refs">
       <div class="refs-head">
-        <div class="refs-k">References</div>
-        <h2>Sources &amp; Citations.</h2>
+        <h2>References</h2>
       </div>
       <ol class="reflist">
         <li class="refitem" id="ref-1"><span class="refnum">01</span><div>
@@ -604,46 +606,46 @@
           <p class="refnote">691M total imaging procedures − 275M (X-rays) − 93M (CT) − 2M (PET) ≈ 321M dental</p>
         </div></li>
         <li class="refitem" id="ref-2"><span class="refnum">02</span><div>
-          <div class="refentry"><a class="reftitle" href="https://www.carecredit.com/well-u/health-wellness/dental-x-ray-cost/" target="_blank" rel="noopener">How Much Do Dental X-Rays Cost? Prices by Type and Location<span class="refext"> ↗</span></a><p class="refsrc">Tellefsen, 2025</p></div>
-        </div></li>
-        <li class="refitem" id="ref-3"><span class="refnum">03</span><div>
-          <div class="refentry"><a class="reftitle" href="https://www.authoritydental.org/dental-x-ray#cost-of-dental-x-rays-explained" target="_blank" rel="noopener">Dental X-Ray Cost: Bitewing, Panoramic, FMX, and How Often You Need Them<span class="refext"> ↗</span></a><p class="refsrc">Lee and Harchandani, 2026</p></div>
-        </div></li>
-        <li class="refitem" id="ref-4"><span class="refnum">04</span><div>
           <div class="refentry"><a class="reftitle" href="https://kffhealthnews.org/health-industry/no-shield-from-x-rays-how-science-is-rethinking-lead-aprons/" target="_blank" rel="noopener">No Shield from X-Rays: How Science is Rethinking Lead Aprons<span class="refext"> ↗</span></a><p class="refsrc">Jaklevic, 2020</p></div>
           <div class="refentry"><a class="reftitle" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10050133/" target="_blank" rel="noopener">Patient Exposure from Radiologic and Nuclear Medicine Procedures in the United States and Worldwide: 2009–2018<span class="refext"> ↗</span></a><p class="refsrc">Mahesh et al., 2024</p></div>
         </div></li>
-        <li class="refitem" id="ref-5"><span class="refnum">05</span><div>
+        <li class="refitem" id="ref-3"><span class="refnum">03</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.nih.gov/news-events/nih-research-matters/radiation-ct-scans-cancer-risks" target="_blank" rel="noopener">Radiation from CT scans and cancer risks<span class="refext"> ↗</span></a><p class="refsrc">Doctrow, 2025</p></div>
           <div class="refentry"><a class="reftitle" href="https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/2832778" target="_blank" rel="noopener">Projected Lifetime Cancer Risks From Current Computed Tomography Imaging<span class="refext"> ↗</span></a><p class="refsrc">Smith-Bindman et al., 2025</p></div>
         </div></li>
-        <li class="refitem" id="ref-6"><span class="refnum">06</span><div>
+        <li class="refitem" id="ref-4"><span class="refnum">04</span><div>
           <div class="refentry"><a class="reftitle" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/jum.16453" target="_blank" rel="noopener">Sound the Alarm: The Sonographer Shortage Is Echoing Across Healthcare<span class="refext"> ↗</span></a><p class="refsrc">Won et al., 2024</p></div>
         </div></li>
-        <li class="refitem" id="ref-7"><span class="refnum">07</span><div>
+        <li class="refitem" id="ref-5"><span class="refnum">05</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.fda.gov/radiation-emitting-products/mammography-information-patients/mqsa-national-statistics" target="_blank" rel="noopener">MQSA National Statistics<span class="refext"> ↗</span></a><p class="refsrc">FDA, 2026</p></div>
           <div class="refentry"><a class="reftitle" href="https://www.nationalbreastcancer.org/national-mammography-day/" target="_blank" rel="noopener">National Mammography Day: Early Detection Saves Lives<span class="refext"> ↗</span></a><p class="refsrc">National Breast Cancer Foundation, 2025</p></div>
         </div></li>
-        <li class="refitem" id="ref-8"><span class="refnum">08</span><div>
+        <li class="refitem" id="ref-6"><span class="refnum">06</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.statista.com/statistics/282401/density-of-magnetic-resonance-imaging-units-by-country/" target="_blank" rel="noopener">Number of magnetic resonance imaging (MRI) units in selected countries as of 2024<span class="refext"> ↗</span></a><p class="refsrc">Statista, 2024</p></div>
           <div class="refentry"><a class="reftitle" href="https://pubmed.ncbi.nlm.nih.gov/38021512/" target="_blank" rel="noopener">A Review of Magnetic Resonance (MR) Safety: The Essentials to Patient Safety<span class="refext"> ↗</span></a><p class="refsrc">Shah and Aran, 2023</p></div>
         </div></li>
-        <li class="refitem" id="ref-9"><span class="refnum">09</span><div>
+        <li class="refitem" id="ref-7"><span class="refnum">07</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.iaea.org/newscenter/news/improving-radiation-protection-in-medical-procedures-using-fluoroscopy" target="_blank" rel="noopener">Improving Radiation Protection in Medical Procedures Using Fluoroscopy<span class="refext"> ↗</span></a><p class="refsrc">Ivanova, 2022</p></div>
         </div></li>
-        <li class="refitem" id="ref-10"><span class="refnum">10</span><div>
+        <li class="refitem" id="ref-8"><span class="refnum">08</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.marketreportsworld.com/market-reports/single-photon-emission-computed-tomography-spect-market-14714553" target="_blank" rel="noopener">Single-Photon Emission Computed Tomography (SPECT) Market Size, Share, Growth, and Industry Analysis, By Type (Standalone SPECT, Hybrid SPECT), By Application (Cardiology, Oncology, General Imaging, Neurology, Others), Regional Insights and Forecast to 2033<span class="refext"> ↗</span></a><p class="refsrc">Market Reports World, 2025</p></div>
           <div class="refentry"><a class="reftitle" href="https://www.med.upenn.edu/physics-and-instrumentation-group/cardiac-spect" target="_blank" rel="noopener">Cardiac-SPECT<span class="refext"> ↗</span></a><p class="refsrc">Perelman School of Medicine at the University of Pennsylvania, 2026</p></div>
           <p class="refnote">8M only accounts for cardiac SPECTs. The exact number of annual SPECT scans in the U.S. is unclear.</p>
         </div></li>
-        <li class="refitem" id="ref-11"><span class="refnum">11</span><div>
+        <li class="refitem" id="ref-9"><span class="refnum">09</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.sciencedirect.com/science/article/abs/pii/S1094695023001063" target="_blank" rel="noopener">Dual-energy X-ray Absorptiometry Trends Among US Medicare Beneficiaries: 2005–2019<span class="refext"> ↗</span></a><p class="refsrc">Prout et al., 2023</p></div>
         </div></li>
-        <li class="refitem" id="ref-12"><span class="refnum">12</span><div>
+        <li class="refitem" id="ref-10"><span class="refnum">10</span><div>
           <div class="refentry"><a class="reftitle" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9754695/" target="_blank" rel="noopener">Patient Exposure from Radiologic and Nuclear Medicine Procedures in the United States<span class="refext"> ↗</span></a><p class="refsrc">Mettler Jr et al., 2020</p></div>
         </div></li>
-        <li class="refitem" id="ref-13"><span class="refnum">13</span><div>
+        <li class="refitem" id="ref-11"><span class="refnum">11</span><div>
           <div class="refentry"><a class="reftitle" href="https://www.ahajournals.org/doi/10.1161/circulationaha.114.008148" target="_blank" rel="noopener">Can Coronary Computed Tomography Angiography Replace Invasive Angiography?<span class="refext"> ↗</span></a><p class="refsrc">Stefanini and Windecker, 2015</p></div>
+        </div></li>
+        <li class="refitem" id="ref-12"><span class="refnum">12</span><div>
+          <div class="refentry"><a class="reftitle" href="https://www.carecredit.com/well-u/health-wellness/dental-x-ray-cost/" target="_blank" rel="noopener">How Much Do Dental X-Rays Cost? Prices by Type and Location<span class="refext"> ↗</span></a><p class="refsrc">Tellefsen, 2025</p></div>
+        </div></li>
+        <li class="refitem" id="ref-13"><span class="refnum">13</span><div>
+          <div class="refentry"><a class="reftitle" href="https://www.authoritydental.org/dental-x-ray#cost-of-dental-x-rays-explained" target="_blank" rel="noopener">Dental X-Ray Cost: Bitewing, Panoramic, FMX, and How Often You Need Them<span class="refext"> ↗</span></a><p class="refsrc">Lee and Harchandani, 2026</p></div>
         </div></li>
       </ol>
     </section>
@@ -675,18 +677,9 @@
        Every displayed number comes straight from the supplied figures.
     ------------------------------------------------------------------------- */
     var DATA = [
-      { key:"dental", name:"Dental X-Ray", cat:"radio",
-        uses:"Cavities, bone loss, root infections, wisdom teeth",
-        volume:320, volDisp:"320M / yr",
-        avgCost:'$66<a class="vol-ref" href="#ref-2" title="Jump to source">[2]</a>',
-        oopRange:'$25 – $750<a class="vol-ref" href="#ref-3" title="Jump to source">[3]</a>',
-        volNote:"Derived: 691M total imaging procedures minus 275M X-ray, 93M CT and 2M PET ≈ 321M dental.",
-        note:"The most common radiographic image in the country — the bitewing and panoramic films taken at routine dental visits.",
-        sources:[ {t:"PubMed (2023)"}, {t:"PMC · NIH"} ] },
-
       { key:"xray", name:"X-Ray", cat:"radio",
         uses:"Bones, fractures, chest & lungs",
-        volume:275, volDisp:"275M / yr",
+        volume:595, volDisp:"595M / yr",
         cost:753.64, costDisp:"$754", avgCost:"$754", oopRange:"$56 – $1,813",
         volNote:"275 million conventional radiology procedures (2016). Some sources cite this as 275 million medical X-ray exams. Separately: 8.1M interventional and 320M dental procedures.",
         costRange:"Range $50 – $1,000+",
@@ -837,11 +830,12 @@
                  '<span class="rng-dash">\u2013</span>'+
                  '<span class="rng-hi">'+parts[1].trim()+'</span></span>';
         }
-        var VREF = {dental:1, xray:4, ct:5, us:6, mammo:7, mri:8, fluoro:9, spect:10, dexa:11, pet:12, angio:13};
-        var vref = VREF[d.key] || (i+1);
+        var VREF = {xray:[1,2], ct:[3], us:[4], mammo:[5], mri:[6], fluoro:[7], spect:[8], dexa:[9], pet:[10], angio:[11]};
+        var vrefs = VREF[d.key] || [i+1];
+        var vrefHtml = vrefs.map(function(n){ return '<a class="vol-ref" href="#ref-'+n+'" title="Jump to source">['+n+']</a>'; }).join('');
         var statBlock =
           '<div class="statcell">' +
-            '<div class="statcol"><div class="sk">Annual scan volume</div><div class="sv">'+volNum+'<a class="vol-ref" href="#ref-'+vref+'" title="Jump to source">['+vref+']</a></div></div>' +
+            '<div class="statcol"><div class="sk">Annual scan volume</div><div class="sv">'+volNum+vrefHtml+'</div></div>' +
             (d.avgCost
               ? '<div class="statcol"><div class="sk">Avg. out-of-pocket</div><div class="sv">'+d.avgCost+'</div></div>' +
                 '<div class="statcol"><div class="sk">Price range</div><div class="sv sv-range">'+d.oopRange+'</div></div>'
