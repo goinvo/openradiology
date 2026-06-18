@@ -481,6 +481,10 @@ em { font-style: italic; }
 .glance .reads-stack .or { padding:4px 0; align-self:flex-start; }
 .glance .reads-stack .rn { font-size:clamp(46px,5.2vw,72px); letter-spacing:-0.02em; line-height:.92; }
 .glance .reads-stack .rl { font-size:11px; letter-spacing:0.12em; margin-top:11px; }
+.glance .reads-sentence .col { padding:6px 0; }
+.glance .reads-sentence .or { padding:0 0 0 0; }
+.glance .reads-sentence .rtext { font-family:'Libertinus Serif',sans-serif; font-size:13.5px; line-height:1.75; color:#5b5349; }
+.glance .reads-sentence .rtext strong { font-weight:500; color:var(--ink); }
 
 .glance .ref-sup { font-size:10px; vertical-align:super; margin-left:6px; color:#7396B0; font-weight:600; text-decoration:none; line-height:1; }
 .glance .ref-sup:hover { text-decoration:underline; }
@@ -684,22 +688,13 @@ em { font-style: italic; }
     <!-- 06 · A TYPICAL DAY (span 4) -->
     <div class="card span-4" data-screen-label="Card 6 · A typical day">
       <div class="card-step">06 · A typical day</div>
-      <p class="card-body">In one day, a clinical radiologist typically reads an average of <strong>35 CT or MRI scans</strong>, <strong>100 screening mammograms</strong>, or <strong>175 X-rays</strong><a class="ref-sup" href="#ref-8" title="Jump to source">[8]</a>.</p>
-      <div class="reads reads-stack">
-        <div class="col">
-          <div class="rn">175</div>
-          <div class="rl">X-rays</div>
-        </div>
+      <p class="card-body">In 1 day, a radiologist typically reads<a class="ref-sup" href="#ref-8" title="Jump to source">[8]</a>:</p>
+      <div class="reads reads-stack reads-sentence">
+        <div class="col"><span class="rtext">35 CTs or MRI scans</span></div>
         <div class="or">or</div>
-        <div class="col">
-          <div class="rn">100</div>
-          <div class="rl">Screening mammograms</div>
-        </div>
+        <div class="col"><span class="rtext">100 mammograms</span></div>
         <div class="or">or</div>
-        <div class="col">
-          <div class="rn">35</div>
-          <div class="rl">CT or MRI</div>
-        </div>
+        <div class="col"><span class="rtext">175 x-rays</span></div>
       </div>
     </div>
 
