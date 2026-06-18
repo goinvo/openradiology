@@ -385,14 +385,17 @@
     font-family: var(--sans);
     font-size: 12px;
     color: var(--ink-soft);
-    padding-left: 14px;
-    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
   }
-  .method-list li::before {
-    content: "–";
-    position: absolute;
-    left: 0;
+  .score-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
     color: var(--faint);
+    min-width: 22px;
+    flex-shrink: 0;
   }
 
  
@@ -544,26 +547,26 @@
   <div class="method-details">
     <div class="method-body">
       <h3 class="method-heading">Methodology</h3>
-      <p class="method-intro">Each problem was evaluated on two independently scored dimensions, patient reach and monetary cost, drawn from peer-reviewed journals, federal datasets, and medical society reports. Scores were penalized when figures were indirect or not directly attributable to the problem. The combined total out of 100 determines the ranking.</p>
+      <p class="method-intro">Each problem was evaluated on two independently scored dimensions, patient reach and monetary cost, drawn from peer-reviewed journals, federal datasets, and medical society reports. Scores were penalized when figures were indirect or not directly attributable to the problem. When only a per-case figure is available rather than an annual total, the monetary score is penalized relative to the applicable dollar-range anchor. The combined total out of 100 determines the ranking.</p>
       <div class="method-grid">
         <div class="method-col">
           <h4 class="method-dim m">Monetary Cost (M)</h4>
           <ul class="method-list">
-            <li>&gt;$10B direct annual cost</li>
-            <li>$1B–$10B direct annual cost</li>
-            <li>$400M–$1B</li>
-            <li>$200M–$400M</li>
-            <li>&lt;$200M or indirect figure</li>
+            <li><span class="score-tag">50</span>&gt;$10B direct annual cost</li>
+            <li><span class="score-tag">40</span>$1B–$10B direct annual cost</li>
+            <li><span class="score-tag">30</span>$400M–$1B</li>
+            <li><span class="score-tag">20</span>$200M–$400M</li>
+            <li><span class="score-tag">10</span>&lt;$200M or indirect figure</li>
           </ul>
         </div>
         <div class="method-col">
           <h4 class="method-dim p">Patient Reach (P)</h4>
           <ul class="method-list">
-            <li>&gt;100M directly affected</li>
-            <li>30M–100M directly affected</li>
-            <li>10M–30M or clear "1 in X" ratio</li>
-            <li>&lt;10M or probabilistic/future harm</li>
-            <li>&lt;5M or indirect impact</li>
+            <li><span class="score-tag">50</span>&gt;100M directly affected</li>
+            <li><span class="score-tag">40</span>30M–100M directly affected</li>
+            <li><span class="score-tag">30</span>10M–30M or clear "1 in X" ratio</li>
+            <li><span class="score-tag">20</span>&lt;10M or probabilistic/future harm</li>
+            <li><span class="score-tag">10</span>&lt;5M or indirect impact</li>
           </ul>
         </div>
       </div>
@@ -787,7 +790,7 @@ window.PROBLEMS = [
     clinical: false,
     description: "Payers require advance approval before imaging can be performed, costing $35 billion in annual administrative overhead with an 81.7% appeal overturn rate.",
     scores: { m: 50, p: 42, d: 23, total: 92 },
-    pLabel: "53M/yr", pCaption: "face insurance review before imaging is approved",
+    pLabel: "53M people/yr", pCaption: "face insurance review before imaging is approved",
     mLabel: "$35B/yr", mCaption: "lost to paperwork and billing disputes",
     evidence: [
       "Before a patient can get a scan, their insurance company must approve it first. In 2024, Medicare Advantage plans alone processed **53 million** prior authorization requests. About **94%** of physicians say this process delays care, and an estimated **3 to 5 million** scans are denied every year (KFF, 2024; AMA, 2024).",
@@ -806,13 +809,13 @@ window.PROBLEMS = [
     category: "Diagnostic",
     clinical: true,
     description: "Radiologists miss or misinterpret findings in 3–5% of scans, a rate that has not improved in 75 years.",
-    scores: { m: 32, p: 44, d: 33, total: 76 },
+    scores: { m: 20, p: 44, d: 33, total: 64 },
     pLabel: "~21M–35M scans/yr", pCaption: "contain a missed or incorrect finding",
     mLabel: "3 in 4", mCaption: "malpractice lawsuits against radiologists involve a missed or misread finding",
     evidence: [
-      "~**21M–35M** scans/year contain errors (derived: 3–5% × 691M annual US scans; Mahesh et al., 2023). **60–80%** of errors are perceptual: the finding was present but the eye passed over it.",
+      "~**21M–35M** scans/year contain errors (derived: 3–5% × 691M annual US scans; Mahesh et al., 2023). **60–80%** of these errors are perceptual: the finding was present but the eye passed over it.",
       "When patients sue radiologists, **3 in 4** lawsuits come down to a missed or wrong diagnosis, something present on the scan that wasn't caught (Berlin, 2007). A **paid claim**, a case that settled or went to verdict in the patient's favor, averages **$174K** in adult radiology; many more claims are filed and dismissed without payout (CRICO, 2010–2014).",
-      "Radiologists report a **3–5%** real-time error rate: what they catch as uncertain during live reads. But retrospective review of scans with confirmed pathology shows a **~30% miss rate**: roughly 1 in 3 significant findings were originally read as normal (Berlin, 2007)."
+      "Radiologists flag roughly **3–5%** of scans as uncertain while reading them live: cases where they notice something but aren't sure what it means. That number understates the real miss rate. When researchers go back to scans where a significant finding was later confirmed, about **1 in 3** had originally been read as completely normal: the finding was already there, but the radiologist didn't catch it (Berlin, 2007)."
     ],
     sources: [
       { label: "Itri et al., 2018", url: "https://pubs.rsna.org/doi/full/10.1148/rg.2018180021" },
@@ -890,17 +893,19 @@ window.PROBLEMS = [
     mLabel: "130 days", mCaption: "on average to fill a vacant radiologist position",
     evidence: [
       "The US has roughly **39,000** radiologists, and demand is already outpacing supply. Without action, that gap is projected to persist through **2055** (Neiman HPI, 2024).",
-      "Radiologists are leaving faster than they can be replaced: it takes an average of **130 days** to hire a replacement (AAPPR, 2024). And more are leaving: radiology practice turnover increased **61%** from 2013 to 2022. Consequently, imaging interpretation turnaround time increased **113%** from 2014 to 2023: for CT scans alone, **318%** (Neiman HPI, 2024)."
+      "Radiologists are leaving faster than they can be replaced: it takes an average of **130 days** to hire a replacement (AAPPR, 2024). And more are leaving: radiology practice turnover increased **61%** from 2013 to 2022. Consequently, imaging interpretation turnaround time increased **113%** from 2014 to 2023: for CT scans alone, **318%** (Neiman HPI, 2024).",
+      "Screening mammography rates are lowest among non-Hispanic American Indian, Alaska Native, and Hispanic women aged 50 to 74. The guidelines behind those recommendations were built on studies that focused predominantly on non-Hispanic White women, meaning they don't account for the younger age at which breast cancer tends to appear in Black, Hispanic, and Asian women. Racial and ethnic minority women also face overlapping barriers to getting scanned: logistical, financial, cultural, and immigration-related (DeBenedectis et al., 2022)."
     ],
     sources: [
       { label: "Neiman HPI, 2024", url: "https://www.neimanhpi.org/press-releases/new-studies-shed-light-on-the-future-radiologist-workforce-shortage-by-projecting-future-radiologist-supply-and-demand-for-imaging/" },
       { label: "Neiman HPI, 2024", url: "https://www.neimanhpi.org/press-releases/imaging-interpretation-turnaround-time-more-than-doubled-between-2014-and-2023/" },
       { label: "Neiman HPI, 2024", url: "https://www.neimanhpi.org/press-releases/practice-turnover-among-radiologists-increased-61-over-a-decade-and-is-linked-to-clinical-workload/" },
-      { label: "AAPPR, 2024", url: "https://medicushcs.com/resources/navigating-the-radiologist-shortage" }
+      { label: "AAPPR, 2024", url: "https://medicushcs.com/resources/navigating-the-radiologist-shortage" },
+      { label: "DeBenedectis et al., 2022", url: "https://www.jacr.org/article/S1546-1440(21)00743-2/fulltext" }
     ]
   },
   {
-    rank: 6,
+    rank: 7,
     name: "Your Skin Color Can Affect Whether You Get Scanned",
     category: "Equity",
     clinical: false,
@@ -918,13 +923,13 @@ window.PROBLEMS = [
     ]
   },
   {
-    rank: 7,
+    rank: 8,
     name: "Imaging Deserts",
     category: "Access",
     clinical: false,
     description: "Geographic deserts, scanner scarcity, and lengthening wait times leave many patients unable to obtain imaging when they need it.",
     scores: { m: 10, p: 32, d: 20, total: 42 },
-    pLabel: "~51M Americans", pCaption: "live more than 30 minutes from the nearest lung cancer screening center",
+    pLabel: "~51M US residents", pCaption: "live more than 30 minutes from the nearest lung cancer screening center",
     mLabel: "1 in 4", mCaption: "rural patients are forced to transfer because no radiology is available on-site",
     evidence: [
       "An estimated **~51 million** rural Americans, nearly **4 in 5**, live more than 30 minutes from the nearest lung cancer screening center. For urban patients, only about **1 in 5** face the same barrier (est. from Eberth, 2021; US Census Bureau, 2022).",
@@ -937,12 +942,12 @@ window.PROBLEMS = [
     ]
   },
   {
-    rank: 8,
+    rank: 6,
     name: "More Work, Less Pay",
     category: "Administrative",
     clinical: false,
     description: "Inflation-adjusted Medicare payments have fallen 33% since 2001 while practice costs rose 59%, forcing consolidation, driving attrition, and narrowing patient access.",
-    scores: { m: 24, p: 14, d: 13, total: 38 },
+    scores: { m: 24, p: 20, d: 13, total: 44 },
     pLabel: "14.7%", pCaption: "fewer independent radiology practices",
     mLabel: "33% pay cut", mCaption: "for the same Medicare work",
     evidence: [
