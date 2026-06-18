@@ -789,7 +789,7 @@ window.PROBLEMS = [
     pLabel: "53M/yr", pCaption: "face insurance review before imaging is approved",
     mLabel: "$35B/yr", mCaption: "lost to paperwork and billing disputes",
     evidence: [
-      "Before a patient can get an imaging scan, their insurance company must approve it first. In 2024, Medicare Advantage plans alone processed **53 million** prior authorization requests. About **94%** of physicians say this process delays care, and an estimated **3 to 5 million** imaging scans are denied every year (KFF, 2024; AMA, 2024).",
+      "Before a patient can get a scan, their insurance company must approve it first. In 2024, Medicare Advantage plans alone processed **53 million** prior authorization requests. About **94%** of physicians say this process delays care, and an estimated **3 to 5 million** scans are denied every year (KFF, 2024; AMA, 2024).",
       "Managing those approvals costs the US healthcare system an estimated **$35 billion** every year in administrative work alone, time that could otherwise go toward patient care (Sahni et al., 2024).",
       "When a denied imaging request is appealed, **81.7%** of those appeals are eventually overturned, meaning insurers are wrong more often than not on the first pass. The consequences go beyond delay: in a survey of **1,000 physicians**, more than **1 in 4** reported that a prior authorization delay led to a serious medical complication for a patient in their care (AMA, 2024)."
     ],
@@ -804,14 +804,14 @@ window.PROBLEMS = [
     name: "Radiologists Miss Findings",
     category: "Diagnostic",
     clinical: true,
-    description: "Radiologists miss or misinterpret findings in 3–5% of studies, a rate that has not improved in 75 years.",
+    description: "Radiologists miss or misinterpret findings in 3–5% of scans, a rate that has not improved in 75 years.",
     scores: { m: 32, p: 44, d: 33, total: 76 },
-    pLabel: "~21M–35M studies/yr", pCaption: "contain a missed or incorrect finding",
-    mLabel: "$400M–$1B+/yr", mCaption: "paid out in malpractice settlements",
+    pLabel: "~21M–35M scans/yr", pCaption: "contain a missed or incorrect finding",
+    mLabel: "3 in 4", mCaption: "malpractice lawsuits against radiologists involve a missed or misread finding",
     evidence: [
-      "~**21M–35M** imaging studies/year contain errors (derived: 3–5% × 691M annual US studies; Mahesh et al., 2023). **60–80%** of errors are perceptual: the finding was present but the eye passed over it.",
+      "~**21M–35M** scans/year contain errors (derived: 3–5% × 691M annual US scans; Mahesh et al., 2023). **60–80%** of errors are perceptual: the finding was present but the eye passed over it.",
       "When patients sue radiologists, **3 in 4** lawsuits come down to a missed or wrong diagnosis, something present on the scan that wasn't caught (Berlin, 2007). A **paid claim**, a case that settled or went to verdict in the patient's favor, averages **$174K** in adult radiology; many more claims are filed and dismissed without payout (CRICO, 2010–2014).",
-      "Radiologists report a **3–5%** real-time error rate: what they catch as uncertain during live reads. But retrospective review of studies with confirmed pathology shows a **~30% miss rate**: roughly 1 in 3 significant findings were originally read as normal (Berlin, 2007)."
+      "Radiologists report a **3–5%** real-time error rate: what they catch as uncertain during live reads. But retrospective review of scans with confirmed pathology shows a **~30% miss rate**: roughly 1 in 3 significant findings were originally read as normal (Berlin, 2007)."
     ],
     sources: [
       { label: "Itri et al., 2018", url: "https://pubs.rsna.org/doi/full/10.1148/rg.2018180021" },
@@ -829,9 +829,9 @@ window.PROBLEMS = [
     description: "Most FDA-cleared radiology AI tools have undisclosed real-world performance across demographic groups and equipment types.",
     scores: { m: 18, p: 38, d: 23, total: 56 },
     pLabel: "~12M–25M scans/yr", pCaption: "analyzed using AI never tested in real hospitals",
-    mLabel: "445 tools", mCaption: "FDA-cleared radiology AI tools by late 2022, growing each year",
+    mLabel: "445 tools", mCaption: "cleared by FDA as of 2022",
     evidence: [
-      "In 2016, the US performed over **371 million** non-dental medical imaging studies. Today, with AI tools deployed in more hospitals than ever, but **66%** of cleared algorithms never tested outside their original hospital, an estimated **12M–25M** scans per year may be analyzed by AI with unknown real-world reliability (Mahesh et al., 2023; Khunte et al., 2023).",
+      "In 2016, the US performed over **371 million** non-dental medical imaging scans. Today, with AI tools deployed in more hospitals than ever, but **66%** of cleared algorithms never tested outside their original hospital, an estimated **12M–25M** scans per year may be analyzed by AI with unknown real-world reliability (Mahesh et al., 2023; Khunte et al., 2023).",
       "By late 2022, **445** radiology AI tools had been cleared by the FDA, with more approved every year. These tools offer real benefits like faster diagnosis and better detection. But as hospitals adopt them quickly, many go into use before anyone has confirmed they work as well for all types of patients (Zhang et al., 2024).",
       "Of **151** FDA-cleared radiology AI tools reviewed (2008–2021), only **4%** revealed who the test patients were, and only **34%** were tested at more than one hospital, so for most approved tools, there is no way to know if they work for different patients or clinical settings (Khunte et al., 2023)."
     ],
@@ -849,7 +849,7 @@ window.PROBLEMS = [
     description: "CT scans carry a documented cumulative cancer risk that compounds with repeat imaging and varies 13-fold between facilities.",
     scores: { m: 22, p: 14, d: 23, total: 36 },
     pLabel: "103K cancers", pCaption: "projected from radiation exposure",
-    mLabel: "~$4.5B est.", mCaption: "estimated first-year treatment burden from CT-induced cancers",
+    mLabel: "~$4.5B.", mCaption: "estimated to be spent on first-year treatment from CT-induced cancers",
     evidence: [
       "The US performed **93 million** CT scans in 2023. Radiation from those scans is projected to eventually cause **103,000 cancers**, accounting for up to **5%** of all new cancer diagnoses in the country each year (Smith-Bindman et al., 2025).",
       "Using NCI's average first-year treatment cost per patient, the **103,000** projected CT-induced cancers could represent a treatment burden of roughly **$4.5 billion** (est. from Smith-Bindman et al., 2025; NCI Cancer Progress Report).",
@@ -867,7 +867,7 @@ window.PROBLEMS = [
     description: "Correctly identified findings fail to reach treating teams, and recommended follow-up imaging is never completed.",
     scores: { m: 22, p: 26, d: 30, total: 48 },
     pLabel: "7 in 10", pCaption: "patients with a flagged finding had no follow-up completed",
-    mLabel: "$2M avg", mCaption: "average payout when a radiology communication-failure case reaches settlement",
+    mLabel: "$2M avg", mCaption: "payout when a radiology communication-failure case reaches settlement",
     evidence: [
       "When a radiologist flags something that needs follow-up, that recommendation often doesn't make it back to the patient. In one hospital study, only **3 in 10** patients with an incidental CT finding had the recommended follow-up completed, and even after a dedicated tracking system was introduced, nearly half still fell through the cracks (Beesley et al., 2023).",
       "**1 in 4** radiologists has faced a malpractice lawsuit over a result that was never communicated. When those cases settle, the average payout is **$2 million** (ACR; Berlin, 2010).",
@@ -885,8 +885,8 @@ window.PROBLEMS = [
     clinical: false,
     description: "Imaging demand grows 5% annually while radiologist supply grows 2%, creating fatigue-driven errors and coverage gaps.",
     scores: { m: 14, p: 36, d: 27, total: 50 },
-    pLabel: "+113%", pCaption: "longer wait for imaging results since 2014",
-    mLabel: "130 days", mCaption: "average time to fill a vacant radiologist position",
+    pLabel: "+113%", pCaption: "longer wait times for imaging results since 2014",
+    mLabel: "130 days", mCaption: "on average to fill a vacant radiologist position",
     evidence: [
       "The US has roughly **39,000** radiologists, and demand is already outpacing supply. Without action, that gap is projected to persist through **2055** (Neiman HPI, 2024).",
       "Radiologists are leaving faster than they can be replaced: it takes an average of **130 days** to hire a replacement (AAPPR, 2024). And more are leaving: radiology practice turnover increased **61%** from 2013 to 2022. Consequently, imaging interpretation turnaround time increased **113%** from 2014 to 2023: for CT scans alone, **318%** (Neiman HPI, 2024)."
@@ -905,10 +905,10 @@ window.PROBLEMS = [
     clinical: false,
     description: "Imaging utilization and quality differ measurably by race and socioeconomic status, producing later-stage diagnoses for disadvantaged groups.",
     scores: { m: 16, p: 26, d: 27, total: 42 },
-    pLabel: "7.7% gap", pCaption: "fewer Black patients receive imaging in the ED compared to White patients",
-    mLabel: "60% longer", mCaption: "diagnostic delay to breast cancer diagnosis for Black vs. White women",
+    pLabel: "~16% less likely", pCaption: "that Black patients will receive emergency scans vs. White patients",
+    mLabel: "60%", mCaption: "longer wait for a breast cancer diagnosis for Black vs. White women.",
     evidence: [
-      "In US emergency rooms, about **half of White patients** receive an imaging scan during their visit, but only **4 in 10 Black patients** do. Asian patients are scanned at a similar rate to White patients (50.8%); other racial groups fall in between (46%). Black patients who do get imaging also tend to wait longer for results than White patients (DeBenedectis et al., 2022).",
+      "In US emergency rooms, **50%** of White patients receive a scan during their visit, but only **42%** of Black patients do. Asian patients are scanned at a similar rate to White patients (50.8%); other racial groups fall in between (46%). Black patients who do get imaging also tend to wait longer for results than White patients (DeBenedectis et al., 2022).",
       "Black women with breast cancer wait **60% longer** than White women to receive a diagnosis after screening: **42 days vs 26 days** on average. Nearly half of Black women (**46%**) experience delays of 45 days or more, compared to **28%** of White women (Miller-Kleinhenz et al., 2021)."
     ],
     sources: [
@@ -924,7 +924,7 @@ window.PROBLEMS = [
     description: "Geographic deserts, scanner scarcity, and lengthening wait times leave many patients unable to obtain imaging when they need it.",
     scores: { m: 10, p: 32, d: 20, total: 42 },
     pLabel: "~51M Americans", pCaption: "live more than 30 minutes from the nearest lung cancer screening center",
-    mLabel: "1 in 4", mCaption: "rural hospital patient transfers happen because no radiology is available on-site",
+    mLabel: "1 in 4", mCaption: "rural patients are forced to transfer because no radiology is available on-site",
     evidence: [
       "An estimated **~51 million** rural Americans, nearly **4 in 5**, live more than 30 minutes from the nearest lung cancer screening center. For urban patients, only about **1 in 5** face the same barrier (est. from Eberth, 2021; US Census Bureau, 2022).",
       "At rural hospitals, **1 in 4** patient transfers happen for one reason: no radiology on-site. Black patients at those same facilities are also more likely to be sent elsewhere than White patients (Lyon et al., via DeBenedectis et al., 2022)."
@@ -942,12 +942,12 @@ window.PROBLEMS = [
     clinical: false,
     description: "Inflation-adjusted Medicare payments have fallen 33% since 2001 while practice costs rose 59%, forcing consolidation, driving attrition, and narrowing patient access.",
     scores: { m: 24, p: 14, d: 13, total: 38 },
-    pLabel: "14.7% fewer", pCaption: "radiology practices as the field consolidates",
-    mLabel: "33% pay cut", mCaption: "decline in inflation-adjusted Medicare reimbursement",
+    pLabel: "14.7%", pCaption: "fewer independent radiology practices",
+    mLabel: "33% pay cut", mCaption: "for the same Medicare work",
     evidence: [
       "From 2014 to 2023, the number of radiologists enrolled in Medicare grew by **17.3%**, but the number of radiology practices fell by **14.7%**, from 5,059 to 4,313. The field is consolidating: more radiologists, fewer independent practices (Christensen et al., 2024).",
       "Medicare physician pay has declined **33%** in inflation-adjusted terms since 2001, and 2025 marked the **fifth consecutive year** of cuts. Payments are not designed to keep pace with the actual cost of running a practice (AMA, 2025).",
-      "The busiest radiologists are already absorbing the squeeze: the top quarter now read **30.6% more studies per day** than before the pandemic (Zamani et al., 2025)."
+      "The busiest radiologists are already absorbing the squeeze: the top quarter now read **30.6% more scans per day** than before the pandemic (Zamani et al., 2025)."
     ],
     sources: [
       { label: "AMA, 2025", url: "https://www.ama-assn.org/practice-management/medicare-medicaid/medicare-physician-pay-has-plummeted-2001-find-out-why" },
